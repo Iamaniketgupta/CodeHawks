@@ -47,5 +47,6 @@ Thumbs.db
 .idea
 .vscode
 
+# Editor-specific project settings
 *.sublime-project
 *.sublime-worksp
