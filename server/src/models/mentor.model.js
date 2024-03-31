@@ -90,8 +90,8 @@ const mentorSchema = new Schema({
     },
     pricing: {
         type: pricingSchema,
-        required: true
     }
+    
 }, { timestamps: true });
 
 mentorSchema.pre("save", async function (next) {
