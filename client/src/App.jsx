@@ -9,11 +9,11 @@ function App() {
     <>
 <Router>
 <Routes>
-<Route exact path="/" element={<Home/>}/>
-<Route exact path="/login_mentee" element={<Login_Mentee/>}/>
-<Route exact path="/signup_mentee" element={<Signup_Mentee/>}/>
-<Route exact path="/login_mentor" element={<Login_Mentor/>}/>
-<Route exact path="/signup_mentor" element={<Signup_Mentor/>}/>
+<Route path="/" element={<Home/>}/>
+<Route path="/login_mentee" element={<Login_Mentee/>}/>
+<Route path="/signup_mentee" element={<Signup_Mentee/>}/>
+<Route path="/login_mentor" element={<Login_Mentor/>}/>
+<Route path="/signup_mentor" element={<Signup_Mentor/>}/>
 </Routes>
 </Router>    
 </>

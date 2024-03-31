@@ -1,10 +1,11 @@
 import axios from 'axios';
 import '../Forms.css';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function SignUp_Mentee() {
+    
     const handlePart1 = () => {
         const fullName = document.getElementById("fullName").value.replaceAll(" ", "");
         const email = document.getElementById("email").value.replaceAll(" ", "");
@@ -20,7 +21,7 @@ export default function SignUp_Mentee() {
         document.getElementById("part1").style.display = "block";
     }
 
-    const [loading,setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         fullName: '',
         email: '',
@@ -154,37 +155,16 @@ export default function SignUp_Mentee() {
                                         </div>
                                         <hr className="mx-n3" />
 
-                                        {/* LinkedIn */}
-                                        {/* <div className="row align-items-center pt-4 py-3">
-                                            <div className="col-md-3 ps-md-5">
-                                                <h6 className="mb-1">Linkedin</h6>
-                                            </div>
-                                            <div className="col-md-9 pe-5">
-                                                <input type="url" id="linkedin" name="linkedin" className="form-control form-contro" placeholder="LinkedIn URL" required />
-                                            </div>
-                                        </div>
-                                        <hr className="mx-n3" /> */}
-
-                                        {/* ProfilePic
-                                        <div className="row align-items-center pt-4 py-3">
-                                            <div className="col-md-3 ps-md-5">
-                                                <h6 className="mb-1">Upload Picture</h6>
-                                            </div>
-                                            <div className="col-md-9 pe-5">
-                                                <input id="profile_pic" name="profile_pic" className="form-control form-control" type="file" accept="image/*" required />
-                                            </div>
-                                        </div> */}
-                                        <hr className="mx-n3" />
 
                                         <div className="px-5 py-4 float-start">
                                             <button type="button" onClick={handlePart2} className="btn btn-primary btn">Previous</button>
                                         </div>
                                         <div className="px-5 py-4 float-end">
                                             <button type="submit" className="btn btn-primary btn flex text-white">
-                                                { loading?
-                                                <div className="animate-spin inline-block size-6 border-[5px] border-current border-t-transparent text-ehite rounded-full" role="status" aria-label="loading">
-                                              </div>:''}
-                                               {!loading &&"SignUp"}</button>
+                                                {loading ?
+                                                    <div className="animate-spin inline-block size-6 border-[5px] border-current border-t-transparent text-ehite rounded-full" role="status" aria-label="loading">
+                                                    </div> : ''}
+                                                {!loading && "SignUp"}</button>
                                         </div>
                                     </div>
 
