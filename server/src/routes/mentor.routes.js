@@ -3,7 +3,7 @@ import { Router } from "express";
 // import { verifyJwt } from "../middlewares/auth.middleware.js";
 // import { uploadImage } from "../middlewares/multer.middleware.js";
 
-const router = Router();
+const mentorRouter = Router();
 
 // router.route("/example").post(exampleFunc);
 // router.route('/signup').post(uploadImage.single("avatar"), signup);
@@ -15,5 +15,5 @@ const router = Router();
 // router.route('/findPeople').post(findPeople);
 // router.route('/getCurrentUser').post(verifyJwt , getCurrentUser);
 // router.route('/getAllUsers').post(getAllUsers)
-
-export default router;
+ 
+export default mentorRouter;

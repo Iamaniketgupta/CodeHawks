@@ -128,6 +128,14 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
         });
 });
 
+const updateDetails = asyncHandler(async(req,res)=>{
+
+    
+
+});
+
+
+
 
 export{
     registerUser,

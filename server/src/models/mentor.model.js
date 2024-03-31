@@ -15,7 +15,7 @@ const mentorWorkSchema = new Schema({
     }
 });
 
-mongoose.model("MentorWork", mentorWorkSchema);
+ mongoose.model("MentorWork", mentorWorkSchema);
 
 
 const mentorSchema = new Schema({
@@ -50,7 +50,7 @@ const mentorSchema = new Schema({
 
     workExp: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: MentorWork,
+        ref: "MentorWork",
     }],
 
     linkedin: {

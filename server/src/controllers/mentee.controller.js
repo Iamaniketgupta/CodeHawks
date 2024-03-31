@@ -1,4 +1,5 @@
 import {Mentee} from '../models/mentee.model.js'
+import Mentor from '../models/mentor.model.js';
 import { ApiError } from "../utils/apiError.js";
 import { ApiResponse } from "../utils/apiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
@@ -64,7 +65,7 @@ const signup = asyncHandler(async(req,res ,next)=>{
             fullName,
             email,
             password,
-            avatar : avatar.url,
+            avatar : avatar?.url ||"",
             country,
             state,
             interests,
@@ -87,26 +88,6 @@ const signup = asyncHandler(async(req,res ,next)=>{
 
     next();
 
-    
-    // const {accessToken , refreshToken} = await generateAccessAndRefreshToken(createdUser._id);
-    // // console.log({accessToken , refreshToken});
-
-
-    // return res
-    // .status(200)
-    // .cookie("accessToken",accessToken )
-    // .cookie("refreshToken" , refreshToken )
-    // .json(
-    //     new ApiResponse(
-    //         200 ,
-    //         {
-    //             mentee:createdUser,
-    //             accessToken,
-    //             refreshToken
-    //         },
-    //         "user registered in successfully"
-    //     )
-    // )
 })
 
 
@@ -167,11 +148,6 @@ const logoutUser = asyncHandler(async(req,res)=>{
             new:true
         }
     )
-
-    // const option = {
-    //     httpOnly : true,
-    //     // secure:true
-    // };
 
     return res.status(200)
     .clearCookie("accessToken" )
