@@ -1,9 +1,9 @@
 import { ApiError } from "../utils/ApiError.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import jwt from "jsonwebtoken";
-import { User } from "../models/user.model.js";
+import { Mentor } from "../models/mentor.model.js";
 
-export const verifyJwt = asyncHandler(async( req , res, next)=>{
+export const verifyMentorJwt = asyncHandler(async( req , res, next)=>{
     try {
         // console.log(req.cookies.accessToken);
         const token = req.cookies.accessToken || req.header("Authorization")?.replace("Bearer" , "");
@@ -16,15 +16,15 @@ export const verifyJwt = asyncHandler(async( req , res, next)=>{
 
         console.log(decodedToken);
     
-        const  user = await User.findById(decodedToken).select("-password -refreshToken");
+        const  mentor = await Mentor.findById(decodedToken).select("-password -refreshToken");
 
-        console.log(user)
+        console.log(mentor)
     
-        if(!user){
+        if(!mentor){
             throw new ApiError(401, "Invalid token");
         }
     
-        req.user = user;
+        req.mentor = mentor;
         next();
     } catch (error) {
         throw new ApiError(401, error?.message || "Invalid access token");
