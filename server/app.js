@@ -18,9 +18,11 @@ app.use(cookieParser());
 // various  routes 
 import mentorRouter from './src/routes/mentor.routes.js'
 import menteeRouter from './src/routes/mentee.route.js'
+import taskRouter from "./src/routes/task.routes.js";
 
 app.use("/api/v1/mentor" , mentorRouter);
 app.use("/api/v1/mentee" , menteeRouter);
+app.use("/api/v1/task" , taskRouter);
 
 
 
