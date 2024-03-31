@@ -1,1 +1,1 @@
-export const DB_NAME = "codehawks";
+export const DB_NAME = "mentorhub";
