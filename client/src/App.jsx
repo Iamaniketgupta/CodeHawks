@@ -1,9 +1,11 @@
-import {BrowserRouter as Router,Routes,Route,useNavigate} from 'react-router-dom';
+import {BrowserRouter as Router,Routes,Route} from 'react-router-dom';
 import Signup_Mentee from './components/SignUp_Mentee';
 import Login_Mentee from './components/Login_Mentee';
 import Signup_Mentor from './components/Signup_Mentor';
 import Login_Mentor from './components/Login_Mentor';
 import Home from './components/Home';
+import MentorDashboard from './components/MentorDashboard';
+import MenteeDashoaboard from './components/MenteeDashoaboard';
 function App() {
   return (
     <>
@@ -14,6 +16,8 @@ function App() {
 <Route path="/signup_mentee" element={<Signup_Mentee/>}/>
 <Route path="/login_mentor" element={<Login_Mentor/>}/>
 <Route path="/signup_mentor" element={<Signup_Mentor/>}/>
+<Route path="/mentor/dashboard" element={<MentorDashboard/>}/>
+<Route path="/mentee/dashboard" element={<MenteeDashoaboard/>}/>
 </Routes>
 </Router>    
 </>

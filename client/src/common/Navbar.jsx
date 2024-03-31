@@ -1,5 +1,4 @@
-import React from 'react'
-import { Link, useLocation,useNavigate} from "react-router-dom";
+import { Link } from "react-router-dom";
 export default function Navbar() {
   return (
 <nav className="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
