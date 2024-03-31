@@ -5,7 +5,7 @@ import { signup , login , logoutUser , addMentorToBookmark , removeMentorFromBoo
 
 const router = Router();
 
-router.route('/signup').post(uploadImage.single("avatar"), signup , login);
+router.route('/signup').post(signup );
 router.route('/login').post(login);
 router.route('/logout').post(verifyJwt , logoutUser);
 router.route('/addMentorToBookmark').post(verifyJwt , addMentorToBookmark);
