@@ -116,7 +116,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     }
 
     const newAccessToken = await user.generateAccessToken();
-    // Update user document with refresh token
+    // Update Mentor document with refresh token
     const newRefreshToken = await user.generateRefreshToken();
     const rtoken = await Mentor.findByIdAndUpdate(user?._id, { refreshToken: newRefreshToken });
     if (!rtoken)
