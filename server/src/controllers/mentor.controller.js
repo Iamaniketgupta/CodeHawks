@@ -15,7 +15,7 @@ const registerMentor = asyncHandler(async (req, res) => {
 
     const { fullName, email, password, country, state, languages, experience } = req.body;
 
-    const isUserExist = await User.findOne({ email });
+    const isUserExist = await Mentor.findOne({ email });
 
     if (isUserExist) {
         throw new ApiError(409, 'User Already Exist')
@@ -24,7 +24,6 @@ const registerMentor = asyncHandler(async (req, res) => {
     const userRegister = await Mentor.create({
         fullName: fullName,
         email: email,
-        username: username,
         password: password,
         country: country,
         state: state,
