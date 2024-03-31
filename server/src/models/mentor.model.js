@@ -27,8 +27,6 @@ const mentorSchema = new Schema({
         required: true,
         trim: true
     },
-
-
     password: {
         type: String,
         required: true,
@@ -42,7 +40,6 @@ const mentorSchema = new Schema({
     },
     education: {
         type: String,
-        required: true,
         trim: true
     },
 
