@@ -1,6 +1,6 @@
 import multer from "multer";
-import { ApiError } from "../utils/ApiError.js";
-import { v4 as uuidv4 } from "uuid"; // Import uuid
+import { ApiError } from "../utils/apiError.js";
+import { v4 as uuidv4 } from "uuid"; 
 
 const imageFileFilter = (req, file, cb) => {
   if (file.mimetype.startsWith('image/')) {

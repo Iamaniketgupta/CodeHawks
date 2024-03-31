@@ -16,13 +16,14 @@ app.use(cookieParser());
 
 
 // various  routes 
-import userRouter from './src/routes/user.routes.js'
-import teamRouter from './src/routes/team.routes.js'
-import eventRouter from './src/routes/event.route.js'
+import mentorRouter from './src/routes/mentor.routes.js'
+import menteeRouter from './src/routes/mentee.route.js'
+import taskRouter from "./src/routes/task.routes.js";
 
-app.use("/api/v1/users" , userRouter);
-app.use("/api/v1/teams" , teamRouter);
-app.use("/api/v1/events" , eventRouter);
+app.use("/api/v1/mentor" , mentorRouter);
+app.use("/api/v1/mentee" , menteeRouter);
+app.use("/api/v1/task" , taskRouter);
+
 
 
 

@@ -2,12 +2,8 @@ import mongoose, { Schema } from "mongoose";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
-const skillLevelsEnum = ['Beginner', 'Intermediate', 'Professional'];
-const sportsInterestEnum = [
-  "Rugby" , "Football" , "Tennis" , "Badminton" ,"Running" , "Basketball" , "Golf" , "Gym Session" , "Squash" , "Social Event" , "Cricket" , "Cycling" , "Hockey" ,"Netball"
-]// Add your specific sports interests
 
-const userSchema = new mongoose.Schema({
+const menteeSchema = new mongoose.Schema({
   fullName: {
     type: String,
     required: true,
@@ -15,11 +11,17 @@ const userSchema = new mongoose.Schema({
   avatar: {
     type: String,
   },
-  phoneNo: {
-    type: String,
-    required: true,
-    unique: true,
+  country:{
+    type:String,
   },
+  state:{
+    type:String
+  },
+  interests:[
+    {
+        type:String,
+    }
+  ],
   email: {
     type: String,
     required: true,
@@ -36,51 +38,34 @@ const userSchema = new mongoose.Schema({
   age: {
     type: Number,
   },
-  sportsInterest: {
-    type: [{ type: String, enum: sportsInterestEnum }],
-  },
-  location: {
-    type: String,
-  },
-  coordinates: {
-    latitude: {
-      type: String,
-    },
-    longitude: {
-      type: String,
-    },
-  },
-  skillLevels: {
-    type: String,
-    enum: skillLevelsEnum,
-  },
-  followers: [{
+  bookmarked_mentors: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: 'Mentor',
     default: [],
   }],
-  following: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    default: [],
-  }],
+  experience:{
+    type:String
+  },
+  linkedin:{
+    type:String
+  },
   refreshToken: {
     type: String,
     default: null, // or any default value you prefer
   },
 });
 
-userSchema.pre("save" , async function(next){
+menteeSchema.pre("save" , async function(next){
     if(!this.isModified("password"))  return next();
     this.password = await bcrypt.hash(this.password , 10);
     next();
 });
 
-userSchema.methods.isPasswordCorrect = async function(password){
+menteeSchema.methods.isPasswordCorrect = async function(password){
     return await bcrypt.compare(password , this.password);
 }
 
-userSchema.methods.generateAccessToken = function(){
+menteeSchema.methods.generateAccessToken = function(){
     return jwt.sign(
         {
             _id:this._id,
@@ -95,7 +80,7 @@ userSchema.methods.generateAccessToken = function(){
     );
 }
 
-userSchema.methods.generateRefreshToken =  function(){
+menteeSchema.methods.generateRefreshToken =  function(){
     return jwt.sign(
         {
             _id:this._id
@@ -107,4 +92,4 @@ userSchema.methods.generateRefreshToken =  function(){
     );
 }
 
-export const User = mongoose.model("User", userSchema);
+export const Mentee = mongoose.model("Mentee", menteeSchema);
