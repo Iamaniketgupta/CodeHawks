@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import '../App.css';
-import '../Home.css';
+import './Home.css';
 import Navbar from './Navbar';
 import { Link} from "react-router-dom";
 import Footer from './Footer';
@@ -78,7 +78,6 @@ function addAnimation() {
 </div>
 
 <Footer></Footer>
-
     </>
   )
 }

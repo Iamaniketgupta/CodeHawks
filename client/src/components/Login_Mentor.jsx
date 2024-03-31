@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import '../Forms.css';
+import './Forms.css';
 export default function Login_Mentor() {
     const [cred,setCred]=useState({email:"",password:""});
     const onChange = (e) => {

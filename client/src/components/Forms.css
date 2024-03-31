@@ -22,9 +22,12 @@ section .card{
 }
 section{
    background-color: #2779e2;
-   background-image:url('./assets/7482290.jpg');
-   background-repeat:no-repeat;
+   background-image:url('../assets/7482290.jpg');
+   background-repeat:repeat;
    background-size:cover;
+   position: relative;
+   width: 100%;
+   height: 100%;
 }
 section #part2{
     display:none;

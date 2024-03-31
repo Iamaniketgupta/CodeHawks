@@ -1,4 +1,4 @@
-import '../Forms.css';
+import './Forms.css';
 import React from 'react';
 export default function SignUp_Mentee() {
     const handlePart1 = () => {
@@ -17,14 +17,13 @@ export default function SignUp_Mentee() {
     }
     return (
         <>
-            <section className=" vh-100">
+            <section className="min-vh-100">
                 <form className="container h-100">
                     <div className="row d-flex justify-content-center align-items-center h-100">
-                        <div className="col-xl-9">
-                            <div className="card" style={{ borderRadius: "15px" }}>
+                        <div className="col-xl-9 mt-5">
+                            <div className="card mt-5" style={{ borderRadius: "15px" }}>
                                 <div className="card-body">
                                     <h1 className='my-2'>SignUp as a Mentee</h1>
-
                                     <div id="part1">
                                         {/* Name */}
                                         <div className="row align-items-center pt-4 pb-3">
@@ -73,7 +72,6 @@ export default function SignUp_Mentee() {
                                             <button type="button" onClick={handlePart1} className="btn btn-primary btn">Next</button>
                                         </div>
                                     </div>
-
                                     <div id="part2">
                                         {/* Country */}
                                         <div className="row align-items-center pt-4 py-3">

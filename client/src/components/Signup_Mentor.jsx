@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Forms.css';
+import './Forms.css';
 export default function Signup_Mentor() {
     const handlePart1 = () => {
         const name=document.getElementById("name").value.replaceAll(" ","");
@@ -18,11 +18,11 @@ export default function Signup_Mentor() {
     }
     return (
         <>
-            <section className="vh-100">
+            <section className="min-vh-100">
                 <form className="container h-100">
                     <div className="row d-flex justify-content-center align-items-center h-100">
-                        <div className="col-xl-9">
-                            <div className="card" style={{ borderRadius: "15px" }}>
+                        <div className="col-xl-9 mt-5">
+                            <div className="card mt-5" style={{ borderRadius: "15px" }}>
                                 <div className="card-body">
                                     <h1 className='my-2'>SignUp as a Mentor</h1>
                                     <div id="part1">
@@ -73,7 +73,6 @@ export default function Signup_Mentor() {
                                             <button type="button" onClick={handlePart1} className="btn btn-primary btn">Next</button>
                                         </div>
                                     </div>
-
                                     <div id="part2">
                                         {/* Country */}
                                         <div className="row align-items-center pt-4 py-3">
