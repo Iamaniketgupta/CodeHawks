@@ -9,24 +9,23 @@ section{
     -webkit-backdrop-filter: blur(15px);
     backdrop-filter: blur(15px);
 }
-hr{
+section hr{
     border: 2px solid white;
 }
-select{
+section select{
 padding:10px;
 }
-.card{
+section .card{
     background:rgba(255, 255, 255, 0.412);
-    -webkit-backdrop-filter: blur(20px);
-    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
 }
-
-body{
+section{
    background-color: #2779e2;
    background-image:url('./assets/7482290.jpg');
    background-repeat:no-repeat;
    background-size:cover;
 }
-#part2{
+section #part2{
     display:none;
 }
