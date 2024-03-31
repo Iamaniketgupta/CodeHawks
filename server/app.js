@@ -17,9 +17,10 @@ app.use(cookieParser());
 
 // various  routes 
 import userRouter from './src/routes/user.routes.js'
-
+import menteeRouter from './src/routes/mentee.route.js'
 
 app.use("/api/v1/users" , userRouter);
+app.use("/api/v1/mentee" , menteeRouter);
 
 
 
