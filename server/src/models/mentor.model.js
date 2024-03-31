@@ -2,6 +2,21 @@ import mongoose, { Schema } from "mongoose";
 import bcrypt from 'bcrypt';
 import Jwt from 'jsonwebtoken';
 
+const pricingSchema = new Schema({
+    mentorshipPrice: {
+        type: Number,
+        required: true,
+    },
+    targetInterest: [{
+        type: String,
+        required: true,
+    }],
+    specialties: [{
+        type: String,
+        required: true,
+    }]
+});
+
 const mentorWorkSchema = new Schema({
     position: {
         type: String,
@@ -17,9 +32,6 @@ const mentorWorkSchema = new Schema({
     }
 });
 
- mongoose.model("MentorWork", mentorWorkSchema);
-
-
 const mentorSchema = new Schema({
     avatar: {
         type: String,
@@ -34,7 +46,6 @@ const mentorSchema = new Schema({
         required: true,
         trim: true
     },
-
     fullName: {
         type: String,
         required: true,
@@ -44,92 +55,77 @@ const mentorSchema = new Schema({
         type: String,
         trim: true
     },
-    description:{
+    description: {
         type: String,
         trim: true
     },
- 
     rating: {
         type: Number,
         default: 0
     },
-
-    workExp: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "MentorWork",
-    }],
-
+    workExp: [mentorWorkSchema],
     linkedin: {
         type: String,
         trim: true,
         lowercase: true
     },
-
-    experience:{
+    experience: {
         type: Number,
         required: true,
     },
- 
     languages: [{
         type: String,
         trim: true
     }],
-    country:{
+    country: {
         type: String,
         required: true,
     },
-
-    state:{
-        type:String,
-        required:true
+    state: {
+        type: String,
+        required: true
     },
-    
-    refreshToken:{
-        type:String,
+    refreshToken: {
+        type: String,
+    },
+    pricing: {
+        type: pricingSchema,
+        required: true
     }
-
 }, { timestamps: true });
 
-// Hashing
 mentorSchema.pre("save", async function (next) {
     if (!this.isModified("password")) return;
     this.password = await bcrypt.hash(this.password, 10);
     next();
 });
 
-// Check Password
-mentorSchema.methods.isPasswordCorrect = async function (password) {  
+mentorSchema.methods.isPasswordCorrect = async function (password) {
     return await bcrypt.compare(password, this.password)
 }
 
-// JWT ACCESS TOKEN
-mentorSchema.methods.generateAccessToken = async function () {  
+mentorSchema.methods.generateAccessToken = async function () {
     return Jwt.sign(
-        // payload
-        {   
-            _id:this._id,
-            email:this.email,
-            fullName:this.fullName
-
-        }, process.env.ACCESS_TOKEN_SECRET,
-
-        // expiry
+        {
+            _id: this._id,
+            email: this.email,
+            fullName: this.fullName
+        },
+        process.env.ACCESS_TOKEN_SECRET,
         {
             expiresIn: process.env.ACCESS_TOKEN_EXPIRY
         });
 }
 
-// JWT REFRESH TOKEN
-mentorSchema.methods.generateRefreshToken = async function () { 
+mentorSchema.methods.generateRefreshToken = async function () {
     return Jwt.sign(
-        {   
-            _id:this._id,
-
-        }, process.env.REFRESH_TOKEN_SECRET,
+        {
+            _id: this._id,
+        },
+        process.env.REFRESH_TOKEN_SECRET,
         {
             expiresIn: process.env.REFRESH_TOKEN_EXPIRY
         });
-
 }
 
 const Mentor = mongoose.model("Mentor", mentorSchema);

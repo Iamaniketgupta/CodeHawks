@@ -21,14 +21,8 @@ const registerMentor = asyncHandler(async (req, res) => {
         throw new ApiError(409, 'User Already Exist')
     }
 
-    const avatarLocalPath = req.files?.avatar[0]?.path
-
-    const avatar = await uploadToCloudinary(avatarLocalPath);
-
-
     const userRegister = await Mentor.create({
         fullName: fullName,
-        avatar: avatar?.url || "",
         email: email,
         username: username,
         password: password,
@@ -128,34 +122,36 @@ const refreshMentorAccessToken = asyncHandler(async (req, res) => {
 });
 
 const updateMentorProfile = asyncHandler(async (req, res) => {
-    const { fullName, country, state, interests, experience, linkedin } = req.body;
+    const { fullName, country, state, interests, experience, linkedin, pricing, workExp } = req.body;
 
-    const userId = await req.mentor._id;
+    const userId = req.mentor._id;
     const user = await Mentor.findById(userId);
     if (!user) {
         throw new ApiError("User not found");
     }
 
-    const updatedUser = await Mentor.findByIdAndUpdate(userId, {
+    const updatedFields = {
         fullName: fullName || user.fullName,
         country: country || user.country,
         state: state || user.state,
         interests: interests || user.interests,
         experience: experience || user.experience,
-        linkedin: linkedin || user.linkedin
-    }, {
-        new: true
-    });
+        linkedin: linkedin || user.linkedin,
+        pricing: pricing || user.pricing,
+        workExp: workExp || user.workExp
+    };
+
+    const updatedUser = await Mentor.findByIdAndUpdate(userId, updatedFields, { new: true });
 
     return res.status(200).json(
         new ApiResponse(
             200,
             updatedUser,
-            "Mentee updated succesfully"
+            "Mentor updated successfully"
         )
-    )
-
+    );
 });
+
 
 const updateMentorAvatar = asyncHandler(async (req, res) => {
     const avatarLocalPath = req.file?.path;
@@ -191,7 +187,7 @@ const updateMentorAvatar = asyncHandler(async (req, res) => {
     return res.status(200).json(
         new ApiResponse(200, user, "Avatar image uploaded successfully")
     )
-})
+});
 
 
 
