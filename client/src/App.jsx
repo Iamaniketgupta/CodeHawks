@@ -1,4 +1,3 @@
-import './App.css'
 import {BrowserRouter as Router,Routes,Route,useNavigate} from 'react-router-dom';
 import Signup_Mentee from './components/SignUp_Mentee';
 import Login_Mentee from './components/Login_Mentee';
@@ -10,7 +9,7 @@ function App() {
     <>
 <Router>
 <Routes>
-<Route exact path="/" element={<Signup_Mentee/>}/>
+<Route exact path="/" element={<Home/>}/>
 <Route exact path="/login_mentee" element={<Login_Mentee/>}/>
 <Route exact path="/signup_mentee" element={<Signup_Mentee/>}/>
 <Route exact path="/login_mentor" element={<Login_Mentor/>}/>

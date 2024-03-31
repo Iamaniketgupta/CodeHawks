@@ -7,7 +7,7 @@ export default function Login_Mentee() {
       }
   return (
     <>
-    <section className="my-2 vh-100">
+    <section className="vh-100">
         <form className="container h-100" method="post">
             <div className="row d-flex justify-content-center align-items-center h-100">
                 <div className="col-xl-9">

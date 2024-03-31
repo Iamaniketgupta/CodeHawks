@@ -1,5 +1,5 @@
-import React from 'react';
 import '../Forms.css';
+import React from 'react';
 export default function SignUp_Mentee() {
     const handlePart1 = () => {
         const name=document.getElementById("name").value.replaceAll(" ","");
@@ -17,7 +17,7 @@ export default function SignUp_Mentee() {
     }
     return (
         <>
-            <section className="my-2 vh-100">
+            <section className=" vh-100">
                 <form className="container h-100">
                     <div className="row d-flex justify-content-center align-items-center h-100">
                         <div className="col-xl-9">
