@@ -1,4 +1,6 @@
 import mongoose, { Schema } from "mongoose";
+import bcrypt from 'bcrypt';
+import Jwt from 'jsonwebtoken';
 
 const mentorWorkSchema = new Schema({
     position: {
@@ -42,7 +44,11 @@ const mentorSchema = new Schema({
         type: String,
         trim: true
     },
-
+    description:{
+        type: String,
+        trim: true
+    },
+ 
     rating: {
         type: Number,
         default: 0

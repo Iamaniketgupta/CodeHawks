@@ -1,7 +1,6 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
-import { User } from "../models/user.model.js"
 import { ApiError } from "../utils/apiError.js";
-import { uploadOnCloudianry } from "../utils/cloudinary.js"
+import { uploadToCloudinary } from "../utils/cloudinary.js"
 import Jwt from "jsonwebtoken";
 import { ApiResponse } from "../utils/apiResponse.js";
 import Mentor from "../models/mentor.model.js";
@@ -12,7 +11,7 @@ const options = {
     secure: true
 }
 
-const registerUser = asyncHandler(async (req, res) => {
+const registerMentor = asyncHandler(async (req, res) => {
 
     const { fullName, email, password, country, state, languages, experience } = req.body;
 
@@ -24,7 +23,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
     const avatarLocalPath = req.files?.avatar[0]?.path
 
-    const avatar = await uploadOnCloudianry(avatarLocalPath);
+    const avatar = await uploadToCloudinary(avatarLocalPath);
 
 
     const userRegister = await Mentor.create({
@@ -51,7 +50,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
 });
 
-const loginUser = asyncHandler(async (req, res) => {
+const loginMentor = asyncHandler(async (req, res) => {
 
     const { email, password } = req.body;
     //validation of the required values
@@ -84,8 +83,8 @@ const loginUser = asyncHandler(async (req, res) => {
 
 });
 
-const logOutUser = asyncHandler(async (req, res) => {
-    Mentor.findByIdAndUpdate(req.user._id, {
+const logOutMentor = asyncHandler(async (req, res) => {
+    Mentor.findByIdAndUpdate(req.mentor._id, {
         $set: {
             refreshToken: ''
         }
@@ -98,7 +97,7 @@ const logOutUser = asyncHandler(async (req, res) => {
         });
 });
 
-const refreshAccessToken = asyncHandler(async (req, res) => {
+const refreshMentorAccessToken = asyncHandler(async (req, res) => {
     const refereshToken = req.cookies.referId || req.body.referId
     console.log("from user controller ", refereshToken)
 
@@ -128,18 +127,81 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
         });
 });
 
-const updateDetails = asyncHandler(async(req,res)=>{
+const updateMentorProfile = asyncHandler(async (req, res) => {
+    const { fullName, country, state, interests, experience, linkedin } = req.body;
 
-    
+    const userId = await req.mentor._id;
+    const user = await Mentor.findById(userId);
+    if (!user) {
+        throw new ApiError("User not found");
+    }
+
+    const updatedUser = await Mentor.findByIdAndUpdate(userId, {
+        fullName: fullName || user.fullName,
+        country: country || user.country,
+        state: state || user.state,
+        interests: interests || user.interests,
+        experience: experience || user.experience,
+        linkedin: linkedin || user.linkedin
+    }, {
+        new: true
+    });
+
+    return res.status(200).json(
+        new ApiResponse(
+            200,
+            updatedUser,
+            "Mentee updated succesfully"
+        )
+    )
 
 });
 
+const updateMentorAvatar = asyncHandler(async (req, res) => {
+    const avatarLocalPath = req.file?.path;
+
+    if (!avatarLocalPath) {
+        throw new ApiError(400, "avatar file is missing");
+    }
+
+    const avatar = await uploadToCloudinary(avatarLocalPath);
+
+    if (!avatar.url) {
+        throw new ApiError(
+            400, "Error while uploading avatar"
+        )
+    }
+
+    const user = await Mentor.findByIdAndUpdate(
+        req.mentor._id,
+        {
+            $set: {
+                avatar: avatar.url
+            }
+        },
+        { new: true }
+    );
+
+    if (!user) {
+        throw new ApiError(
+            400, "Error while uploading avatar"
+        )
+    }
+
+    return res.status(200).json(
+        new ApiResponse(200, user, "Avatar image uploaded successfully")
+    )
+})
 
 
 
-export{
-    registerUser,
-    loginUser,
-    logOutUser,
-    refreshAccessToken
+
+
+export {
+    registerMentor,
+    loginMentor,
+    logOutMentor,
+    updateMentorProfile,
+    updateMentorAvatar,
+    refreshMentorAccessToken,
 }

@@ -1,19 +1,15 @@
 import { Router } from "express";
-// import { editProfile, exampleFunc, login, logoutUser, signup, toggleFollow,getAllUsers , recommendUsers , findPeople , getCurrentUser} from "../controllers/user.controller.js";
-// import { verifyJwt } from "../middlewares/auth.middleware.js";
-// import { uploadImage } from "../middlewares/multer.middleware.js";
+import { logOutMentor, loginMentor,  registerMentor, updateMentorAvatar, updateMentorProfile } from "../controllers/mentor.controller.js";
+import { verifyMentorJwt } from "../middlewares/mentorAuth.middleware.js";
 
 const mentorRouter = Router();
 
-// router.route("/example").post(exampleFunc);
-// router.route('/signup').post(uploadImage.single("avatar"), signup);
-// router.route('/login').post(login);
-// router.route('/logout').post(verifyJwt , logoutUser);
-// router.route('/editProfile').post(verifyJwt , editProfile);
-// router.route('/recommendUsers').post(verifyJwt , recommendUsers);
-// router.route('/toggleFollow/:userId').post(verifyJwt , toggleFollow);
-// router.route('/findPeople').post(findPeople);
-// router.route('/getCurrentUser').post(verifyJwt , getCurrentUser);
-// router.route('/getAllUsers').post(getAllUsers)
+
+mentorRouter.route('/signup').post(registerMentor);
+mentorRouter.route('/login').post(loginMentor);
+mentorRouter.route('/logout').post(verifyMentorJwt , logOutMentor);
+mentorRouter.route('/editProfile').post(verifyMentorJwt , updateMentorProfile);
+mentorRouter.route('/updateMentorAvatar').post(verifyMentorJwt , updateMentorAvatar);
  
 export default mentorRouter;
+ 
