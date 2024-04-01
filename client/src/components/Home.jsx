@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import '../App.css';
-import '../Home.css';
+import './Home.css';
 import { Link} from "react-router-dom";
 import Reviews from './Reviews';
 import FAQ from './FAQ';

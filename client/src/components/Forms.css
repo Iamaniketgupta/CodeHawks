@@ -22,7 +22,7 @@ section .card{
 }
 section{
    background-color: #2779e2;
-   background-image:url('./assets/7482290.jpg');
+   background-image:url('../assets/7482290.jpg');
    background-repeat:no-repeat;
    background-size:cover;
 }

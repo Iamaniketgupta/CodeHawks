@@ -1,9 +1,10 @@
+import Sidebar from "../common/Sidebar";
 
 const MenteeDashoaboard = () => {
     return (
 
    <>
-   Mentee Dashboard
+<Sidebar/>
    </>
     );
 }

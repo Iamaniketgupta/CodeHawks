@@ -1,5 +1,5 @@
 import axios from 'axios';
-import '../Forms.css';
+import './Forms.css';
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -52,14 +52,13 @@ export default function SignUp_Mentee() {
 
     return (
         <>
-            <section className=" vh-100">
+            <section className=" min-vh-100">
                 <form className="container h-100" onSubmit={handleSubmit}>
                     <div className="row d-flex justify-content-center align-items-center h-100">
                         <div className="col-xl-9">
-                            <div className="card" style={{ borderRadius: "15px" }}>
+                            <div className="card mt-md-5" style={{ borderRadius: "15px" }}>
                                 <div className="card-body">
                                     <h1 className='my-2'>SignUp as a Mentee</h1>
-
                                     <div id="part1">
                                         {/* Name */}
                                         <div className="row align-items-center pt-4 pb-3">
