@@ -1,18 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
 
-const TimeSchema = new Schema({
-    hours: {
-      type: Number,
-      required: true,
-    },
-    minutes: {
-      type: Number,
-      required: true,
-    },
-  });
-
-
 const timeslotSchema = new Schema(
   {
     date: {
@@ -20,7 +8,15 @@ const timeslotSchema = new Schema(
       required: true,
     },
     time: {
-      type: TimeSchema,
+      type: String,
+      required: true,
+    },
+    monthName:{
+      type: String,
+      required: true,
+    },
+    month:{
+      type: String,
       required: true,
     },
     mentor:{

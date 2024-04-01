@@ -4,8 +4,10 @@ import Login_Mentee from './components/Login_Mentee';
 import Signup_Mentor from './components/Signup_Mentor';
 import Login_Mentor from './components/Login_Mentor';
 import Home from './components/Home';
-import MentorDashboard from './components/MentorDashboard';
-import MenteeDashoaboard from './components/MenteeDashoaboard';
+import MentorDashboard from './components/mentorDashboard/MentorDashboard';
+import MenteeDashboard from './components/menteeDashboard/MenteeDashboard';
+import MySlots from './components/mentorDashboard/dashboardComponents/MySlots';
+import { Toaster } from 'react-hot-toast';
 function App() {
   return (
     <>
@@ -17,9 +19,12 @@ function App() {
 <Route path="/login_mentor" element={<Login_Mentor/>}/>
 <Route path="/signup_mentor" element={<Signup_Mentor/>}/>
 <Route path="/mentor/dashboard" element={<MentorDashboard/>}/>
-<Route path="/mentee/dashboard" element={<MenteeDashoaboard/>}/>
+<Route path="/mentee/dashboard" element={<MenteeDashboard/>}/>
+<Route path="/a" element={<MySlots/>}/>
 </Routes>
-</Router>    
+</Router>
+<Toaster />
+
 </>
   )
 }
