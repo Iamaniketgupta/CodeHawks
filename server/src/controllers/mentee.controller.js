@@ -37,8 +37,8 @@ const signup = asyncHandler(async(req,res ,next)=>{
         throw new ApiError(400 , "All fields are required");
     }
 
-    const user = await Mentee.find({
-        email
+    const user = await Mentee.findOne({
+        email:email
     });
 
     if(user){
@@ -68,8 +68,14 @@ const signup = asyncHandler(async(req,res ,next)=>{
     if(!createdUser){
         throw new ApiError(500 , "something went wrong while registering");
     } 
-
-    next();
+    
+    return res.status(200).json(
+        new ApiResponse(
+            200,
+            createdUser,
+            "Mentee registered successfully"
+        )
+    )
 
 })
 
