@@ -6,7 +6,7 @@ import Mentor  from "../models/mentor.model.js";
 export const verifyMentorJwt = asyncHandler(async( req , res, next)=>{
     try {
         // console.log(req.cookies.accessToken);
-        const token = req.cookies.accessToken || req.header("Authorization")?.replace("Bearer" , "");
+        const token = req.cookies.menauthId || req.header("Authorization")?.replace("Bearer" , "");
     
         if(!token){
             throw new ApiError(401, "Unauthorized request");
@@ -14,11 +14,11 @@ export const verifyMentorJwt = asyncHandler(async( req , res, next)=>{
     
         const decodedToken = jwt.verify(token , process.env.ACCESS_TOKEN_SECRET);
 
-        console.log(decodedToken);
+        // console.log(decodedToken);
     
         const  mentor = await Mentor.findById(decodedToken).select("-password -refreshToken");
 
-        console.log(mentor)
+        // console.log(mentor)
     
         if(!mentor){
             throw new ApiError(401, "Invalid token");
