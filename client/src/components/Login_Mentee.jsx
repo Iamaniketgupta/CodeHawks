@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './Forms.css';
-import { ToastContainer, toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 export default function Login_Mentee() {
@@ -15,7 +15,7 @@ export default function Login_Mentee() {
         e.preventDefault();
         try {
             setLoading(true);
-            const response = await axios.post('http://localhost:8000/api/v1/mentee/login', cred);
+            const response = await axios.post('/api/v1/mentee/login', cred);
             console.log(response.data);
             toast.success('Login successful!');
             setLoading(false)
@@ -68,7 +68,6 @@ export default function Login_Mentee() {
                 </div>
             </form>
         </section >
-        <ToastContainer />
 
 </>
   )

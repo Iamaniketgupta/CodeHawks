@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import './Forms.css';
-import { ToastContainer, toast } from 'react-toastify';
+
 import axios from 'axios';
+import toast from 'react-hot-toast';
 export default function Login_Mentor() {
 
     const [cred, setCred] = useState({ email: "", password: "" });
@@ -15,13 +16,13 @@ export default function Login_Mentor() {
         e.preventDefault();
         try {
             setLoading(true);
-            const response = await axios.post('http://localhost:8000/api/v1/mentee/login', cred);
+            const response = await axios.post('/api/v1/mentor/login', cred);
             console.log(response.data);
             toast.success('Login successful!');
             setLoading(false)
         } catch (error) {
             console.error('Error:', error);
-            toast.error('Failed to Login: Please try again.');
+            toast.error(error.response?.data?.message || "Failed to Login!");
             setLoading(false)
         }
     }
@@ -68,7 +69,6 @@ export default function Login_Mentor() {
                     </div>
                 </form>
             </section>
-            <ToastContainer />
         </>
     )
 }

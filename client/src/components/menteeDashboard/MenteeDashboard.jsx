@@ -1,4 +1,4 @@
-import Sidebar from "../common/Sidebar";
+import Sidebar from "../../common/Sidebar";
 
 const MenteeDashoaboard = () => {
     return (
