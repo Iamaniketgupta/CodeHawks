@@ -65,7 +65,7 @@ const loginMentor = asyncHandler(async (req, res) => {
     const accessToken = await ValidUser.generateAccessToken();
     // Update user document with refresh token
     const refreshToken = await ValidUser.generateRefreshToken();
-    const rtoken = await User.findByIdAndUpdate(ValidUser._id, { refreshToken: refreshToken });
+    const rtoken = await Mentor.findByIdAndUpdate(ValidUser._id, { refreshToken: refreshToken });
     if (!rtoken)
         throw new ApiError(500, "something went wrong");
 
@@ -187,9 +187,6 @@ const updateMentorAvatar = asyncHandler(async (req, res) => {
         new ApiResponse(200, user, "Avatar image uploaded successfully")
     )
 });
-
-
-
 
 
 export {

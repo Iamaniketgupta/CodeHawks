@@ -31,45 +31,28 @@ const generateAccessAndRefreshToken = async(userId)=>{
 
 
 const signup = asyncHandler(async(req,res ,next)=>{
-    const {fullName  , email ,  password  , country , state , interests ,linkedin ,experience  } = req.body;
-    console.log(req.file)
+    const {fullName  , email ,  password  , country , state   ,experience  } = req.body;
 
-    if(!(fullName && phoneNo && email && password && country && state && interests && linkedin && experience)){
+    if(!(fullName  && email && password && country && state   && experience)){
         throw new ApiError(400 , "All fields are required");
     }
 
-    if(req.file){
-        if(!req.file.fieldname){
-            throw new ApiError(400 , "avatar is required");
-        }
-    }
-    
-    const avatarLocalPath = req.file?.path;
+    const user = await Mentee.find({
+        email
+    });
 
-    if(!avatarLocalPath){
-        throw new ApiError(400 , "avatar file is missing");
+    if(user){
+        throw new ApiError("User with email already exist");
     }
 
-    console.log(avatarLocalPath)
-
-    const avatar = await uploadToCloudinary(avatarLocalPath);
-    // console.log(avatar)
-    if(!avatar){
-        throw new ApiError(
-            400 , "Error while uploading avatar"
-        )
-    }
-    
     const mentee = await Mentee.create(
         {
             fullName,
             email,
             password,
-            avatar : avatar?.url ||"",
             country,
             state,
-            interests,
-            linkedin,
+     
             experience
         }
     );
@@ -84,7 +67,7 @@ const signup = asyncHandler(async(req,res ,next)=>{
 
     if(!createdUser){
         throw new ApiError(500 , "something went wrong while registering");
-    }
+    } 
 
     next();
 

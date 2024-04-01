@@ -26,7 +26,7 @@ export default function Signup_Mentor() {
         password: '',
         country: '',
         state: '',
-        experience: ''
+        experience: 0
     });
 
     const handleChange = (e) => {
@@ -37,7 +37,7 @@ export default function Signup_Mentor() {
         e.preventDefault();
         try {
             setLoading(true);
-            const response = await axios.post('http://localhost:8000/api/v1/mentee/signup', formData);
+            const response = await axios.post('http://localhost:8000/api/v1/mentor/signup', formData);
             console.log(response.data);
             toast.success('Sign up successful!');
             setLoading(false)
@@ -130,6 +130,17 @@ export default function Signup_Mentor() {
                                             <div className="col-md-9 pe-5">
                                                 <input onChange={handleChange} value={formData.state}
                                                 type="text" id="state" name="state" className="form-control form-contro" placeholder="Country" required />
+                                            </div>
+                                        </div>
+                                        <hr className="mx-n3" />
+
+                                        <div className="row align-items-center pt-4 py-3">
+                                            <div className="col-md-3 ps-md-5">
+                                                <h6 className="mb-1">Exp</h6>
+                                            </div>
+                                            <div className="col-md-9 pe-5">
+                                                <input onChange={handleChange} value={formData.experience}
+                                                type="number" id="experience" name="experience" className="form-control form-contro" placeholder="experience" required />
                                             </div>
                                         </div>
                                         <hr className="mx-n3" />
