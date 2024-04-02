@@ -25,11 +25,11 @@ const EditProfile = () => {
                 <p className="m-3  p-2 text-xl font-semibold">Profile visibility : </p>
                 {
                     visible ?
-                        <FaToggleOn onClick={()=>setVisible(false)}
-                        className="text-green-600 cursor-pointer text-2xl" title="Visible" /> :
+                        <FaToggleOn onClick={() => setVisible(false)}
+                            className="text-green-600 cursor-pointer text-2xl" title="Visible" /> :
 
-                        <FaToggleOff onClick={()=>setVisible(true)}
-                         className="text-red-600 cursor-pointer  text-2xl" title="Hidden" />
+                        <FaToggleOff onClick={() => setVisible(true)}
+                            className="text-red-600 cursor-pointer  text-2xl" title="Hidden" />
                 }
             </div>
 
@@ -46,9 +46,12 @@ const EditProfile = () => {
 
                             <div className="border-gray-300 h-5 w-5 animate-spin rounded-full border-2 border-t-blue-600" />
                         </div>}
-                    <FaEdit title="Edit Image"
-                        className="z-10 absolute bottom-3 right-3 text-blue-900 cursor-pointer" />
 
+                    <input type="file" name="avatar" id="avatar" hidden />
+                    <label htmlFor="avatar">
+                        <FaEdit title="Edit Image"
+                            className="z-10 absolute bottom-3 right-3 text-blue-900 cursor-pointer" />
+                    </label>
                 </div>
 
 
