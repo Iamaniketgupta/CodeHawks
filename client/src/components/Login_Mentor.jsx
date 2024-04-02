@@ -1,9 +1,15 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+
 import './Forms.css';
 
 import axios from 'axios';
 import toast from 'react-hot-toast';
+
+
 export default function Login_Mentor() {
+
+    const navigate = useNavigate();
 
     const [cred, setCred] = useState({ email: "", password: "" });
     const onChange = (e) => {
@@ -19,7 +25,9 @@ export default function Login_Mentor() {
             const response = await axios.post('/api/v1/mentor/login', cred);
             console.log(response.data);
             toast.success('Login successful!');
-            setLoading(false)
+            setLoading(false);
+            navigate("/mentor_dashboard");
+            
         } catch (error) {
             console.error('Error:', error);
             toast.error(error.response?.data?.message || "Failed to Login!");
