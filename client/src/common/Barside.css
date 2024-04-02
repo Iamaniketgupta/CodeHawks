@@ -9,14 +9,14 @@
   position: fixed;
   top: 0;
   left: 0;
-  height: 100%;
+  height: 100vh;
   width: 260px;
   background: #11101d;
   z-index: 100;
   transition: all 0.5s ease;
 }
 .sidebar.close{
-  width: 78px;
+  width: 70px;
 }
 .sidebar .logo-details{
   height: 60px;
@@ -168,7 +168,7 @@
 }
 
 .sidebar .profile-details{
-  position: fixed;
+  /* position: fixed; */
   bottom: 0;
   width: 260px;
   display: flex;
@@ -216,19 +216,22 @@
   font-size: 12px;
 }
 .home-section{
-  position: relative;
-  background: #E4E9F7;
-  height: 100vh;
-  left: 260px;
-  width: calc(100% - 260px);
+  min-height: 100%;
+  padding-left:80px;
+  width: 100%;
+  min-height: 100vh;
   transition: all 0.5s ease;
+}
+.home-section h1{
+  font-size: 40px;
+  width:100%;
 }
 .sidebar.close ~ .home-section{
   left: 78px;
-  width: calc(100% - 78px);
+  width: 100%;
 }
 .home-section .home-content{
-  height: 60px;
+  min-height: 100vh;
   display: flex;
   align-items: center;
 }

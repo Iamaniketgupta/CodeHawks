@@ -49,15 +49,14 @@ export default function SignUp_Mentee() {
             setLoading(false)
         }
     }
-
     return (
         <>
-            <section className=" min-vh-100">
+            <section className="min-vh-100 form">
                 <form className="container h-100" onSubmit={handleSubmit}>
                     <div className="row d-flex justify-content-center align-items-center h-100">
-                        <div className="col-xl-9">
-                            <div className="card mt-md-5" style={{ borderRadius: "15px" }}>
-                                <div className="card-body">
+                        <div className="col-xl-9 mt-md-5">
+                            <div className="card mt-5" style={{ borderRadius: "15px" }}>
+                                <div className="card-body m-md-5">
                                     <h1 className='my-2'>SignUp as a Mentee</h1>
                                     <div id="part1">
                                         {/* Name */}

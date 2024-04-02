@@ -28,7 +28,7 @@ export default function Login_Mentee() {
 
     return (
         <>
-            <section className="vh-100">
+            <section className="vh-100 form">
                 <form className="container h-100" onSubmit={handleSubmit}>
                     <div className="row d-flex justify-content-center align-items-center h-100">
                         <div className="col-xl-9">
