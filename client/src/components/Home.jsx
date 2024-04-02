@@ -4,7 +4,7 @@ import './Home.css';
 import { Link} from "react-router-dom";
 import Reviews from './Reviews';
 import FAQ from './FAQ';
-import Navbar from '../common/Navbar';
+import Topbar from '../common/Topbar';
 import Footer from '../common/Footer';
 export default function Home() {
 
@@ -32,9 +32,9 @@ function addAnimation() {
 
   return (
     <>
-<Navbar/>
-<div className="home">
-<div className="intro">
+<Topbar/>
+<div className="home pt-5">
+<div className="intro pt-5">
 <h1 className='text-center mt-5'>Mentor Hub</h1>    
 <h2 className='text-center mt-2'>Make your path easier with a Mentor</h2>
 <p className='text-center mt-2'>Land your dream job, role, and company faster than ever with 1:1 long term mentorship.</p>
@@ -55,7 +55,6 @@ function addAnimation() {
 </div>
 </div>
   </div>
-
   {/* Features */}
   <div className="bg-white dark:bg-gray-900">
   <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
