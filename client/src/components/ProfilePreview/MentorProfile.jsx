@@ -1,8 +1,7 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaHeart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
-import { MdDelete } from 'react-icons/md';
 const MentorProfile = () => {
 
     const [slotsData, setSlotsData] = useState([]);
@@ -29,13 +28,15 @@ const MentorProfile = () => {
     }, [slotsData]);
 
 
-    const bookMyTrail = () => {
+    const bookMyTrail = async () => {
 
     }
 
-    const butMentorship = () => {
+    const butMentorship = async () => {
 
     }
+
+
     return (
 
         <div>
@@ -156,7 +157,11 @@ const MentorProfile = () => {
                                 }
                             </div>
                         </div>
-                        <button className='inline-block px-3 py-2 bg-blue-500 rounded-xl text-white font-semibold'>Book Free Trail</button>
+
+                        <button
+                            className={`inline-block px-3 py-2 bg-blue-500 rounded-xl text-white font-semibold 
+                        ${!selectedSlot ? "opacity-20 " : ''}`} disabled={!selectedSlot}>
+                            Book Free Trail</button>
 
                     </div>
 
