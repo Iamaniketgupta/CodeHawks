@@ -160,7 +160,7 @@ const MentorProfile = () => {
 
                         <button
                             className={`inline-block px-3 py-2 bg-blue-500 rounded-xl text-white font-semibold 
-                        ${!selectedSlot ? "opacity-20 " : ''}`} disabled={!selectedSlot}>
+                        ${!selectedSlot ? "opacity-20 cursor-not-allowed" : ''}`} disabled={!selectedSlot}>
                             Book Free Trail</button>
 
                     </div>
