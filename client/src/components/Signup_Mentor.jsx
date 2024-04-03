@@ -4,8 +4,8 @@ import toast from 'react-hot-toast';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 export default function Signup_Mentor() {
+    
     const handlePart1 = () => {
-
 
         const fullName=document.getElementById("fullName").value.replaceAll(" ","");
         const email=document.getElementById("email").value.replaceAll(" ","");
@@ -17,6 +17,7 @@ export default function Signup_Mentor() {
         }
 
     }
+
     const handlePart2 = () => {
         document.getElementById("part2").style.display = "none";
         document.getElementById("part1").style.display = "block";

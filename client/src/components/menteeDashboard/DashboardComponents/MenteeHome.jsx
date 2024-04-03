@@ -1,5 +1,5 @@
 import React from 'react'
-import Barside from '../../common/Barside'
+import Barside from '../../../common/Barside'
 import Taskbox from './Taskbox'
 
 export default function MenteeHome() {

@@ -1,6 +1,5 @@
 import Barside from "../../common/Barside";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import MenteeHome from "./MenteeHome";
+import MenteeHome from "./DashboardComponents/MenteeHome";
 
 const MenteeDashoaboard = () => {
 

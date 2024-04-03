@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import './Forms.css';
 import toast from 'react-hot-toast';
-import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { login } from '../store/authSlice';
@@ -13,28 +12,28 @@ export default function Login_Mentee() {
     }
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             setLoading(true);
-            const response = await axios.post('http://localhost:8000/api/v1/mentee/login', cred);
+            const response = await axios.post('/api/v1/mentee/login', cred);
             console.log(response.data.data);
             const obj = {
                 user:response.data.data.user
             }
             dispatch(login(obj));
-            const response = await axios.post('/api/v1/mentee/login', cred);
-            console.log(response.data);
+        
             toast.success('Login successful!');
-            setLoading(false)
+            setLoading(false);
+            navigate("/mentee_dashboard");
             
         } catch (error) {
-            console.error('Error:', error);
-            toast.error('Failed to Login: Please try again.' , error);
-            setLoading(false)
+            
+            toast.error(error.response?.data?.message || "Failed to Login!");
+            setLoading(false);
         }
     }
 
