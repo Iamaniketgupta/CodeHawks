@@ -3,12 +3,17 @@ import './Forms.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { login } from '../store/authSlice';
+import { useNavigate } from 'react-router-dom';
 export default function Login_Mentee() {
     const [cred, setCred] = useState({ email: "", password: "" });
     const onChange = (e) => {
         setCred({ ...cred, [e.target.name]: e.target.value });
     }
     const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
 
 
     const handleSubmit = async (e) => {
@@ -16,12 +21,17 @@ export default function Login_Mentee() {
         try {
             setLoading(true);
             const response = await axios.post('http://localhost:8000/api/v1/mentee/login', cred);
-            console.log(response.data);
+            console.log(response.data.data);
+            const obj = {
+                user:response.data.data.user
+            }
+            dispatch(login(obj));
             toast.success('Login successful!');
             setLoading(false)
+            
         } catch (error) {
             console.error('Error:', error);
-            toast.error('Failed to Login: Please try again.');
+            toast.error('Failed to Login: Please try again.' , error);
             setLoading(false)
         }
     }

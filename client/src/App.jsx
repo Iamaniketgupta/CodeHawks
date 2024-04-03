@@ -6,6 +6,7 @@ import Login_Mentor from './components/Login_Mentor';
 import Home from './components/Home';
 import MentorDashboard from './components/MentorDashboard';
 import MenteeDashoaboard from './components/MenteeDashoaboard';
+import Chat from './components/Chat';
 function App() {
   return (
     <>
@@ -18,6 +19,7 @@ function App() {
 <Route path="/signup_mentor" element={<Signup_Mentor/>}/>
 <Route path="/mentor/dashboard" element={<MentorDashboard/>}/>
 <Route path="/mentee/dashboard" element={<MenteeDashoaboard/>}/>
+<Route path="/mentee/chat/:recipientId" element={<Chat/>}/>
 </Routes>
 </Router>    
 </>
