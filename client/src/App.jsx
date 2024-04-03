@@ -9,7 +9,8 @@ import MenteeDashboard from './components/menteeDashboard/MenteeDashboard';
 import { Toaster } from 'react-hot-toast';
 import EditProfile from './components/mentorDashboard/dashboardComponents/EditProfile';
 import MentorDashboard from './components/mentorDashboard/MentorDashboard';
-
+import MentorProfile from './components/ProfilePreview/MentorProfile';
+import AllMentorsPage from "./components/AllMentorsPage"
 function App() {
   return (
     <>
@@ -22,6 +23,8 @@ function App() {
           {/* Main Routes */}
           <Route path="mentee/dashboard/" element={<MenteeDashboard />} />
           <Route path="mentor/dashboard/" element={<MentorDashboard />} />
+          <Route path="/profile/:nameId" element={<MentorProfile />} />
+
 
           {/* Authentication Routes  */}
           <Route path="/login_mentee" element={<Login_Mentee />} />
@@ -34,6 +37,7 @@ function App() {
 
           {/* Extra Temporary routes */}
           <Route path="/a" element={<EditProfile />} />
+          <Route path="/c" element={<AllMentorsPage />} />
 
         </Routes>
       </Router>

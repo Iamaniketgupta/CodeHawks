@@ -2,30 +2,37 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { FaHeart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
+import { useLocation } from 'react-router-dom';
 const MentorProfile = () => {
-
+    const { state } = useLocation();
     const [slotsData, setSlotsData] = useState([]);
 
     const [selectedSlot, setSelectedSlot] = useState(null);
 
     const [slotloader, setSlotLoader] = useState(false);
 
-    async function getAllSlots() {
-        try {
-            setSlotLoader(true);
-            const response = await axios.get('/api/v1/timeslot/getAllSlots');
-            setSlotsData(response.data);
-            setSlotLoader(false);
 
-        } catch (error) {
-            setSlotLoader(false);
 
-        }
-    }
 
-    useEffect(() => {
-        getAllSlots();
-    }, [slotsData]);
+    // const [userDetails,setUserDetails]= useState({});
+
+
+    // async function getAllSlots() {
+    //     try {
+    //         setSlotLoader(true);
+    //         const response = await axios.get('/api/v1/timeslot/getAllSlots');
+    //         console.log(response)
+    //         setSlotsData(response.data);
+    //         setSlotLoader(false);
+
+    //     } catch (error) {
+    //         setSlotLoader(false);
+    //     }
+    // }
+
+    // useEffect(() => {
+    //     getAllSlots();
+    // }, []);
 
 
     const bookMyTrail = async () => {
@@ -48,74 +55,80 @@ const MentorProfile = () => {
 
                     <div className='flex items-center justify-between'>
 
-
                         <div className='p-2 rounded-xl w-32 h-32 bg-black my-3'>
-                            <img src="/" alt="MentorImg" className='w-full h-full' />
+
+                            <img src={state?.avatar || "/"} alt={state.fullName} className='w-full h-full' />
                         </div>
-                        <div className='mr-3'>
-                            <FaHeart className='text-red-500 text-3xl' />
-                            <FaRegHeart className='text-blue-500 text-3xl' />
-                        </div>
+
                     </div>
 
                     <div className='flex   justify-between p-3 flex-wrap gap-3 '>
                         <div>
 
                             <div className=' text-2xl font-bold'>
-                                Aniket gupta
+                                {state.fullName}
                             </div>
                             <div className='font-semit text-xl'>
-                                Developer
+                                {state.profession || "-no profession found"}
                             </div>
 
-
+                            {/* 
                             <div className='flex gap-3 text-xs my-2'>
                                 <p className='p-2 border-2 rounded-lg'>Frontend</p>
                                 <p className='p-2 border-2 rounded-lg'>Frontend</p>
-                            </div>
+                            </div> */}
 
                         </div>
 
 
                         <div>
                             <div className='p-3 max-w-[250px] border-2'>
-                                <p>10 + Years of Experience</p>
-                                <p className='font-semibold text-lg'>Hewlett Packard Enterprise </p>
-                                <p>GenPact</p>
-                                <p>NIIST Bhopal,RGTU</p>
+                                <p>{state.experience || "1"} + years of experience</p>
+
+                                {
+                                    state.workExp?.map((item) =>
+                                        <p key={item._id} className='font-semibold text-lg'>Hewlett Packard Enterprise </p>
+                                    )
+                                }
+
                             </div>
                         </div>
 
 
                     </div>
 
-
                     {/* Description */}
                     <div className='p-3'>
                         <h3>About</h3>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni distinctio minus itaque molestiae impedit repellendus eius! Deleniti ut velit culpa quisquam nulla dolorem, iure sapiente quod non, praesentium distinctio mollitia.
+                        {state.about || "-no description found"}
                     </div>
 
-                    <div className='p-3'>
-                        <span>5 Star</span>
+                    <div className='mx-3 my-2 bg-yellow-200 border-2 border-yellow-400 rounded-lg px-2 py-1 inline-block'>
+                        <span>{state.rating + " Stars"}</span>
                     </div>
-
-
 
                     <div className='pl-3'>
                         <div className='p-2 border-2 inline-block px-3'>
-                            <p>Ludhiana, India</p>
+                            <p>{state.state}, {state.country}</p>
                         </div>
-                        <p className='mx-2 w-10 h-10 rounded-full border-2 inline-flex bg-blue-500 items-center justify-center text-white font-bold'>In</p>
+                        <a href={state.linkedin || "#"} className='mx-2 w-10 h-10 rounded-full border-2 inline-flex bg-blue-500 items-center justify-center text-white font-bold'>In</a>
 
                         <div >
                             <p className='my-3 '>
                                 Languages That i speak
                             </p>
 
-                            <p className='p-2  border-2 inline-block'>
-                                English
-                            </p>
+                            {
+
+                                state.languages?.map((item) =>
+                                    <p key={item} className='p-2  border-2 inline-block'>
+                                        {item}
+                                    </p>
+                                )
+                                
+                            }
+                            {state.languages.length===0 && <p><i>-No Languages found</i></p>}
+
                         </div>
                     </div>
 

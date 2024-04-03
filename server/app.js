@@ -22,6 +22,7 @@ import taskRouter from "./src/routes/task.routes.js";
 import timeslotRouter  from './src/routes/timeslot.route.js'
 import messageRouter from './src/routes/message.route.js'
 import subscriptionRouter from './src/routes/subscription.route.js'
+import generalRoutes from './src/routes/generalRoutes.js'
 
 app.use("/api/v1/mentor" , mentorRouter);
 app.use("/api/v1/mentee" , menteeRouter);
@@ -29,6 +30,7 @@ app.use("/api/v1/task" , taskRouter);
 app.use("/api/v1/timeslot" , timeslotRouter);
 app.use("/api/v1/message" , messageRouter);
 app.use("/api/v1/subscription" , subscriptionRouter);
+app.use("/api/v1" , generalRoutes);
 
 
 

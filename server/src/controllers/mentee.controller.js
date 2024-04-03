@@ -151,44 +151,64 @@ const logoutUser = asyncHandler(async(req,res)=>{
 })
 
 
-const addMentorToBookmark = asyncHandler(async(req,res)=>{
-    const {mentorId} = req.body
-    if(!mentorId){
-        throw new ApiError(400 , "Mentor id is requried");
+const addMentorToBookmark = asyncHandler(async (req, res) => {
+    const { mentorId } = req.body;
+    if (!mentorId) {
+        throw new ApiError(400, "Mentor id is required");
     }
 
     const mentor = await Mentor.findById(mentorId);
-    if(!mentor){
-        throw new ApiError("Mentor dont exist ");
+    if (!mentor) {
+        throw new ApiError("Mentor doesn't exist");
     }
 
     const mentee = await Mentee.findById(req.user._id);
-    mentee.bookmarked_mentors.push(mentorId);
+    const index = mentee.bookmarked_mentors.indexOf(mentorId);
+
+    let action;
+    let message;
+    if (index === -1) {
+        mentee.bookmarked_mentors.push(mentorId);
+        action = "added";
+        message = "Mentor added successfully";
+    } else {
+        mentee.bookmarked_mentors.splice(index, 1);
+        action = "removed";
+        message = "Mentor removed successfully";
+    }
+
     await mentee.save();
 
     return res.status(200).json(
         new ApiResponse(
             200,
             {},
-            "Mentor added successfully"
+            `Mentor ${action} successfully: ${message}`
         )
-    )
-})
+    );
+});
 
-const removeMentorFromBookmark = asyncHandler(async(req,res)=>{
-    const {mentorId} = req.body;
-    if(!mentorId){
+
+const removeMentorFromBookmark = asyncHandler(async (req, res) => {
+    const { mentorId } = req.body;
+    if (!mentorId) {
         throw new ApiError("Mentor id is required");
     }
 
     const mentor = await Mentor.findById(mentorId);
-    if(!mentor){
-        throw new ApiError("Mentor dont exist");
+    // console.log(mentor)
+    if (!mentor) {
+        throw new ApiError("Mentor doesn't exist");
     }
 
-    mentor.bookmarked_mentors = mentor.bookmarked_mentors.filter(item => item != mentorId);
+    const mentee = await Mentee.findById(req.user._id);
+    if (!mentee) {
+        throw new ApiError(401,"unAuthorized");
+    }
 
-    await mentor.save();
+    mentee.bookmarked_mentors = mentor.bookmarked_mentors?.filter(item => item !== mentorId);
+
+    await mentee.save();
 
     return res.status(200).json(
         new ApiResponse(
@@ -196,8 +216,34 @@ const removeMentorFromBookmark = asyncHandler(async(req,res)=>{
             {},
             "Mentor removed successfully"
         )
-    )
-})
+    );
+});
+
+
+const getMenteeBookmarks = async (req, res) => {
+    try {
+        const menteeId = req.user._id; 
+        const mentee = await Mentee.findById(menteeId).populate('bookmarked_mentors', '-password -refreshToken -email');
+        if (!mentee) {
+            throw new Error("Mentee not found");
+        }
+        const bookmarks = mentee.bookmarked_mentors.map(mentor => ({
+            id: mentor._id,
+            fullName: mentor.fullName,
+        }));
+
+        res.status(200).json({
+            success: true,
+            bookmarks: bookmarks
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
 
 
 const updateMenteeAvatar = asyncHandler(async(req,res)=>{
@@ -229,6 +275,7 @@ const updateMenteeAvatar = asyncHandler(async(req,res)=>{
         new ApiResponse(200 , user , "Avatar image uploaded successfully")
     )
 })
+
 
 
 const updateMenteeProfile = asyncHandler(async(req,res)=>{
@@ -269,5 +316,6 @@ export
     addMentorToBookmark,
     removeMentorFromBookmark,
     updateMenteeAvatar,
-    updateMenteeProfile
+    updateMenteeProfile,
+    getMenteeBookmarks
 }

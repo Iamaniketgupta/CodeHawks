@@ -72,7 +72,8 @@ const deleteTimeslot = asyncHandler(async (req, res) => {
 });
 
 const getAllSlots = asyncHandler(async (req, res) => {
-    const mentorId = req.mentor._id;
+    const {mentorId} = req.body;
+    console.log(mentorId)
     if (!mentorId) {
         throw new ApiError(404,"Failed to get data");
     }

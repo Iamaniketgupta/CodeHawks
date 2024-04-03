@@ -18,18 +18,12 @@ const pricingSchema = new Schema({
 });
 
 const mentorWorkSchema = new Schema({
-    position: {
-        type: String,
-        required: true,
-    },
+
     company: {
         type: String,
         required: true,
     },
-    currentlyWorking: {
-        type: Boolean,
-        default: false
-    }
+
 });
 
 const mentorSchema = new Schema({
