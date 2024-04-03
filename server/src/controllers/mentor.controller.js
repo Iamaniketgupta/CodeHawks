@@ -4,6 +4,7 @@ import { uploadToCloudinary } from "../utils/cloudinary.js"
 import Jwt from "jsonwebtoken";
 import { ApiResponse } from "../utils/apiResponse.js";
 import Mentor from "../models/mentor.model.js";
+import { isValidObjectId } from "mongoose";
 
 
 const options = {
@@ -127,7 +128,7 @@ const refreshMentorAccessToken = asyncHandler(async (req, res) => {
 });
 
 const updateMentorProfile = asyncHandler(async (req, res) => {
-    const { fullName, country, state, interests, experience, linkedin, pricing, workExp } = req.body;
+    const { fullName, country, state, interests, experience, linkedin, pricing, workExp , status } = req.body;
 
     const userId = req.mentor._id;
     const user = await Mentor.findById(userId);
@@ -143,7 +144,8 @@ const updateMentorProfile = asyncHandler(async (req, res) => {
         experience: experience || user.experience,
         linkedin: linkedin || user.linkedin,
         pricing: pricing || user.pricing,
-        workExp: workExp || user.workExp
+        workExp: workExp || user.workExp,
+        status : status || user.status
     };
 
     const updatedUser = await Mentor.findByIdAndUpdate(userId, updatedFields, { new: true });
@@ -195,6 +197,33 @@ const updateMentorAvatar = asyncHandler(async (req, res) => {
 });
 
 
+const getMentorById = asyncHandler(async(req,res)=>{
+    const {mentorId} = req.body;
+    if(!mentorId){
+        throw new ApiError(400 , "Mentor id is required");
+    }
+
+    const isMentorIdValid = isValidObjectId(mentorId);
+    if(!isMentorIdValid){
+        throw new ApiError(400 , "mentor id is not valid");
+    }
+
+
+    const mentor = await Mentor.findById(mentorId).select("-password -refreshToken");
+
+    if(!mentor){
+        throw new ApiError(500 , "Error while fetchinf mentor from the db");
+    }
+
+    return res.status(200).json(
+        new ApiResponse(
+            200,
+            mentor ,
+            "mentor fetched successfully"
+        )
+    )
+})
+
 export {
     registerMentor,
     loginMentor,
@@ -202,4 +231,5 @@ export {
     updateMentorProfile,
     updateMentorAvatar,
     refreshMentorAccessToken,
+    getMentorById
 }

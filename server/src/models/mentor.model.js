@@ -90,6 +90,10 @@ const mentorSchema = new Schema({
     },
     pricing: {
         type: pricingSchema,
+    },
+    status:{
+        type:Boolean,
+        default:false
     }
     
 }, { timestamps: true });
