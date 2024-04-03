@@ -4,10 +4,21 @@ import { useEffect } from 'react';
 export default function Barside() {
   function giveAction() {
     let sidebar = document.querySelector(".sidebar");
+    let menu=document.querySelector(".logo-details");
     let sidebarBtn = document.querySelector(".bx-menu");
-    sidebarBtn.addEventListener("click", () => {
+    sidebarBtn.addEventListener("click", (event) => {
       sidebar.classList.toggle("close");
     });
+    window.addEventListener('click', function(e){   
+      if (menu.contains(e.target)){
+          sidebar.classList.toggle("close");
+        // Clicked in box
+      } else{
+            sidebar.classList.add("close");
+        // Clicked outside the box
+      }
+    });
+  
   }
   useEffect(() => {
     window.addEventListener('load', giveAction);
@@ -15,16 +26,13 @@ export default function Barside() {
   }, []);
   return (
     <>
-      <link
-        href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
-        rel="stylesheet"
-      />
-      <div className="sidebar" onClick={giveAction}>
+    
+      <div className="sidebar close" onClick={giveAction}>
         <div className="logo-details">
           <i className="bx bx-menu" />
         </div>
         <div className="logo-details">
-          <i className="bx bxl-c-plus-plus" />
+          <i className="bx bx bx-shield-quarter" />
           <span className="logo_name">Mentor Hub</span>
         </div>
         <ul className="nav-links">
@@ -35,90 +43,72 @@ export default function Barside() {
             </Link>
             <ul className="sub-menu blank">
               <li>
-                <Link className="link_name" to="/">
-                  Category
+                <Link className="link_name" to="/mentee/dashboard/">
+                  Dashboard
                 </Link>
               </li>
             </ul>
           </li>
           <li>
-            <Link to="/mentee/dashboard/analytics">
+            <Link to="/mentee/dashboard/tasks">
               <i className="bx bx-pie-chart-alt-2" />
-              <span className="link_name">Analytics</span>
+              <span className="link_name">Tasks</span>
             </Link>
             <ul className="sub-menu blank">
               <li>
-                <Link className="link_name" to="/">
-                  Analytics
+                <Link className="link_name" to="/mentee/dashboard/tasks">
+                  Tasks
                 </Link>
               </li>
             </ul>
           </li>
           <li>
-            <Link to="/">
-              <i className="bx bx-line-chart" />
-              <span className="link_name">Chart</span>
+            <Link to="/mentee/dashboard/chats">
+              <i className="bx bx bxs-chat" />
+              <span className="link_name">Chats</span>
             </Link>
             <ul className="sub-menu blank">
               <li>
-                <Link className="link_name" to="/">
-                  Chart
+                <Link className="link_name" to="/mentee/dashboard/chats">
+                  Chats
                 </Link>
               </li>
             </ul>
           </li>
           <li>
-            <ul className="sub-menu">
-              <li>
-                <Link className="link_name" to="/">
-                  Plugins
-                </Link>
-              </li>
-              <li>
-                <Link to="/">UI Face</Link>
-              </li>
-              <li>
-                <Link to="/">Pigments</Link>
-              </li>
-              <li>
-                <Link to="/">Box Icons</Link>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <Link to="/">
+            <Link to="/mentee/dashboard/subscription">
               <i className="bx bx-compass" />
-              <span className="link_name">Explore</span>
+              <span className="link_name">Subscription</span>
             </Link>
             <ul className="sub-menu blank">
               <li>
-                <Link className="link_name" to="/">
-                  Explore
+                <Link className="link_name" to="/mentee/dashboard/subscription">
+                  Subscription
                 </Link>
               </li>
             </ul>
           </li>
           <li>
-            <Link to="/">
+            <Link to="/mentee/dashboard/">
               <i className="bx bx-history" />
-              <span className="link_name">History</span>
+              <span className="link_name">Others</span>
             </Link>
             <ul className="sub-menu blank">
               <li>
-                <Link className="link_name" to="/">
-                  History
+                <Link className="link_name" to="/mentee/dashboard/">
+                  Others
                 </Link>
               </li>
             </ul>
           </li>
           <li>
-            <Link to="/">
+            <Link to="/mentee/dashboard/settings">
               <i className="bx bx-cog" />
               <span className="link_name">Setting</span>
             </Link>
             <ul className="sub-menu blank">
               <li>
-                <Link className="link_name" to="/">
+                <Link className="link_name" to="/mentee/dashboard/settings">
                   Setting
                 </Link>
               </li>
@@ -130,7 +120,7 @@ export default function Barside() {
                 {/*<img src="image/profile.jpg" alt="profileImg">*/}
               </div>
               <div className="name-job">
-                <div className="profile_name">Prem Shahi</div>
+                <div className="profile_name">Tirthesh Jain</div>
                 <div className="job">Web Desginer</div>
               </div>
               <i className="bx bx-log-out" />

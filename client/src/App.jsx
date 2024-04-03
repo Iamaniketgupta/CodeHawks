@@ -12,6 +12,12 @@ import MenteeDashboard from './components/menteeDashboard/MenteeDashboard';
 import MySlots from './components/mentorDashboard/dashboardComponents/MySlots';
 import { Toaster } from 'react-hot-toast';
 import MenteeHome from './components/menteeDashboard/MenteeHome';
+import Tasks from './components/menteeDashboard/Tasks';
+import Chats from './components/menteeDashboard/Chats';
+import Settings from './components/menteeDashboard/Settings';
+import Subscription from './components/menteeDashboard/Subscription';
+
+
 import Analytics from './common/Analytics';
 
 import MentorProfile from './components/ProfilePreview/MentorProfile';
@@ -30,7 +36,10 @@ function App() {
 <Route path="signup_mentor" element={<Signup_Mentor/>}/>
 <Route path="mentor/dashboard/" element={<MentorDashboard/>}/>
 <Route path="mentee/dashboard/" element={<><MenteeDashboard/><MenteeHome/></>}/>
-<Route path="mentee/dashboard/analytics" element={<><MenteeDashboard/><Analytics/></>}/>
+<Route path="mentee/dashboard/tasks" element={<><MenteeDashboard/><Tasks/></>}/>
+<Route path="mentee/dashboard/chats" element={<><MenteeDashboard/><Chats/></>}/>
+<Route path="mentee/dashboard/settings" element={<><MenteeDashboard/><Settings/></>}/>
+<Route path="mentee/dashboard/subscription" element={<><MenteeDashboard/><Subscription/></>}/>
 <Route path="/a" element={<MySlots/>}/>
 
 <Route path="/login_mentee" element={<Login_Mentee/>}/>
