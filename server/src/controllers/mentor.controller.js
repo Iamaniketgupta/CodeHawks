@@ -54,11 +54,17 @@ const loginMentor = asyncHandler(async (req, res) => {
         email
     });
 
-    if (!ValidUser) throw new ApiError(404, "User Does not exist");
+    if (!ValidUser) 
+    res.status(404).json({
+        data:{},
+        message: "User Not Found"
+    });
+
     if (!password) throw new ApiError(400, "Password is required");
 
     if (!await ValidUser.isPasswordCorrect(password)) {
         res.status(401).json({
+            data:{},
             message: "Invalid email or password"
         });
     }

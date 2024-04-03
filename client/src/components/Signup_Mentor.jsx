@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import './Forms.css';
-import { ToastContainer, toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 export default function Signup_Mentor() {
     const handlePart1 = () => {
+
+
         const fullName=document.getElementById("fullName").value.replaceAll(" ","");
         const email=document.getElementById("email").value.replaceAll(" ","");
         const password=document.getElementById("password").value.replaceAll(" ","");
@@ -32,15 +35,17 @@ export default function Signup_Mentor() {
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             setLoading(true);
-            const response = await axios.post('http://localhost:8000/api/v1/mentor/signup', formData);
+            const response = await axios.post('/api/v1/mentor/signup', formData);
             console.log(response.data);
             toast.success('Sign up successful!');
-            setLoading(false)
+            setLoading(false);
+            navigate("/login_mentor")
         } catch (error) {
             console.error('Error:', error);
             toast.error('Error signing up. Please try again.');
@@ -181,7 +186,6 @@ export default function Signup_Mentor() {
                     </div>
                 </form>
             </section>
-            <ToastContainer />
         </>
     )
 }
