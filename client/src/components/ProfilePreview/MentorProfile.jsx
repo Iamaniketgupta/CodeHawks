@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { FaHeart } from "react-icons/fa";
-import { FaRegHeart } from "react-icons/fa";
+
 import { useLocation } from 'react-router-dom';
 const MentorProfile = () => {
     const { state } = useLocation();
@@ -17,31 +16,31 @@ const MentorProfile = () => {
     // const [userDetails,setUserDetails]= useState({});
 
 
-    // async function getAllSlots() {
-    //     try {
-    //         setSlotLoader(true);
-    //         const response = await axios.get('/api/v1/timeslot/getAllSlots');
-    //         console.log(response)
-    //         setSlotsData(response.data);
-    //         setSlotLoader(false);
+    async function getAllSlots() {
+        try {
+            setSlotLoader(true);
+            const response = await axios.get('/api/v1/timeslot/getAllSlots');
+            console.log(response)
+            setSlotsData(response.data);
+            setSlotLoader(false);
 
-    //     } catch (error) {
-    //         setSlotLoader(false);
-    //     }
+        } catch (error) {
+            setSlotLoader(false);
+        }
+    }
+
+    useEffect(() => {
+        getAllSlots();
+    }, []);
+
+
+    // const bookMyTrail = async () => {
+    
     // }
 
-    // useEffect(() => {
-    //     getAllSlots();
-    // }, []);
+    // const butMentorship = async () => {
 
-
-    const bookMyTrail = async () => {
-
-    }
-
-    const butMentorship = async () => {
-
-    }
+    // }
 
 
     return (
