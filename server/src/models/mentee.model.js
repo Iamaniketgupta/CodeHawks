@@ -10,6 +10,7 @@ const menteeSchema = new mongoose.Schema({
   },
   avatar: {
     type: String,
+    default:"https://res.cloudinary.com/dsj5kuvj4/image/upload/v1712154743/ccbliuoote9hm8n4pngj.webp"
   },
   country:{
     type:String,
@@ -18,6 +19,11 @@ const menteeSchema = new mongoose.Schema({
     type:String
   },
   interests:[
+    {
+        type:String,
+    }
+  ],
+  languages:[
     {
         type:String,
     }

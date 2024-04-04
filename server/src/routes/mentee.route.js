@@ -10,7 +10,7 @@ router.route('/login').post(login);
 router.route('/logout').post(verifyJwt , logoutUser);
 router.route('/addMentorToBookmark').post(verifyJwt , addMentorToBookmark);
 router.route('/removeMentorFromBookmark').post(verifyJwt , removeMentorFromBookmark);
-router.route('/updateMenteeAvatar').post(verifyJwt , updateMenteeAvatar);
+router.route('/updateMenteeAvatar').post(verifyJwt ,  uploadImage.single("avatar") ,updateMenteeAvatar);
 router.route('/updateMenteeProfile').post(verifyJwt , updateMenteeProfile);
 
 export default router;

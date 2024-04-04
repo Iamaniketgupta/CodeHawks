@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import {login} from '../../../store/authSlice'
 
-const EditProfile = () => {
+const EditMenteeProfile = () => {
 
     
     const user = useSelector((state)=>state.auth.user);
@@ -16,26 +16,25 @@ const EditProfile = () => {
     
     const [loader, setLoader] = useState(false);
     const [fullName, setfullName] = useState(user.fullName || "");
-    const [profession, setprofession] = useState(user.profession || "")
+    const [country, setcountry] = useState(user.country || "")
+    const [state, setstate] = useState(user.state || "")
     const [experience, setexperience] = useState(user.experience || "");
     const [linkedin, setlinkedin] = useState(user.linkedin || "")
-    const [visible, setVisible] = useState(user.status || false);
-    const [workExp, setWorkExp] = useState(user.workExp || []);
-    const [description, setdescription] = useState(user.description || "")
+    const [interests, setinterests] = useState(user.interests || []);
 
 
     const updateDetails = async()=>{
         setLoader(true)
         const data = {
             fullName ,
-            profession,
             experience,
             linkedin,
-            status:visible,
-            workExp
+            country,
+            state,
+            interests
         }
         try {
-            const response = await axios.post("/api/v1/mentor/editProfile", data, {
+            const response = await axios.post("/api/v1/mentee/updateMenteeProfile", data, {
               });
 
             //   console.log(response.data.data)
@@ -63,7 +62,7 @@ const EditProfile = () => {
           formData.append('avatar', file);
         //   console.log(formData)
       
-          const response = await axios.post("/api/v1/mentor/updateMentorAvatar", {avatar : file}, {
+          const response = await axios.post("/api/v1/mentee/updateMenteeAvatar", {avatar : file}, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }
@@ -87,15 +86,15 @@ const EditProfile = () => {
     
 
       const handleWorkExpChange = (idx, value) => {
-        const updatedWorkExp = [...workExp];
-        updatedWorkExp[idx] = value;
-        setWorkExp(updatedWorkExp);
+        const updateInterests = [...interests];
+        updateInterests[idx] = value;
+        setinterests(updateInterests);
         
     };
 
 
     function addWork(e) {
-        setWorkExp((prev) => ([...prev, '']))
+        setinterests((prev) => ([...prev, '']))
     }
 
 
@@ -103,7 +102,7 @@ const EditProfile = () => {
     return (
         <div>
             <h2 className="m-3  p-2 text-2xl font-bold">Edit Profile</h2>
-            <div className="flex items-center">
+            {/* <div className="flex items-center">
                 <p className="m-3  p-2 text-xl font-semibold">Profile visibility : </p>
                 {
                     visible ?
@@ -113,7 +112,7 @@ const EditProfile = () => {
                         <FaToggleOff onClick={() => setVisible(true)}
                             className="text-red-600 cursor-pointer  text-2xl" title="Hidden" />
                 }
-            </div>
+            </div> */}
 
 
 
@@ -157,12 +156,20 @@ const EditProfile = () => {
                             onChange={(e)=>setfullName(e.target.value)}
                             />
 
-                        <p>Profession</p>
+                        <p>Country</p>
                         <input
                             className="px-3 my-2 rounded-lg outline-offset-2 border-2 border-blude-300"
                             type="text" name="fullName"
-                            value={profession}
-                            onChange={(e)=>setprofession(e.target.value)}
+                            value={country}
+                            onChange={(e)=>setcountry(e.target.value)}
+                            />
+
+                        <p>State</p>
+                        <input
+                            className="px-3 my-2 rounded-lg outline-offset-2 border-2 border-blude-300"
+                            type="text" name="fullName"
+                            value={state}
+                            onChange={(e)=>setstate(e.target.value)}
                             />
 
                         <p>Experience</p>
@@ -190,32 +197,32 @@ const EditProfile = () => {
                     <div className="m-2">
                         <div>
                             <button onClick={addWork}
-                                className="inline-block my-2 rounded-lg text-white text-xs font-bold cursor-pointer bg-blue-500 p-2">Add Companies</button>
+                                className="inline-block my-2 rounded-lg text-white text-xs font-bold cursor-pointer bg-blue-500 p-2">Add Interests</button>
 
                         </div>
                         {
-                            workExp?.map((item, idx) =>
+                            interests?.map((item, idx) =>
                                 <div className="" key={idx}>
-                                    <p>Company {idx + 1}</p>
+                                    <p>Interest {idx + 1}</p>
                                     <div className="flex items-center gap-2">
                                         <input
                                             className="px-3 my-2 rounded-lg outline-offset-2 border-2 border-blude-300"
                                             type="text" name="fullName"
-                                            value={workExp[idx]}
+                                            value={interests[idx]}
                                             onChange={(e)=>{
                                                 handleWorkExpChange(idx , e.target.value)
                                             }}
                                             />
 
                                         <MdDelete className="text-lg text-red-500 cursor-pointer"
-                                            onClick={() => setWorkExp(() => workExp?.filter((item, itemIdx) => itemIdx !== idx))} />
+                                            onClick={() => setinterests(() => interests?.filter((item, itemIdx) => itemIdx !== idx))} />
                                     </div>
                                 </div>
                             )
                         }
                     </div>
                     {/* about */}
-                    <div className=" mx-3 w-[90%] my-2">
+                    {/* <div className=" mx-3 w-[90%] my-2">
                         <p>About</p>
                         <textarea
                             className="px-3 min-h-[120px] my-2 rounded-lg w-full outline-offset-2 border-2 border-blude-300"
@@ -223,7 +230,7 @@ const EditProfile = () => {
                             value={description}
                             onChange={(e)=>setdescription(e.target.value)}
                             ></textarea>
-                    </div>
+                    </div> */}
 
                 </div>
 
@@ -234,4 +241,4 @@ const EditProfile = () => {
     );
 }
 
-export default EditProfile;
+export default EditMenteeProfile;

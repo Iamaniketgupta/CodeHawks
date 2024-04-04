@@ -6,7 +6,7 @@ import { ApiError } from './apiError.js';
 
 cloudinary.config({ 
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
-    api_key: '852652549314759', 
+    api_key: '585843464382915', 
     api_secret: process.env.CLOUDINARY_API_SECRET 
   });
 
