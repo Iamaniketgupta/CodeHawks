@@ -4,9 +4,6 @@ import toast from "react-hot-toast";
 import { IoRefreshCircle } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
 
-
-import { Link } from "react-router-dom";
-
 const MySlots = () => {
 
     const [loading, setLoading] = useState(false);
@@ -19,8 +16,8 @@ const MySlots = () => {
     async function getAllSlots() {
         try {
             setSlotLoader(true);
-            const response = await axios.get('/api/v1/timeslot/getAllSlots');
-            setSlotsData(response.data);
+            const response = await axios.get('/api/v1/mentor/getAllSlots');
+              setSlotsData(response.data?.data);
             setSlotLoader(false);
 
         } catch (error) {
@@ -29,13 +26,20 @@ const MySlots = () => {
         }
     }
 
-    async function handleDeleteSlot(e) {
+    useEffect(() => {
+        getAllSlots();
+    }, []);
+
+    async function handleDeleteSlot(slotId) {
         try {
             setSlotLoader(true);
-            const slotId = e.target.id;
-            const response = await axios.delete('/api/v1/timeslot/deleteSlots', slotId);
+            if (!confirm("Are you sure ?"))
+                return;
+
+            const response = await axios.delete(`/api/v1/timeslot/deleteSlots/${slotId}`);
             if (response)
                 toast.success("Slot Deleted")
+            getAllSlots();
             setSlotLoader(false);
 
         } catch (error) {
@@ -111,10 +115,11 @@ const MySlots = () => {
                 return;
             }
             const response = await axios.post('/api/v1/timeslot/addTimeslot', { date, month, monthName, time });
-            console.log(response.data);
+            // console.log(response.data);
             toast.success("Slot Added");
             getAllSlots();
             setData({ date: '', time: '' });
+            setLoading(false);
 
         } catch (error) {
             setLoading(false);
@@ -183,7 +188,7 @@ const MySlots = () => {
 
 
 
-                    {slotloader ? <div className="text-center relative bottom-11"> Wait..</div> : ''}
+                {slotloader ? <div className="text-center relative bottom-11"> Wait..</div> : ''}
                 <div className=" mx-auto w-[70%] flex flex-wrap gap-3 justify-center items-center">
                     {
                         !slotsData && "No Slots Found"
@@ -191,7 +196,7 @@ const MySlots = () => {
                     {
                         slotsData?.map((slot) =>
                             <div key={slot?._id} className="relative flex min-w-[100px] items-center rounded-lg justify-center pr-3 pl-1 bg-slate-100">
-                                <MdDelete onClick={handleDeleteSlot} id={slot._id}
+                                <MdDelete onClick={() => handleDeleteSlot(slot._id)}
                                     className="text-red-600 absolute right-2 top-2 cursor-pointer" title="Delete Slot" />
 
                                 <div className="w-16 h-16 m-2 inline-flex items-center justify-center rounded-xl bottom-2 border-4 border-blue-500 border-outset">

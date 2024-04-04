@@ -9,7 +9,10 @@ export const verifyJwt = asyncHandler(async( req , res, next)=>{
         const token = req.cookies.accessToken || req.header("Authorization")?.replace("Bearer" , "");
     
         if(!token){
-            throw new ApiError(401, "Unauthorized request");
+            res.status(402).json({
+                data:null,
+                message:"Please Login as Mentee"
+            });
         }
     
         const decodedToken = jwt.verify(token , process.env.ACCESS_TOKEN_SECRET);

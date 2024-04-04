@@ -29,8 +29,8 @@ export default function Login_Mentee() {
             toast.success('Login successful!');
             setLoading(false);
 
-            // for testing
-            navigate("/e");
+            navigate("/mentee/dashboard");
+
             
         } catch (error) {
             

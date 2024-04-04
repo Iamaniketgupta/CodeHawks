@@ -19,17 +19,13 @@ function MentorCard(props) {
 
   const handleBookMark = async () => {
     try {
-      const response = await axios.put("/api/v1/mentee/addMentorToBookmark", { mentorId });
-      if (response.status === "401")
-        throw new Error("Please Login first!");
-      if (!response)
-        throw new Error("Failed to Add !");
-
+       await axios.put("/api/v1/mentee/addMentorToBookmark", { mentorId });
+       
       toast.success(`Like Added Success`);
       setLiked(true);
       updateLocalStorage(mentorId, true);
     } catch (error) {
-      toast.error(error || "An error occurred");
+      toast.error(error.response.data.message || "An error occurred");
     }
   }
 

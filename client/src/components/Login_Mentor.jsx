@@ -33,9 +33,8 @@ export default function Login_Mentor() {
             toast.success('Login successful!');
             setLoading(false)
 
-            //for testing
-            navigate("/a");
-            
+            navigate("/mentor/dashboard");
+
         } catch (error) {
             console.error('Error:', error);
             toast.error(error.response?.data?.message || "Failed! Something went Wrong");
