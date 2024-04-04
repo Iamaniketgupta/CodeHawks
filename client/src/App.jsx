@@ -9,6 +9,10 @@ import MenteeDashboard from './components/menteeDashboard/MenteeDashboard';
 import { Toaster } from 'react-hot-toast';
 import EditProfile from './components/mentorDashboard/dashboardComponents/EditProfile';
 import MentorDashboard from './components/mentorDashboard/MentorDashboard';
+
+import EditMenteeProfile from './components/menteeDashboard/DashboardComponents/EditMenteeProfile';
+
+
 import MentorProfile from './components/ProfilePreview/MentorProfile';
 import AllMentorsPage from "./components/AllMentorsPage"
 import Paymentsuccess from './common/Paymentsuccess';
@@ -45,6 +49,12 @@ function App() {
 
           {/* Extra Temporary routes */}
           <Route path="/a" element={<EditProfile />} />
+
+
+          <Route path="/e" element={<EditMenteeProfile />} />
+          <Route path="/c" element={<AllMentorsPage />} />
+
+
 
         </Routes>
       </Router>

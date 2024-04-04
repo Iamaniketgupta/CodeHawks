@@ -18,17 +18,25 @@ const pricingSchema = new Schema({
 });
 
 const mentorWorkSchema = new Schema({
+  
+    company: {
+        type: String,
+        required: true,
+    }
+  
 
     company: {
         type: String,
         required: true,
     },
 
+                                    
 });
 
 const mentorSchema = new Schema({
     avatar: {
         type: String,
+        default:"https://res.cloudinary.com/dsj5kuvj4/image/upload/v1712154743/ccbliuoote9hm8n4pngj.webp"
     },
     email: {
         type: String,
@@ -88,6 +96,9 @@ const mentorSchema = new Schema({
     status:{
         type:Boolean,
         default:false
+    },
+    profession:{
+        type:String
     }
     
 }, { timestamps: true });

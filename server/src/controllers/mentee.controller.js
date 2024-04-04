@@ -31,9 +31,9 @@ const generateAccessAndRefreshToken = async(userId)=>{
 
 
 const signup = asyncHandler(async(req,res ,next)=>{
-    const {fullName  , email ,  password  , country , state   ,experience  } = req.body;
+    const {fullName  , email ,  password  , country , state   ,experience , interests , languages  } = req.body;
 
-    if(!(fullName  && email && password && country && state   && experience)){
+    if(!(fullName  && email && password && country && state   && experience && interests && languages)){
         throw new ApiError(400 , "All fields are required");
     }
 
@@ -52,8 +52,9 @@ const signup = asyncHandler(async(req,res ,next)=>{
             password,
             country,
             state,
-     
-            experience
+            experience,
+            interests,
+            languages
         }
     );
 
