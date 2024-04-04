@@ -22,15 +22,7 @@ const mentorWorkSchema = new Schema({
     company: {
         type: String,
         required: true,
-    }
-  
-
-    company: {
-        type: String,
-        required: true,
-    },
-
-                                    
+    }                            
 });
 
 const mentorSchema = new Schema({
