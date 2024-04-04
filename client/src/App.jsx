@@ -11,6 +11,8 @@ import EditProfile from './components/mentorDashboard/dashboardComponents/EditPr
 import MentorDashboard from './components/mentorDashboard/MentorDashboard';
 import MentorProfile from './components/ProfilePreview/MentorProfile';
 import AllMentorsPage from "./components/AllMentorsPage"
+import Paymentsuccess from './common/Paymentsuccess';
+import PaymentFailed from './common/PaymentFailed';
 function App() {
   return (
     <>
@@ -21,9 +23,15 @@ function App() {
           <Route path="/" element={<Home />} />
 
           {/* Main Routes */}
-          <Route path="mentee/dashboard/" element={<MenteeDashboard />} />
-          <Route path="mentor/dashboard/" element={<MentorDashboard />} />
+          <Route path="mentee/dashboard" element={<MenteeDashboard />} />
+          <Route path="mentor/dashboard" element={<MentorDashboard />} />
           <Route path="/profile/:nameId" element={<MentorProfile />} />
+          <Route path="/allMentors" element={<AllMentorsPage />} />
+
+          {/* Stripe Payment response Routes */}
+          <Route path="/checkout-success" element={<Paymentsuccess />} />
+          <Route path="/Mentor/:mentorid" element={<PaymentFailed />} />
+
 
 
           {/* Authentication Routes  */}
@@ -37,7 +45,6 @@ function App() {
 
           {/* Extra Temporary routes */}
           <Route path="/a" element={<EditProfile />} />
-          <Route path="/c" element={<AllMentorsPage />} />
 
         </Routes>
       </Router>

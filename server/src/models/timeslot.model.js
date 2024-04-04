@@ -4,7 +4,7 @@ import mongoose, { Schema } from "mongoose";
 const timeslotSchema = new Schema(
   {
     date: {
-      type: Date,
+      type: String,
       required: true,
     },
     time: {

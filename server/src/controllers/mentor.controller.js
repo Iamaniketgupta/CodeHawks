@@ -5,6 +5,7 @@ import Jwt from "jsonwebtoken";
 import { ApiResponse } from "../utils/apiResponse.js";
 import Mentor from "../models/mentor.model.js";
 import { isValidObjectId } from "mongoose";
+import Timeslot from "../models/timeslot.model.js";
 
 
 const options = {
@@ -225,7 +226,30 @@ const getMentorById = asyncHandler(async(req,res)=>{
             "mentor fetched successfully"
         )
     )
-})
+});
+
+
+const getMentorAllSlots = asyncHandler(async (req, res) => {
+    const mentorId = req.mentor._id;
+// console.log(mentorId)
+    if (!mentorId) {
+        throw new ApiError(404,"Failed to get data");
+    }
+    const timeSlots = await Timeslot.find({mentor:mentorId}).select("-mentor");
+    
+    if (!timeSlots || timeSlots.length === 0) {
+        res.status(201).json({
+            data:[],
+            message:"No Slots Available"
+        });
+    }
+
+    else{
+    res.status(200).json({
+        data: timeSlots,
+    })}
+}
+);
 
 export {
     registerMentor,
@@ -234,5 +258,6 @@ export {
     updateMentorProfile,
     updateMentorAvatar,
     refreshMentorAccessToken,
-    getMentorById
+    getMentorById,
+    getMentorAllSlots
 }

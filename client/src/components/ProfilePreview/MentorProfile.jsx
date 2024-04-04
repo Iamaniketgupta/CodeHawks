@@ -1,16 +1,16 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 const MentorProfile = () => {
     const { state } = useLocation();
+    const navigate = useNavigate();
     const [slotsData, setSlotsData] = useState([]);
 
     const [selectedSlot, setSelectedSlot] = useState(null);
 
     const [slotloader, setSlotLoader] = useState(false);
-
-
 
 
     // const [userDetails,setUserDetails]= useState({});
@@ -19,9 +19,16 @@ const MentorProfile = () => {
     async function getAllSlots() {
         try {
             setSlotLoader(true);
-            const response = await axios.get('/api/v1/timeslot/getAllSlots');
+            const mentorId = state._id;
+            // console.log(mentorId)
+            const response = await axios.get('/api/v1/timeslot/getAllSlots', {
+                params: {
+                    mentorId: mentorId
+                }
+            });
             console.log(response)
-            setSlotsData(response.data);
+
+            setSlotsData(response.data.data);
             setSlotLoader(false);
 
         } catch (error) {
@@ -35,13 +42,29 @@ const MentorProfile = () => {
 
 
     // const bookMyTrail = async () => {
-    
-    // }
-
-    // const butMentorship = async () => {
 
     // }
 
+    const buyMentorship = async () => {
+            try {
+
+                const res =await axios.post(`/api/v1/payment/checkout-session/${state._id}`,{
+                    headers:{
+                        Authorization:`Bearer pk_test_51P1gnJSJzjqVqPS4GUjR3KrNnajTe3KyhC2LVeimTlxth7DFiL5TznffkNHYtbxfvocGYacl1Qbh3G5w9ZvmklUW00fwzf1dXj`
+                    }
+                })
+
+                if(!res)
+                throw new Error("Payment Failed");
+                
+                if(res.data.session.url)
+                navigate(res.data.session.url)
+                
+            } catch (error) {
+                console.log(error)
+                toast.error(error);
+            }
+    }
 
     return (
 
@@ -124,9 +147,9 @@ const MentorProfile = () => {
                                         {item}
                                     </p>
                                 )
-                                
+
                             }
-                            {state.languages.length===0 && <p><i>-No Languages found</i></p>}
+                            {state.languages.length === 0 && <p><i>-No Languages found</i></p>}
 
                         </div>
                     </div>
@@ -184,20 +207,29 @@ const MentorProfile = () => {
                         <h3 className='p-2 font-semibold text-2xl'>
                             Buy Mentorship</h3>
                         <div className='p-2 my-2'>
-                            <p>For fresher</p>
-                            <p>Ml , AI , WEB</p>
+                            {state.pricing?.specialties?.map((item,idx)=>
+                                <p key={idx}>{item}</p>
+                            )
+                            }
+                             {state.pricing?.targetInterest?.map((item,idx)=>
+                                <p key={idx}>{item}</p>
+                            )
+                            }
 
                         </div>
 
-                        <div className='font-bold text-3xl my-3'>
-                            <p>10,000</p>
+                        <div className={`font-bold text-3xl my-3 ${!state.pricing?.mentorshipPrice && "text-lg text-red-500"}`}>
+                            <p>{state.pricing?.mentorshipPrice || "-No Pricing Found"}</p>
                         </div>
-                        <button className='inline-block p-3 bg-blue-500 rounded-xl text-white font-semibold'>Buy 1:1 Mentorship</button>
+                        <button onClick={()=>buyMentorship()}
+                            className={`inline-block px-3 py-2 bg-blue-500 rounded-xl text-white font-semibold 
+                        ${!state.pricing?.mentorshipPrice ? "opacity-20 cursor-not-allowed" : ''}`} disabled={!state.pricing?.mentorshipPrice}>
+                            Buy 1:1 Mentorship</button>
+
                     </div>
 
+
                 </div>
-
-
             </div>
         </div>
     );

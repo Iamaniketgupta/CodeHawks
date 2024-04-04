@@ -1,28 +1,42 @@
 import mongoose, { Mongoose, Schema } from "mongoose";
 
 
-const subscriptionSchema = new Schema(
+const subscriptionSchema = new mongoose.Schema(
     {
-        price : {
-            type:Number,
-            required:true
+        mentor: {
+            type: mongoose.Types.ObjectId,
+            ref: "Doctor",
+            required: true,
         },
-        mentor : {
-            type: mongoose.Schema.Types.ObjectId,
-            ref:"Mentor",
+        mentee: {
+            type: mongoose.Types.ObjectId,
+            ref: "User",
+            required: true,
+        },
+
+        Price: {
+            type: String,
             required: true
         },
-        mentee:{
-            type: mongoose.Schema.Types.ObjectId,
-            ref:"Mentee",
-            required: true
-        },
-        months:{
-            type:Number,
+        session:{
+            type:String,
             required:true
-        }
-    }
-)
+        },
+
+        status: {
+            type: String,
+            enum: ["pending", "approved", "cancelled"],
+            default: "pending",
+        },
+        isPaid: {
+            type: Boolean,
+            default: true,
+        },
+    },
+    { timestamps: true }
+);
+
+
 
 
 export const Subscription = mongoose.model("Subscription", subscriptionSchema);

@@ -23,15 +23,15 @@ const addTimeslot = asyncHandler(async (req, res) => {
 
     const slot = await Timeslot.create(
         {
-            date,
-            time,
-            monthName,
-            month,
+            date:date,
+            time:time,
+            monthName:monthName,
+            month:month,
             mentor: user._id
         }
     );
 
-    console.log(slot)
+    // console.log(slot)
     if (!slot) {
         throw new ApiError(500, "Error while making slot");
     }
@@ -46,7 +46,9 @@ const addTimeslot = asyncHandler(async (req, res) => {
 })
 
 const deleteTimeslot = asyncHandler(async (req, res) => {
-    const { slotId } = req.body;
+    const  slotId  = req.params.slotId;
+    // console.log(slotId)
+
     if (!slotId) {
         throw new ApiError(400, "Slot id is required");
     }
@@ -72,22 +74,28 @@ const deleteTimeslot = asyncHandler(async (req, res) => {
 });
 
 const getAllSlots = asyncHandler(async (req, res) => {
-    const {mentorId} = req.body;
-    console.log(mentorId)
+    const mentorId = req.query.mentorId;
+    // console.log("Requested mentor ID:", mentorId);
+
     if (!mentorId) {
-        throw new ApiError(404,"Failed to get data");
+        throw new ApiError(404, "Failed to get data - mentorId not provided");
     }
-    const timeSlots = await Timeslot.find({mentor:mentorId}).select("-mentor");
-    
+
+    const timeSlots = await Timeslot.find({ mentor: mentorId }).select("-mentor");
+    // console.log("Found time slots:", timeSlots);
+
     if (!timeSlots || timeSlots.length === 0) {
-        throw new ApiError(404, "No Slots Found");
+        return res.status(200).json({
+            data: [],
+            message: "No Slots Found",
+        });
     }
 
     res.status(200).json({
         data: timeSlots,
-    })
-}
-)
+    });
+});
+
 
 
 

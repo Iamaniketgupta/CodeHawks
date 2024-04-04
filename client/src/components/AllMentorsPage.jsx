@@ -16,7 +16,7 @@ const AllMentorsPage = () => {
         try {
             setLoading(true);
             const response = await axios.get('/api/v1/allMentors');
-            console.log(response.data);
+            // console.log(response.data);
             setAllMentors(response.data?.data);
             setLoading(false);
 
@@ -41,12 +41,11 @@ const AllMentorsPage = () => {
                 <div className='m-2 p-2 flex gap-3 flex-wrap justify-center items-center'>
                     {
                         loading ? <Spinner /> :
-                            allMentors?.map((item) => {
-                                return (
+                            allMentors?.map((item) => 
                                     <div key={item?._id}>
                                         <MentorCard item={item} id={item._id} />
-                                    </div>)
-                            })
+                                    </div>
+                            )
                     }
 
                 </div>
