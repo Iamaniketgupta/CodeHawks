@@ -28,11 +28,9 @@ export default function Signup_Mentor() {
         state: '',
         experience: 0
     });
-
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {

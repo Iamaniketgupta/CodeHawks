@@ -1,13 +1,12 @@
-import React from 'react'
-import Barside from '../../common/Barside'
-import Taskbox from './Taskbox'
-
+import React, { useEffect, useState } from 'react';
+import Taskbox from './Taskbox';
 export default function MenteeHome() {
+
   return (
     <>
 <section className="home-section">
-    <div><h1>Mentee Home</h1></div>
-    <Taskbox/>
+<div><h2 className='mt-3 text-md taskhead'><i className="fa fa-clock-o" aria-hidden="true"></i> Recent Tasks</h2></div>
+<Taskbox type="top"/>
 </section>
 </>
   )

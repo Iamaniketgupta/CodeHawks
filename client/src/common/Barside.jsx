@@ -52,12 +52,12 @@ export default function Barside() {
           <li>
             <Link to="/mentee/dashboard/tasks">
               <i className="bx bx-pie-chart-alt-2" />
-              <span className="link_name">Tasks</span>
+              <span className="link_name">My Tasks</span>
             </Link>
             <ul className="sub-menu blank">
               <li>
                 <Link className="link_name" to="/mentee/dashboard/tasks">
-                  Tasks
+                  My Tasks
                 </Link>
               </li>
             </ul>
@@ -78,25 +78,12 @@ export default function Barside() {
           <li>
             <Link to="/mentee/dashboard/subscription">
               <i className="bx bx-compass" />
-              <span className="link_name">Subscription</span>
+              <span className="link_name">My Mentors</span>
             </Link>
             <ul className="sub-menu blank">
               <li>
                 <Link className="link_name" to="/mentee/dashboard/subscription">
-                  Subscription
-                </Link>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <Link to="/mentee/dashboard/">
-              <i className="bx bx-history" />
-              <span className="link_name">Others</span>
-            </Link>
-            <ul className="sub-menu blank">
-              <li>
-                <Link className="link_name" to="/mentee/dashboard/">
-                  Others
+                  My Mentors
                 </Link>
               </li>
             </ul>
@@ -104,12 +91,12 @@ export default function Barside() {
           <li>
             <Link to="/mentee/dashboard/settings">
               <i className="bx bx-cog" />
-              <span className="link_name">Setting</span>
+              <span className="link_name">Edit Profile</span>
             </Link>
             <ul className="sub-menu blank">
               <li>
                 <Link className="link_name" to="/mentee/dashboard/settings">
-                  Setting
+                  Edit Profile
                 </Link>
               </li>
             </ul>

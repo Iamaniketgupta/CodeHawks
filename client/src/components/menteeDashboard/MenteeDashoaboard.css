@@ -1,0 +1,24 @@
+.taskhead{
+    font-size: 30px;
+}
+.taskcard{
+    max-width: 400px;
+}
+.card-title{
+    font-weight: bolder;
+}
+@media (max-width:1024px){
+    .taskcard{
+        max-width: 250px;
+    }
+    .taskhead{
+        font-size: 20px;
+    }
+}
+*{
+    margin:0;
+    padding:0;
+}
+.home-section{
+    overflow-x:hidden;
+}
