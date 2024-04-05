@@ -12,7 +12,6 @@ const EditProfile = () => {
     const user = useSelector((state)=>state.auth.user);
     const dispatch = useDispatch();
 
-
     
     const [loader, setLoader] = useState(false);
     const [fullName, setfullName] = useState(user.fullName || "");
@@ -22,6 +21,7 @@ const EditProfile = () => {
     const [visible, setVisible] = useState(user.status || false);
     const [workExp, setWorkExp] = useState(user.workExp || []);
     const [description, setdescription] = useState(user.description || "")
+    // console.log(workExp)
 
 
     const updateDetails = async()=>{
@@ -32,13 +32,14 @@ const EditProfile = () => {
             experience,
             linkedin,
             status:visible,
-            workExp
+            workExp,
+            description
         }
         try {
             const response = await axios.post("/api/v1/mentor/editProfile", data, {
               });
 
-            //   console.log(response.data.data)
+              console.log(response.data)
               const obj = {
                 user:response.data.data
               }
@@ -201,7 +202,7 @@ const EditProfile = () => {
                                         <input
                                             className="px-3 my-2 rounded-lg outline-offset-2 border-2 border-blude-300"
                                             type="text" name="fullName"
-                                            value={workExp[idx]}
+                                            value={item}
                                             onChange={(e)=>{
                                                 handleWorkExpChange(idx , e.target.value)
                                             }}

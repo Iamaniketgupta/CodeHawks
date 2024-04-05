@@ -56,7 +56,10 @@ const mentorSchema = new Schema({
         type: Number,
         default: 0
     },
-    workExp: [mentorWorkSchema],
+    workExp: [{
+        type: String,
+        required: true,
+    }],
     linkedin: {
         type: String,
         trim: true,
