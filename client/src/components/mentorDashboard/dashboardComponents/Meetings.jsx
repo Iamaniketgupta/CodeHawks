@@ -1,5 +1,5 @@
 import { Axios } from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import toast from "react-hot-toast";
 import { CiSearch } from "react-icons/ci";
 
@@ -8,16 +8,30 @@ const Meetings = () => {
     const [loading, setLoading] = useState(false);
     const [menteeId, setMenteeId] = useState(null);
     const [query, setQuery] = useState('');
+    const [meetings, setMeetings] = useState([]);
 
-    const [data, setData] = useState({
+//  onClick={() => {
+//     return setSelectedSlot((prev) => prev !== slot?._id ? slot?._id : null)
+
+useEffect(()=>{
+    fetchMeetings();
+},[]);
+
+const [data, setData] = useState({
         date: '',
         time: '',
         roomId: ''
     });
-    
+    // console.log(data);
+
     async function handleSubmit(e) {
         e.preventDefault();
         try {
+            if(!menteeId)
+            {
+                toast.error("Please Select a Mentee");
+                return;
+            }
             setLoading(true);
             const date = data.date?.split("-")[2] || '';
             let month = data.date?.split("-")[1] || '';
@@ -74,10 +88,10 @@ const Meetings = () => {
                 setLoading(false);
                 return;
             }
-            const response = await Axios.post('/api/v1/meeting/new', { date, month, monthName, time, roomId, menteeId });
+            const response = await Axios.post('/api/v1/meeting/create/new', { date, month, monthName, time, roomId, menteeId });
             // console.log(response.data);
             toast.success("Meeting Added");
-            // getAllSlots();
+            fetchMeetings();
             setData({ date: '', time: '', roomId: '' });
             setLoading(false);
 
@@ -88,6 +102,47 @@ const Meetings = () => {
         }
 
     }
+
+    async function handleDeleteMeeting(meetingId){
+        if(!meetingId ){
+        toast.error("Oops something wrong!");
+            return;
+        }
+        if(!confirm("Are You Sure ?"))
+        return;
+        try {
+            
+            const res = await Axios.delete(`/api/v1/meeting/${menteeId}`);
+            if(res){
+                toast.success("Delete Success");
+            }
+    
+        } catch (error) {
+            toast.error(error.response.data.message||"Failed to delete");
+        }
+    }
+
+    async function fetchMeetings(){
+       try {
+         const res = await Axios.get("/api/v1/meeting/allMentorMeetings");
+         setMeetings(res.data.meetings);
+ 
+       } catch (error) {
+        setMeetings([]);
+       }
+        
+    }
+
+    // async function myMentees(){
+    //     try {
+    //       const res = await Axios.get("/api/v1/meeting/allMentorMeetings");
+    //       setMentees(res.data.meetings);
+  
+    //     } catch (error) {
+    //     setMentees([]);
+    //     }
+         
+    //  }
 
 
     function handleDataChange(e) {

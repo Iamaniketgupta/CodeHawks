@@ -55,7 +55,7 @@ const getAllMeetings = asyncHandler(async (req, res) => {
                 select: 'fullName'
             });
 
-        res.status(200).json(meetings);
+        res.status(200).json({meetings});
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

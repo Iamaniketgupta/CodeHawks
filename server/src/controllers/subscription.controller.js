@@ -8,43 +8,43 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { Pricing } from "../models/pricing.model.js";
 
 
-const getSubscription = asyncHandler(async (req, res) => {
-    const { mentorId, menteeId, price, months } = req.body;
-    if (!(mentorId && menteeId && price && months)) {
-        throw new ApiError(400, "All fields are required");
-    }
+// const getSubscription = asyncHandler(async (req, res) => {
+//     const { mentorId, menteeId, price, months } = req.body;
+//     if (!(mentorId && menteeId && price && months)) {
+//         throw new ApiError(400, "All fields are required");
+//     }
 
-    const mentor = await Mentor.findById(mentorId);
-    if (!mentor) {
-        throw new ApiError(400, "mentor dont exist");
-    }
+//     const mentor = await Mentor.findById(mentorId);
+//     if (!mentor) {
+//         throw new ApiError(400, "mentor dont exist");
+//     }
 
-    const mentee = await Mentee.findById(menteeId);
-    if (!mentee) {
-        throw new ApiError(400, "Mentee dont exist");
-    }
+//     const mentee = await Mentee.findById(menteeId);
+//     if (!mentee) {
+//         throw new ApiError(400, "Mentee dont exist");
+//     }
 
-    const subscription = await Subscription.create(
-        {
-            mentor: mentorId,
-            mentee: menteeId.
-                price,
-            months
-        }
-    );
+//     const subscription = await Subscription.create(
+//         {
+//             mentor: mentorId,
+//             mentee: menteeId.
+//                 price,
+//             months
+//         }
+//     );
 
-    if (!subscription) {
-        throw new ApiError(500, "Error while creating subscription");
-    }
+//     if (!subscription) {
+//         throw new ApiError(500, "Error while creating subscription");
+//     }
 
-    return res.status(200).json(
-        new ApiResponse(
-            200,
-            subscription,
-            "Subscription made successfully"
-        )
-    )
-})
+//     return res.status(200).json(
+//         new ApiResponse(
+//             200,
+//             subscription,
+//             "Subscription made successfully"
+//         )
+//     )
+// })
 
 
 const getCheckoutSession = asyncHandler(async (req, res) => {
@@ -109,6 +109,6 @@ console.log(mentorId);
 
 
 export {
-    getSubscription,
+    // getSubscription,
     getCheckoutSession
 }
