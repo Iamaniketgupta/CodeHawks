@@ -134,6 +134,7 @@ const refreshMentorAccessToken = asyncHandler(async (req, res) => {
 const updateMentorProfile = asyncHandler(async (req, res) => {
     const { fullName, country, state, interests, experience, linkedin, pricing, workExp , status } = req.body;
 
+    // console.log(req.body)
     const userId = req.mentor._id;
     const user = await Mentor.findById(userId);
     if (!user) {
@@ -151,9 +152,11 @@ const updateMentorProfile = asyncHandler(async (req, res) => {
         workExp: workExp || user.workExp,
         status : status || user.status
     };
+    // console.log(updatedFields)
 
     const updatedUser = await Mentor.findByIdAndUpdate(userId, updatedFields, { new: true });
 
+    console.log(updatedUser)
     return res.status(200).json(
         new ApiResponse(
             200,
