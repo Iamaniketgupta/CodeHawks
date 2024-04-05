@@ -113,6 +113,7 @@ export default function SignUp_Mentee() {
     // Do something with selectedOptions
   const selectedValues = selectedOptions.map(option => option.value);
     setFormData({ ...formData, ["interests"]: selectedValues });
+    // ha
     // console.log(selectedOptions);
   };
 
