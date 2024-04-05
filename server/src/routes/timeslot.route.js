@@ -6,6 +6,6 @@ const router = express.Router();
 
 router.route('/addTimeslot').post(verifyMentorJwt , addTimeslot);
 router.route('/deleteTimeslot').delete(verifyMentorJwt , deleteTimeslot);
-router.route('/getAllSlots').get( getAllSlots);
+router.route('/getAllSlots').get(getAllSlots);
 
 export default router;

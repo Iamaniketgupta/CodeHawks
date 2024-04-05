@@ -52,7 +52,6 @@ const signup = asyncHandler(async(req,res ,next)=>{
             password,
             country,
             state,
-     
             experience
         }
     );

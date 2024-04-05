@@ -3,8 +3,6 @@ import {app} from './app.js'
 import connectDB from "./src/db/index.js";
 import http from 'http';
 
-
-
 // io.on('connection', (socket) => {
 //     console.log('A user connected');
   

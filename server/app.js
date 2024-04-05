@@ -27,8 +27,5 @@ app.use("/api/v1/task" , taskRouter);
 app.use("/api/v1/timeslot" , timeslotRouter);
 
 
-
-
-
 export {app} 
 

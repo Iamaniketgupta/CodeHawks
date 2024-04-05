@@ -4,7 +4,6 @@ import { uploadImage } from "../middlewares/multer.middleware.js";
 import { signup , login , logoutUser , addMentorToBookmark , removeMentorFromBookmark , updateMenteeAvatar , updateMenteeProfile } from "../controllers/mentee.controller.js";
 
 const router = Router();
-
 router.route('/signup').post(signup );
 router.route('/login').post(login);
 router.route('/logout').post(verifyJwt , logoutUser);
