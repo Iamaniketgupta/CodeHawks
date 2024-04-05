@@ -73,6 +73,10 @@ const mentorSchema = new Schema({
         type:Schema.Types.ObjectId,
         ref:"Timeslot",
     }],
+    myMeetings:[{
+        type:Schema.Types.ObjectId,
+        ref:"Meeting",
+    }],
     
     state: {
         type: String,

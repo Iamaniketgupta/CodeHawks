@@ -19,6 +19,7 @@ import Paymentsuccess from './common/Paymentsuccess';
 import PaymentFailed from './common/PaymentFailed';
 import MySlots from './components/mentorDashboard/dashboardComponents/MySlots';
 import Pricing from './components/mentorDashboard/dashboardComponents/Pricing';
+import Meetings from './components/mentorDashboard/dashboardComponents/Meetings';
 function App() {
   return (
     <>
@@ -53,10 +54,8 @@ function App() {
           <Route path="/editProfile" element={<EditProfile />} />
 
 
-          <Route path="/e" element={<EditMenteeProfile />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/slots" element={<MySlots />} />
-          {/* <Route path="/c" element={<AllMentorsPage />} /> */}
+
+          <Route path="/m" element={<Meetings />} />
 
 
 

@@ -10,22 +10,22 @@ const menteeSchema = new mongoose.Schema({
   },
   avatar: {
     type: String,
-    default:"https://res.cloudinary.com/dsj5kuvj4/image/upload/v1712154743/ccbliuoote9hm8n4pngj.webp"
+    default: "https://res.cloudinary.com/dsj5kuvj4/image/upload/v1712154743/ccbliuoote9hm8n4pngj.webp"
   },
-  country:{
-    type:String,
+  country: {
+    type: String,
   },
-  state:{
-    type:String
+  state: {
+    type: String
   },
-  interests:[
+  interests: [
     {
-        type:String,
+      type: String,
     }
   ],
-  languages:[
+  languages: [
     {
-        type:String,
+      type: String,
     }
   ],
   email: {
@@ -49,17 +49,22 @@ const menteeSchema = new mongoose.Schema({
     ref: 'Mentor',
     default: [],
   }],
-  
-  bookedSlots:[{
+
+  bookedSlots: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref:"Timeslot"
+    ref: "Timeslot"
+  }],
+  
+  myMeetings: [{
+    type: Schema.Types.ObjectId,
+    ref: "Meeting",
   }],
 
-  experience:{
-    type:String
+  experience: {
+    type: String
   },
-  linkedin:{
-    type:String
+  linkedin: {
+    type: String
   },
   refreshToken: {
     type: String,
@@ -67,41 +72,41 @@ const menteeSchema = new mongoose.Schema({
   },
 });
 
-menteeSchema.pre("save" , async function(next){
-    if(!this.isModified("password"))  return next();
-    this.password = await bcrypt.hash(this.password , 10);
-    next();
+menteeSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
+  this.password = await bcrypt.hash(this.password, 10);
+  next();
 });
 
-menteeSchema.methods.isPasswordCorrect = async function(password){
-    return await bcrypt.compare(password , this.password);
+menteeSchema.methods.isPasswordCorrect = async function (password) {
+  return await bcrypt.compare(password, this.password);
 }
 
-menteeSchema.methods.generateAccessToken = function(){
-    return jwt.sign(
-        {
-            _id:this._id,
-            username:this.username,
-            email:this.email,
-            fullName : this.fullName
-        },
-        process.env.ACCESS_TOKEN_SECRET,
-        {
-            expiresIn:process.env.ACCESS_TOKEN_EXPIRY
-        }
-    );
+menteeSchema.methods.generateAccessToken = function () {
+  return jwt.sign(
+    {
+      _id: this._id,
+      username: this.username,
+      email: this.email,
+      fullName: this.fullName
+    },
+    process.env.ACCESS_TOKEN_SECRET,
+    {
+      expiresIn: process.env.ACCESS_TOKEN_EXPIRY
+    }
+  );
 }
 
-menteeSchema.methods.generateRefreshToken =  function(){
-    return jwt.sign(
-        {
-            _id:this._id
-        },
-        process.env.REFRESH_TOKEN_SECRET,
-        {
-            expiresIn:process.env.REFRESH_TOKEN_EXPIRY
-        }
-    );
+menteeSchema.methods.generateRefreshToken = function () {
+  return jwt.sign(
+    {
+      _id: this._id
+    },
+    process.env.REFRESH_TOKEN_SECRET,
+    {
+      expiresIn: process.env.REFRESH_TOKEN_EXPIRY
+    }
+  );
 }
 
 export const Mentee = mongoose.model("Mentee", menteeSchema);
