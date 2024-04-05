@@ -14,7 +14,10 @@ const options = {
 
 const registerMentor = asyncHandler(async (req, res) => {
 
-    const { fullName, email, password, country, state, languages, experience } = req.body;
+    const { fullName, email, password, country, state, languages, experience   , profession} = req.body;
+    if(!(fullName && email && password && country && state && languages && experience   && profession && languages)){
+        throw new ApiError(400 , "All fields are required");
+    }
 
     const isUserExist = await Mentor.findOne({ email });
 
@@ -29,7 +32,8 @@ const registerMentor = asyncHandler(async (req, res) => {
         country: country,
         state: state,
         languages: languages,
-        experience: experience
+        experience: experience,
+        profession,
     });
 
     if (!userRegister) {
@@ -131,7 +135,7 @@ const refreshMentorAccessToken = asyncHandler(async (req, res) => {
 });
 
 const updateMentorProfile = asyncHandler(async (req, res) => {
-    const { fullName, country, state, interests, experience, linkedin, pricing, workExp , status } = req.body;
+    const { fullName, country, state, interests, experience, linkedin, pricing, workExp , status ,description , profession} = req.body;
 
     // console.log(req.body)
     const userId = req.mentor._id;
@@ -149,7 +153,9 @@ const updateMentorProfile = asyncHandler(async (req, res) => {
         linkedin: linkedin || user.linkedin,
         pricing: pricing || user.pricing,
         workExp: workExp || user.workExp,
-        status : status || user.status
+        status : status || user.status,
+        description : description || user.description,
+        profession : profession || user.profession
     };
     // console.log(updatedFields)
 

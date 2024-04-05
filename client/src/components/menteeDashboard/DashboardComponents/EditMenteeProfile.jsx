@@ -37,7 +37,7 @@ const EditMenteeProfile = () => {
             const response = await axios.post("/api/v1/mentee/updateMenteeProfile", data, {
               });
 
-            //   console.log(response.data.data)
+              console.log(response.data.data)
               const obj = {
                 user:response.data.data
               }

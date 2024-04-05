@@ -3,6 +3,7 @@ import './Forms.css';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Select from "react-select";
 export default function Signup_Mentor() {
     
     const handlePart1 = () => {
@@ -30,7 +31,9 @@ export default function Signup_Mentor() {
         password: '',
         country: '',
         state: '',
-        experience: 0
+        experience: 0,
+        profession:'',
+        languages:[]
     });
 
     const handleChange = (e) => {
@@ -53,6 +56,40 @@ export default function Signup_Mentor() {
             setLoading(false)
         }
     }
+
+    const languageOptions = [
+        { value: "english", label: "English" },
+        { value: "spanish", label: "Spanish" },
+        { value: "french", label: "French" },
+        { value: "mandarin", label: "Mandarin Chinese" },
+        { value: "arabic", label: "Arabic" },
+        { value: "hindi", label: "Hindi" },
+        { value: "bengali", label: "Bengali" },
+        { value: "portuguese", label: "Portuguese" },
+        { value: "russian", label: "Russian" },
+        { value: "japanese", label: "Japanese" },
+        { value: "german", label: "German" },
+        { value: "korean", label: "Korean" },
+        { value: "italian", label: "Italian" },
+        { value: "turkish", label: "Turkish" },
+        { value: "dutch", label: "Dutch" },
+        { value: "polish", label: "Polish" },
+        { value: "vietnamese", label: "Vietnamese" },
+        { value: "swedish", label: "Swedish" },
+        { value: "urdu", label: "Urdu" },
+        { value: "greek", label: "Greek" },
+      ];
+
+      
+  const languageChange = (selectedOptions) => {
+    // Do something with selectedOptions
+  const selectedValues = selectedOptions.map(option => option.value);
+    console.log(formData.languages)
+    setFormData({ ...formData, ["languages"]: selectedValues });
+    // console.log(selectedOptions);
+  };
+
+
     return (
         <>
             <section className="min-vh-100 form">
@@ -150,6 +187,31 @@ export default function Signup_Mentor() {
                                             </div>
                                         </div>
                                         <hr className="mx-n3" />
+
+                                        <div className="row align-items-center pt-4 py-3">
+                                            <div className="col-md-3 ps-md-5">
+                                                <h6 className="mb-1">Profession</h6>
+                                            </div>
+                                            <div className="col-md-9 pe-5">
+                                                <input onChange={handleChange} value={formData.profession}
+                                                type="text" id="profession" 
+                                                 name="profession" className="form-control form-contro" placeholder="eg. SWE at Oracle" required />
+                                            </div>
+                                        </div>
+
+                                        
+                                        <hr className="mx-n3" />
+
+                                        <div className="row align-items-center pt-4 py-3">
+                                        <div className="col-md- ps-md-5 w-full">
+                                            <h6 className="mb-1">Languages </h6>
+                                            <Select
+                                            options={languageOptions}
+                                            isMulti
+                                            onChange={languageChange}
+                                            />
+                                        </div>
+                                        </div>
                                         {/*LinkedIn  */}
                                         {/* <div className="row align-items-center pt-4 py-3">
                                             <div className="col-md-3 ps-md-5">
