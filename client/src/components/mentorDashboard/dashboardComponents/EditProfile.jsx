@@ -36,8 +36,7 @@ const EditProfile = () => {
             description
         }
         try {
-            const response = await axios.post("/api/v1/mentor/editProfile", data, {
-              });
+            const response = await axios.post("/api/v1/mentor/editProfile", data);
 
               console.log(response.data)
               const obj = {
