@@ -49,6 +49,12 @@ const menteeSchema = new mongoose.Schema({
     ref: 'Mentor',
     default: [],
   }],
+  
+  bookedSlots:[{
+    type: mongoose.Schema.Types.ObjectId,
+    ref:"Timeslot"
+  }],
+
   experience:{
     type:String
   },

@@ -73,7 +73,7 @@ const mentorSchema = new Schema({
         type:Schema.Types.ObjectId,
         ref:"Timeslot",
     }],
-
+    
     state: {
         type: String,
         required: true

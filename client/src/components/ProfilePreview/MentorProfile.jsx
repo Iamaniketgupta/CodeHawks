@@ -38,6 +38,8 @@ const MentorProfile = () => {
     }
     const [myprice, setMyPrice] = useState({});
 
+
+
     async function fetchPricing() {
         try {
             const response = await axios.get(`/api/v1/mentor/pricing/${state._id}`);
@@ -56,9 +58,25 @@ const MentorProfile = () => {
     }, []);
 
 
-    // const bookMyTrail = async () => {
+    const bookMyTrail = async () => {
+        try {
+            
+            if(!selectedSlot)
+            toast.error("Please Select a slot");
+        const res = await axios.post("/api/v1/timeslot/bookSlot",{selectedSlot});
+        if(res.status === 200) {
+            toast.success("Booked Success");
+        }
+        selectedSlot(null);
+            
+        } catch (error) {
+            toast.error(error.response.data.message);
+            console.log(error);
 
-    // }
+        }
+    }
+
+
  const your_stripe_public_key ="pk_test_51P1gnJSJzjqVqPS4GUjR3KrNnajTe3KyhC2LVeimTlxth7DFiL5TznffkNHYtbxfvocGYacl1Qbh3G5w9ZvmklUW00fwzf1dXj";
  const stripePromise = loadStripe('your_stripe_public_key');
  const buyMentorship = async (mentorId) => {
@@ -203,19 +221,27 @@ const MentorProfile = () => {
 
                                             <div className="w-16 h-16 m-2 inline-flex items-center justify-center rounded-xl bottom-2 border-4 border-blue-500 border-outset">
                                                 <div>
-                                                    <p className="text-2xl font-semibold ">{slot.date}</p>
+                                                    <p className="text-2xl font-semibold ">{slot?.date}</p>
                                                     <p>{slot?.monthName}</p>
                                                 </div>
                                             </div>
                                             <div className="font-semibold text-lg m-3">{slot?.time}</div>
+                                            <div className='absolute top-2 right-2'>
+                                            {
+                                                slot?.isBooked?
+                                                <div className='text-xs bg-red-600 text-white px-2 rounded-lg'>Booked</div>
+                                                :<div className='text-xs bg-green-600 text-white px-2 rounded-lg'>Available</div>
+                                            }
+
+                                            </div>
                                         </div>
                                     )
                                 }
                             </div>
                         </div>
 
-                        <button
-                            className={`inline-block px-3 py-2 bg-blue-500 rounded-xl text-white font-semibold 
+                        <button onClick={bookMyTrail}
+                            className={`inline-block px-3 my-3  py-2 bg-blue-500 rounded-xl text-white font-semibold 
                         ${!selectedSlot ? "opacity-20 cursor-not-allowed" : ''}`} disabled={!selectedSlot}>
                             Book Free Trail</button>
 

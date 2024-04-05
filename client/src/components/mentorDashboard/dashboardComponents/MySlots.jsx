@@ -17,7 +17,7 @@ const MySlots = () => {
         try {
             setSlotLoader(true);
             const response = await axios.get('/api/v1/mentor/getAllSlots');
-              setSlotsData(response.data?.data);
+            setSlotsData(response.data?.data);
             setSlotLoader(false);
 
         } catch (error) {
@@ -195,7 +195,7 @@ const MySlots = () => {
                     }
                     {
                         slotsData?.map((slot) =>
-                            <div key={slot?._id} className="relative flex min-w-[100px] items-center rounded-lg justify-center pr-3 pl-1 bg-slate-100">
+                            <div key={slot?._id} className={`relative flex min-w-[100px] items-center rounded-lg justify-center pr-3 pl-1 bg-slate-100 ${slot?.isBooked?"cursor-not-allowed":""}`}>
                                 <MdDelete onClick={() => handleDeleteSlot(slot._id)}
                                     className="text-red-600 absolute right-2 top-2 cursor-pointer" title="Delete Slot" />
 
@@ -206,6 +206,14 @@ const MySlots = () => {
                                     </div>
                                 </div>
                                 <div className="font-semibold text-lg m-3">{slot?.time}</div>
+                                <div className='absolute top-2 right-2'>
+                                    {
+                                        slot?.isBooked &&
+                                            <div className='text-xs bg-red-600 text-white px-2 rounded-lg'>Booked</div>
+                                            // : <div className='text-xs bg-green-600 text-white px-2 rounded-lg'>Available</div>
+                                    }
+
+                                </div>
                             </div>
                         )
                     }
