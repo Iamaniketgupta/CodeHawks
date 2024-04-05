@@ -29,7 +29,8 @@ export default function Login_Mentee() {
             toast.success('Login successful!');
             setLoading(false);
 
-            navigate("/mentee/dashboard");
+            navigate("/allMentors");
+            // navigate("/mentee/dashboard");
 
             
         } catch (error) {

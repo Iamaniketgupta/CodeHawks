@@ -5,16 +5,16 @@ const subscriptionSchema = new mongoose.Schema(
     {
         mentor: {
             type: mongoose.Types.ObjectId,
-            ref: "Doctor",
+            ref: "Mentor",
             required: true,
         },
         mentee: {
             type: mongoose.Types.ObjectId,
-            ref: "User",
+            ref: "Mentee",
             required: true,
         },
 
-        Price: {
+        price: {
             type: String,
             required: true
         },
@@ -25,7 +25,7 @@ const subscriptionSchema = new mongoose.Schema(
 
         status: {
             type: String,
-            enum: ["pending", "approved", "cancelled"],
+            enum: ["pending", "paid", "cancelled"],
             default: "pending",
         },
         isPaid: {

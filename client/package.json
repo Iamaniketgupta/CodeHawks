@@ -26,6 +26,7 @@
     "react-toastify": "^10.0.5",
     "socket.io": "^4.7.5",
     "socket.io-client": "^4.7.5",
+    "stripe": "^14.24.0",
     "universal-cookie": "^7.1.4"
   },
   "devDependencies": {
