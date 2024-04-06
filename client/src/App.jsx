@@ -30,6 +30,8 @@ import Pricing from './components/mentorDashboard/dashboardComponents/Pricing';
 import Meetings from './components/mentorDashboard/dashboardComponents/Meetings';
 import RoomPage from "./components/Room/RoomPage";
 import MyMentees from './components/mentorDashboard/dashboardComponents/MyMentees';
+import MentorCard from './common/MentorCard';
+import MentorChat from './components/MentorChat';
 
 function App() {
   return (
@@ -64,6 +66,7 @@ function App() {
 
         {/* Chat Routes */}
         <Route path="/mentee/chat/:recipientId" element={<Chat />} />
+        <Route path="/mentor/chat/:recipientId" element={<MentorChat />} />
         <Route path="/room/:roomId" element={<RoomPage />} />
 
         {/* Extra Temporary routes */}

@@ -63,13 +63,13 @@ export default function Barside() {
             </ul>
           </li>
           <li>
-            <Link to="/mentee/dashboard/chats">
+            <Link to="/mentee/chat/id">
               <i className="bx bx bxs-chat" />
               <span className="link_name">Chats</span>
             </Link>
             <ul className="sub-menu blank">
               <li>
-                <Link className="link_name" to="/mentee/dashboard/chats">
+                <Link className="link_name" to="/mentee/chat/id">
                   Chats
                 </Link>
               </li>
