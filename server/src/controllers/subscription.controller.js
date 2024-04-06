@@ -108,36 +108,6 @@ const getUserSubscribers = asyncHandler(async(req,res)=>{
 
 });
 
-const getMenteeSubscriptions = asyncHandler(async(req,res)=>{
-    const menteeId = req.user._id;
-
-    const mentee = await Mentee.findById(menteeId);
-    if(!mentee){
-        throw new ApiError(400 , "user not found");
-    }
-    
-    const subscriptions = await Subscription.find(
-        {
-            mentee:menteeId
-        }
-    ).populate(
-        {
-            path:"mentor",
-            select:"avatar fullName"
-        }
-    );
-    if(!subscriptions){
-        throw new ApiError(500 , " Error while getting Subscriptions");
-    }
-    
-    return res.status(200).json(
-        new ApiResponse(
-            200,
-            subscriptions,
-            "Mentor subscriptions fetched successfully"
-        )
-    )
-})
 
 const getMenteeSubscriptions = asyncHandler(async(req,res)=>{
     const menteeId = req.user._id;
@@ -170,36 +140,6 @@ const getMenteeSubscriptions = asyncHandler(async(req,res)=>{
 })
 
 
-const getMenteeSubscriptions = asyncHandler(async(req,res)=>{
-    const menteeId = req.user._id;
-
-    const mentee = await Mentee.findById(menteeId);
-    if(!mentee){
-        throw new ApiError(400 , "user not found");
-    }
-    
-    const subscriptions = await Subscription.find(
-        {
-            mentee:menteeId
-        }
-    ).populate(
-        {
-            path:"mentor",
-            select:"avatar fullName"
-        }
-    );
-    if(!subscriptions){
-        throw new ApiError(500 , " Error while getting Subscriptions");
-    }
-    
-    return res.status(200).json(
-        new ApiResponse(
-            200,
-            subscriptions,
-            "Mentor subscriptions fetched successfully"
-        )
-    )
-})
 
 
 export {
