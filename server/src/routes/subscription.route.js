@@ -9,4 +9,5 @@ const router = Router();
 router.route('/getUserSubscribers').post( verifyMentorJwt , getUserSubscribers);
 router.route('/getMenteeSubscriptions').post(verifyJwt , getMenteeSubscriptions);
 
+
 export default router;

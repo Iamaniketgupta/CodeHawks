@@ -9,7 +9,6 @@ import { Pricing } from "../models/pricing.model.js";
 
 
 
-
 const getCheckoutSession = asyncHandler(async (req, res) => {
     const { mentorId } = req.params;
     const { _id, email } = req.user;
@@ -68,8 +67,6 @@ console.log(mentorId);
 });
 
 
-
-
 const getUserSubscribers = asyncHandler(async(req,res)=>{
     const {mentorId} = req.body;
     if(!mentorId){
@@ -88,7 +85,6 @@ const getUserSubscribers = asyncHandler(async(req,res)=>{
         throw new ApiError(500 , "Subscription not found");
     }
 
-    console.log(subscription)
 
     const mentees = subscription.map(sub => {
         return {
@@ -141,6 +137,36 @@ const getMenteeSubscriptions = asyncHandler(async(req,res)=>{
             "Mentor subscriptions fetched successfully"
         )
     )
+})
+
+const getMenteeSubscriptions = asyncHandler(async(req,res)=>{
+    const menteeId = req.user._id;
+
+    const mentee = await Mentee.findById(menteeId);
+    if(!mentee){
+        throw new ApiError(400 , "user not found");
+    }
+    
+    const subscriptions = await Subscription.find(
+        {
+            mentee:menteeId
+        }
+    ).populate(
+        {
+            path:"mentor",
+            select:"avatar fullName"
+        }
+    );
+    if(!subscriptions){
+        throw new ApiError(500 , " Error while getting Subscriptions");
+    }
+    
+    return res.status(200).json(
+        new ApiResponse(
+            200,
+            subscriptions,
+            "Mentor subscriptions fetched successfully"
+))
 })
 
 

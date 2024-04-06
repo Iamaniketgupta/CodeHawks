@@ -30,7 +30,6 @@ export default function Login_Mentee() {
             setLoading(false);
 
 
-
             // temporary
             navigate("/m");
 
