@@ -33,7 +33,7 @@ export default function Login_Mentor() {
             toast.success('Login successful!');
             setLoading(false)
 
-            navigate("/mentor/dashboard");
+            navigate("/m");
 
         } catch (error) {
             console.error('Error:', error);

@@ -17,6 +17,10 @@ import MentorProfile from './components/ProfilePreview/MentorProfile';
 import AllMentorsPage from "./components/AllMentorsPage"
 import Paymentsuccess from './common/Paymentsuccess';
 import PaymentFailed from './common/PaymentFailed';
+import MySlots from './components/mentorDashboard/dashboardComponents/MySlots';
+import AssignTask from './components/AssignTask';
+import MentorAllTasks from './components/MentorAllTasks';
+import MenteeAllTasks from './components/MenteeAllTasks';
 function App() {
   return (
     <>
@@ -48,7 +52,8 @@ function App() {
           <Route path="/mentee/chat/:recipientId" element={<Chat />} />
 
           {/* Extra Temporary routes */}
-          <Route path="/a" element={<EditProfile />} />
+          <Route path="/a" element={<MentorAllTasks />} />
+          <Route path="/m" element={<AssignTask />} />
 
 
           <Route path="/e" element={<EditMenteeProfile />} />

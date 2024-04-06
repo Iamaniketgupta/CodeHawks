@@ -6,7 +6,8 @@ import SubmitTask from '../models/submitTask.model.js';
 import { ApiResponse } from '../utils/apiResponse.js';
 
 const assignTask = asyncHandler(async (req, res) => {
-    const { menteeIds, title, description } = req.body;
+    const { menteeIds, title, description ,githubLink } = req.body;
+    // console.log(req.body)
 
     menteeIds.map((menteeId)=>{
         const isValidId = isValidObjectId(menteeId);
@@ -20,6 +21,7 @@ const assignTask = asyncHandler(async (req, res) => {
         mentee: menteeIds,
         title,
         description,
+        githubLink
     });
 
     await task.save();
@@ -264,5 +266,38 @@ const getAllTasks = asyncHandler(async(req,res)=>{
     )
 })
 
-export { assignTask, changeTaskStatus , submitTask  , editSubmittedTask , markTaskAsComplete  , deleteTask , getTaskSubmissions , getAllTasks};
+
+const getAllMenteeTasks = asyncHandler(async(req,res)=>{
+    const menteeId = req.user._id;
+    if(!menteeId){
+        throw new ApiError(400 , "Mentee id is required");
+    }
+
+    const tasks = await SubmitTask.find(
+        {
+            mentee:menteeId
+        }
+    ).populate(
+        {
+            path:"mentor",
+            select:"fullName avatar profession"
+        }
+    ).populate(
+        {
+            path:"task",
+        }
+    );
+    if(!tasks){
+        throw new ApiError(500 , "Tasks not found");
+    }
+
+    return res.status(200).json(
+        new ApiResponse(
+            200,
+            tasks,
+            "Tasks fetched successfully"
+        )
+    )
+})
+export { assignTask,getAllMenteeTasks, changeTaskStatus , submitTask  , editSubmittedTask , markTaskAsComplete  , deleteTask , getTaskSubmissions , getAllTasks};
 

@@ -108,8 +108,52 @@ const getCheckoutSession = asyncHandler(async (req, res) => {
 
 
 
+const getUserSubscribers = asyncHandler(async(req,res)=>{
+    const {mentorId} = req.body;
+    if(!mentorId){
+        throw new ApiError(400 , "Mentor id is required");
+    }
+
+    console.log(mentorId)
+    const subscription = await Subscription.find({ mentor: mentorId })
+    .populate(
+        {
+            path:"mentee"
+        }
+    );
+
+    if(!subscription){
+        throw new ApiError(500 , "Subscription not found");
+    }
+
+    console.log(subscription)
+
+    const mentees = subscription.map(sub => {
+        return {
+            id: sub.mentee._id,
+            name: sub.mentee.fullName,
+        };
+    });
+
+    if(!mentees){
+        throw new ApiError(500 , "Some error happend");
+    }
+
+    return res.status(200).json(
+        new ApiResponse(
+            200,
+            mentees,
+            "Subscribed mentees fetched successfully"
+        )
+    )
+
+})
+
+
+
 
 export {
     getSubscription,
-    getCheckoutSession
+    getCheckoutSession,
+    getUserSubscribers
 }

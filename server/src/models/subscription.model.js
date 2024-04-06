@@ -5,12 +5,12 @@ const subscriptionSchema = new mongoose.Schema(
     {
         mentor: {
             type: mongoose.Types.ObjectId,
-            ref: "Doctor",
+            ref: "Mentor",
             required: true,
         },
         mentee: {
             type: mongoose.Types.ObjectId,
-            ref: "User",
+            ref: "Mentee",
             required: true,
         },
 

@@ -13,8 +13,6 @@ const Chat = () => {
   const user = useSelector((state)=>state.auth.user);
 
 
-
-
   return (
     <div className='flex' >
         <div className='w-1/2 min-h-screen' >
