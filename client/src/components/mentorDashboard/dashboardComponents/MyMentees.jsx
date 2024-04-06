@@ -37,6 +37,8 @@ const MyMentees = () => {
 
 
   return (
+    <div className="p-4 sm:ml-64 text-black">
+    <div className="p-4  border-gray-200 border-2 rounded-lg dark:border-gray-700 mt-14">
     <div className="w-full min-h-screen bg-white">
       <div className="font-bold text-2xl p-3 text-center">Subscribers :</div>
 
@@ -72,6 +74,9 @@ const MyMentees = () => {
         ))}
 
 
+
+      </div>
+    </div>
 
       </div>
     </div>

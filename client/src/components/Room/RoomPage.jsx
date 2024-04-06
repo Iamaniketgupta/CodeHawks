@@ -7,6 +7,7 @@ const RoomPage = () => {
     const user = useSelector((state) => state.auth.user);
     const { roomId } = useParams();
     const elementRef = useRef(null);
+    const zcRef = useRef(null); 
 
     useEffect(() => {
         const myMeeting = async () => {
@@ -30,9 +31,11 @@ const RoomPage = () => {
 
         myMeeting();
 
-        // Cleanup function to leave the room when the component unmounts
         return () => {
-            // Add cleanup code here if necessary
+            if (zcRef.current) {
+                zcRef.current.leaveRoom(); 
+                zcRef.current = null; 
+            }
         };
     }, [roomId, user]);
 
