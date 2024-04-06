@@ -8,7 +8,6 @@ import { ApiResponse } from '../utils/apiResponse.js';
 const assignTask = asyncHandler(async (req, res) => {
     const { menteeIds, title, description ,githubLink } = req.body;
     // console.log(req.body)
-
     menteeIds.map((menteeId)=>{
         const isValidId = isValidObjectId(menteeId);
         if(!isValidId){
@@ -77,6 +76,7 @@ const submitTask = asyncHandler(async (req, res, next) => {
         if(!task){
             throw new ApiError(400 , "Task to submit not found");
         }
+        console.log(task);
     
         let found = false;
         task.mentee.map((mentee)=>{
@@ -276,7 +276,6 @@ const getAllMenteeTasks = asyncHandler(async(req,res)=>{
     if(!menteeId){
         throw new ApiError(400 , "Mentee id is required");
     }
-
     const tasks = await SubmitTask.find(
         {
             mentee:menteeId
@@ -294,7 +293,6 @@ const getAllMenteeTasks = asyncHandler(async(req,res)=>{
     if(!tasks){
         throw new ApiError(500 , "Tasks not found");
     }
-
     return res.status(200).json(
         new ApiResponse(
             200,

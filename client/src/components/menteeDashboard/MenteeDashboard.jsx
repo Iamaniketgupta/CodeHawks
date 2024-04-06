@@ -1,12 +1,12 @@
 import Barside from "../../common/Barside";
-import MenteeHome from "./DashboardComponents/MenteeHome";
-
+import {BrowserRouter as Router,Routes,Route} from 'react-router-dom';
+import MenteeHome from "./MenteeHome";
+import "./MenteeDashoaboard.css";
 const MenteeDashoaboard = () => {
-
     return (
-        <>
-            <Barside />
-        </>
+<>
+<Barside/>
+</>
     );
 }
 
