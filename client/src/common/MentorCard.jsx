@@ -77,11 +77,13 @@ function MentorCard(props) {
 
         <img
 
-          src="https://www.preplaced.in/_next/image?url=https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fpreplaced-upload-prod%2Fo%2Fimage%252Fmentor-profile%252FAnarghya%2520Kinirec4B9R7jrAPQKGzx%3Falt%3Dmedia%26token%3D16d5e78b-3214-4766-94f7-6197bd1c588a&w=384&q=75"
+          src={props.item.avatar}
           className="mb-3 w-40 h-40 rounded-full shadow-lg overflow-clip"
         />
         <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{props?.item?.fullName || "-No Name"}</h5>
-        <span className="text-sm text-gray-500 dark:text-gray-400">{props?.item?.profession || "- Profession Not Found"}</span>
+        <span className="text-sm my-1 text-gray-500 dark:text-gray-400">{props?.item?.profession || "- Profession Not Found"}</span>
+        <span className="text-sm text-gray-500 dark:text-gray-400">{props?.item?.country? props?.item?.country +", " + props?.item?.state : ''}</span>
+        <span className="text-sm text-gray-500 dark:text-gray-400">{props?.item?.experience? props?.item?.experience + "+ years of Exp" : ''}</span>
         <div className="mt-4 flex space-x-3 lg:mt-6">
 
           <Link to={`/profile/${mentorName}`} state={props?.item}

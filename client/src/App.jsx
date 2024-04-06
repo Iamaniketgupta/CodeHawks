@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Signup_Mentee from './components/SignUp_Mentee';
 import Login_Mentee from './components/Login_Mentee';
 import Signup_Mentor from './components/Signup_Mentor';
@@ -18,13 +18,18 @@ import AllMentorsPage from "./components/AllMentorsPage"
 import Paymentsuccess from './common/Paymentsuccess';
 import PaymentFailed from './common/PaymentFailed';
 import MySlots from './components/mentorDashboard/dashboardComponents/MySlots';
+
 import AssignTask from './components/AssignTask';
 import MentorAllTasks from './components/MentorAllTasks';
 import MenteeAllTasks from './components/MenteeAllTasks';
+
+import Pricing from './components/mentorDashboard/dashboardComponents/Pricing';
+import Meetings from './components/mentorDashboard/dashboardComponents/Meetings';
+
 function App() {
   return (
     <>
-      <Router>
+      
         <Routes>
 
           {/* Home Route */}
@@ -52,17 +57,20 @@ function App() {
           <Route path="/mentee/chat/:recipientId" element={<Chat />} />
 
           {/* Extra Temporary routes */}
+
           <Route path="/a" element={<MentorAllTasks />} />
           <Route path="/m" element={<AssignTask />} />
 
+          <Route path="/editProfile" element={<EditProfile />} />
 
-          <Route path="/e" element={<EditMenteeProfile />} />
-          <Route path="/c" element={<AllMentorsPage />} />
+
+
+          <Route path="/m" element={<Meetings />} />
 
 
 
         </Routes>
-      </Router>
+     
 
       <Toaster />
     </>

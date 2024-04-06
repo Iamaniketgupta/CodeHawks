@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import { loadStripe } from '@stripe/stripe-js';
 
 import { useLocation, useNavigate } from 'react-router-dom';
 const MentorProfile = () => {
@@ -26,7 +27,7 @@ const MentorProfile = () => {
                     mentorId: mentorId
                 }
             });
-            console.log(response)
+            // console.log(response)
 
             setSlotsData(response.data.data);
             setSlotLoader(false);
@@ -35,37 +36,73 @@ const MentorProfile = () => {
             setSlotLoader(false);
         }
     }
+    const [myprice, setMyPrice] = useState({});
+
+
+
+    async function fetchPricing() {
+        try {
+            const response = await axios.get(`/api/v1/mentor/pricing/${state._id}`);
+            // console.log("hello ");
+            setMyPrice(response.data.pricing);
+            // console.log(pricingData);
+        } catch (error) {
+            setMyPrice({});
+            // console.error('Error fetching pricing:', error.message);
+        }
+    }
 
     useEffect(() => {
+        fetchPricing();
         getAllSlots();
     }, []);
 
 
-    // const bookMyTrail = async () => {
+    const bookMyTrail = async () => {
+        try {
+            
+            if(!selectedSlot)
+            toast.error("Please Select a slot");
+        const res = await axios.post("/api/v1/timeslot/bookSlot",{selectedSlot});
+        if(res.status === 200) {
+            toast.success("Booked Success");
+        }
+        selectedSlot(null);
+            
+        } catch (error) {
+            toast.error(error.response.data.message);
+            console.log(error);
 
-    // }
-
-    const buyMentorship = async () => {
-            try {
-
-                const res =await axios.post(`/api/v1/payment/checkout-session/${state._id}`,{
-                    headers:{
-                        Authorization:`Bearer pk_test_51P1gnJSJzjqVqPS4GUjR3KrNnajTe3KyhC2LVeimTlxth7DFiL5TznffkNHYtbxfvocGYacl1Qbh3G5w9ZvmklUW00fwzf1dXj`
-                    }
-                })
-
-                if(!res)
-                throw new Error("Payment Failed");
-                
-                if(res.data.session.url)
-                navigate(res.data.session.url)
-                
-            } catch (error) {
-                console.log(error)
-                toast.error(error);
-            }
+        }
     }
 
+
+ const your_stripe_public_key ="pk_test_51P1gnJSJzjqVqPS4GUjR3KrNnajTe3KyhC2LVeimTlxth7DFiL5TznffkNHYtbxfvocGYacl1Qbh3G5w9ZvmklUW00fwzf1dXj";
+ const stripePromise = loadStripe('your_stripe_public_key');
+ const buyMentorship = async (mentorId) => {
+    try {
+        // Retrieve the Stripe object from the Stripe promise
+        console.log(state._id);
+        const stripe = await stripePromise;
+        // Make a request to your backend to create a checkout session
+        const res = await axios.post(`/api/v1/payment/checkout-session/${state._id}`, {
+            headers: {
+                Authorization: `Bearer ${your_stripe_public_key}`
+            }
+        });
+
+        // Check if the response contains the session URL
+        if (!res || !res.data.session.url) {
+            throw new Error("Payment Failed");
+        }
+
+        // Redirect the user to the checkout page
+        window.location.href = res.data.session.url;
+    } catch (error) {
+        toast.error("Some Error Occurred: " + error.message);
+        console.log(error);
+    }
+};
     return (
 
         <div>
@@ -107,9 +144,11 @@ const MentorProfile = () => {
                             <div className='p-3 max-w-[250px] border-2'>
                                 <p>{state.experience || "1"} + years of experience</p>
 
+
+                                <p className='text-xs mt-3 text-blue-500 font-semibold'>Companies Experience </p>
                                 {
-                                    state.workExp?.map((item) =>
-                                        <p key={item._id} className='font-semibold text-lg'>Hewlett Packard Enterprise </p>
+                                    state.workExp?.map((item, idx) =>
+                                        <p key={idx} className='font-semibold text-lg'>{item} </p>
                                     )
                                 }
 
@@ -182,19 +221,27 @@ const MentorProfile = () => {
 
                                             <div className="w-16 h-16 m-2 inline-flex items-center justify-center rounded-xl bottom-2 border-4 border-blue-500 border-outset">
                                                 <div>
-                                                    <p className="text-2xl font-semibold ">{slot.date}</p>
+                                                    <p className="text-2xl font-semibold ">{slot?.date}</p>
                                                     <p>{slot?.monthName}</p>
                                                 </div>
                                             </div>
                                             <div className="font-semibold text-lg m-3">{slot?.time}</div>
+                                            <div className='absolute top-2 right-2'>
+                                            {
+                                                slot?.isBooked?
+                                                <div className='text-xs bg-red-600 text-white px-2 rounded-lg'>Booked</div>
+                                                :<div className='text-xs bg-green-600 text-white px-2 rounded-lg'>Available</div>
+                                            }
+
+                                            </div>
                                         </div>
                                     )
                                 }
                             </div>
                         </div>
 
-                        <button
-                            className={`inline-block px-3 py-2 bg-blue-500 rounded-xl text-white font-semibold 
+                        <button onClick={bookMyTrail}
+                            className={`inline-block px-3 my-3  py-2 bg-blue-500 rounded-xl text-white font-semibold 
                         ${!selectedSlot ? "opacity-20 cursor-not-allowed" : ''}`} disabled={!selectedSlot}>
                             Book Free Trail</button>
 
@@ -207,23 +254,24 @@ const MentorProfile = () => {
                         <h3 className='p-2 font-semibold text-2xl'>
                             Buy Mentorship</h3>
                         <div className='p-2 my-2'>
-                            {state.pricing?.specialties?.map((item,idx)=>
-                                <p key={idx}>{item}</p>
+                            {myprice?.specialties?.map((item, idx) =>
+                                <p key={idx} className='p-2 border-2 inline-block m-1 text-xs rounded-lg'>{item}</p>
                             )
                             }
-                             {state.pricing?.targetInterest?.map((item,idx)=>
-                                <p key={idx}>{item}</p>
-                            )
+                            </div>
+                            <div className='inline-flex gap-3'>
+                            <p className='font-semibold text-blue-500'>for :</p>
+
+                            {myprice?.targetInterest
                             }
-
                         </div>
 
-                        <div className={`font-bold text-3xl my-3 ${!state.pricing?.mentorshipPrice && "text-lg text-red-500"}`}>
-                            <p>{state.pricing?.mentorshipPrice || "-No Pricing Found"}</p>
+                        <div className={`font-bold text-3xl my-3 ${!myprice?.mentorshipPrice && "text-lg text-red-500"}`}>
+                            <p>{myprice?.mentorshipPrice || "-No Pricing Found"}</p>
                         </div>
-                        <button onClick={()=>buyMentorship()}
+                        <button onClick={() => buyMentorship()}
                             className={`inline-block px-3 py-2 bg-blue-500 rounded-xl text-white font-semibold 
-                        ${!state.pricing?.mentorshipPrice ? "opacity-20 cursor-not-allowed" : ''}`} disabled={!state.pricing?.mentorshipPrice}>
+                        ${!myprice?.mentorshipPrice ? "opacity-20 cursor-not-allowed" : ''}`} disabled={!myprice?.mentorshipPrice}>
                             Buy 1:1 Mentorship</button>
 
                     </div>

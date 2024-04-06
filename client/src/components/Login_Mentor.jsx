@@ -25,11 +25,12 @@ export default function Login_Mentor() {
         try {
             setLoading(true);
             const response = await axios.post('/api/v1/mentor/login', cred);
+            // console.log(response);
             const obj = {
-                user:response.data.user
+                user: response.data.user
             }
             dispatch(login(obj));
-
+            console.log(obj);
             toast.success('Login successful!');
             setLoading(false)
 
@@ -75,12 +76,12 @@ export default function Login_Mentor() {
                                                 <div className="animate-spin inline-block size-6 border-[5px] border-current border-t-transparent text-ehite rounded-full" role="status" aria-label="loading">
                                                 </div> : ''}
                                             {!loading && "Login"}
-                                        </button>                       
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </form>
             </section>

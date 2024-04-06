@@ -37,8 +37,8 @@ const signup = asyncHandler(async(req,res ,next)=>{
         throw new ApiError(400 , "All fields are required");
     }
 
-    console.log(languages)
-    console.log(interests)
+    // console.log(languages)
+    // console.log(interests)
 
     const user = await Mentee.findOne({
         email:email

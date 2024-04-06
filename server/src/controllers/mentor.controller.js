@@ -6,6 +6,7 @@ import { ApiResponse } from "../utils/apiResponse.js";
 import Mentor from "../models/mentor.model.js";
 import { isValidObjectId } from "mongoose";
 import Timeslot from "../models/timeslot.model.js";
+import { Pricing } from "../models/pricing.model.js";
 
 
 const options = {
@@ -254,6 +255,72 @@ const getMentorAllSlots = asyncHandler(async (req, res) => {
 }
 );
 
+
+//  Pricing controllers
+
+const createPrice = asyncHandler(async (req, res) => {
+    const mentorId = req.mentor._id;
+
+    // Check if mentor already has pricing
+    const mentor = await Mentor.findById(mentorId).populate('pricing');
+    if (mentor.pricing) {
+        return res.status(400).json({ message: 'Mentor already has pricing. Delete it first to create a new one.' });
+    }
+
+    const { mentorshipPrice, targetInterest, specialties } = req.body;
+
+    const pricing = new Pricing({
+        mentor: mentorId,
+        mentorshipPrice,
+        targetInterest,
+        specialties
+    });
+
+    await pricing.save();
+
+    // Associate pricing with mentor
+    mentor.pricing = pricing._id;
+    await mentor.save();
+
+    res.status(201).json({ message: 'Pricing created successfully', pricing });
+});
+
+
+// Fetch Pricing
+const getPricing = asyncHandler(async (req, res) => {
+    const mentorId = req.params.mentorId;
+
+    const mentor = await Mentor.findById(mentorId).populate('pricing');
+
+    if (!mentor || !mentor.pricing) {
+        return res.status(404).json({ message: 'No pricing found for this mentor' });
+    }
+
+    res.status(200).json({ pricing: mentor.pricing });
+});
+
+// Delete pricing
+const deletePricing = asyncHandler(async (req, res) => {
+    const priceId = req.params.priceId;
+    const pricing = await Pricing.findById(priceId);
+    if (!pricing) {
+        return res.status(404).json({ message: 'No pricing found' });
+    }
+
+    const mentor = await Mentor.findOneAndUpdate(
+        { pricing: priceId }, 
+        { $unset: { pricing: 1 } }, 
+        { new: true } 
+    );
+
+    await Pricing.deleteOne({ _id: priceId });
+
+    res.status(200).json({ message: 'Pricing deleted successfully' });
+});
+
+
+
+
 export {
     registerMentor,
     loginMentor,
@@ -262,5 +329,6 @@ export {
     updateMentorAvatar,
     refreshMentorAccessToken,
     getMentorById,
-    getMentorAllSlots
+    getMentorAllSlots,
+    createPrice, getPricing, deletePricing
 }

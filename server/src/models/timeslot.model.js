@@ -19,6 +19,10 @@ const timeslotSchema = new Schema(
       type: String,
       required: true,
     },
+    isBooked:{
+      type: Boolean,
+      default: false,
+    },
     mentor:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Mentor',

@@ -2,20 +2,7 @@ import mongoose, { Schema } from "mongoose";
 import bcrypt from 'bcrypt';
 import Jwt from 'jsonwebtoken';
 
-const pricingSchema = new Schema({
-    mentorshipPrice: {
-        type: Number,
-        required: true,
-    },
-    targetInterest: [{
-        type: String,
-        required: true,
-    }],
-    specialties: [{
-        type: String,
-        required: true,
-    }]
-});
+
 
 const mentorWorkSchema = new Schema({
   
@@ -78,6 +65,19 @@ const mentorSchema = new Schema({
         type: String,
         required: true,
     },
+    pricing:{
+        type:Schema.Types.ObjectId,
+        ref:"Pricing",
+    },
+    timeSlots:[{
+        type:Schema.Types.ObjectId,
+        ref:"Timeslot",
+    }],
+    myMeetings:[{
+        type:Schema.Types.ObjectId,
+        ref:"Meeting",
+    }],
+    
     state: {
         type: String,
         required: true
@@ -85,9 +85,7 @@ const mentorSchema = new Schema({
     refreshToken: {
         type: String,
     },
-    pricing: {
-        type: pricingSchema,
-    },
+  
     status:{
         type:Boolean,
         default:false

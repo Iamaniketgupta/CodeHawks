@@ -12,6 +12,7 @@ const EditProfile = () => {
     const user = useSelector((state)=>state.auth.user);
     const dispatch = useDispatch();
 
+    console.log(user);
     
     const [loader, setLoader] = useState(false);
     const [fullName, setfullName] = useState(user.fullName || "");
