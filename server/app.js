@@ -24,6 +24,7 @@ import messageRouter from './src/routes/message.route.js'
 import subscriptionRouter from './src/routes/subscription.route.js'
 import generalRoutes from './src/routes/generalRoutes.js'
 import stripePayment from './src/routes/stripePayment.route.js'
+import meeting from './src/routes/meeting.routes.js'
 
 app.use("/api/v1/mentor" , mentorRouter);
 app.use("/api/v1/mentee" , menteeRouter);
@@ -32,6 +33,7 @@ app.use("/api/v1/timeslot" , timeslotRouter);
 app.use("/api/v1/message" , messageRouter);
 app.use("/api/v1/subscription" , subscriptionRouter);
 app.use("/api/v1" , generalRoutes);
+app.use("/api/v1/meeting" ,meeting );
 app.use("/api/v1/payment" , stripePayment);
 
 
