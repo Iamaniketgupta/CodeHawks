@@ -92,6 +92,9 @@ const getUserSubscribers = asyncHandler(async(req,res)=>{
             _id: sub.mentee._id,
             fullName: sub.mentee.fullName,
             avatar: sub.mentee.avatar,
+            state:sub.mentee.state,
+            country:sub.mentee.country,
+            interests:sub.mentee.interests
         };
     }); 
 
