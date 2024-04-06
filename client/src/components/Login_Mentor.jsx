@@ -34,7 +34,7 @@ export default function Login_Mentor() {
             toast.success('Login successful!');
             setLoading(false)
 
-            navigate("/m");
+            navigate("/a");
 
         } catch (error) {
             console.error('Error:', error);
