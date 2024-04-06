@@ -28,56 +28,58 @@ import MenteeAllTasks from './components/MenteeAllTasks';
 
 import Pricing from './components/mentorDashboard/dashboardComponents/Pricing';
 import Meetings from './components/mentorDashboard/dashboardComponents/Meetings';
+import RoomPage from "./components/Room/RoomPage";
 
 function App() {
   return (
     <>
-      
-        <Routes>
 
-          {/* Home Route */}
-          <Route path="/" element={<Home />} />
+      <Routes>
 
-          {/* Main Routes */}
-          <Route path="mentor/dashboard/" element={<MentorDashboard/>}/>
-<Route path="mentee/dashboard/" element={<><MenteeDashboard/><MenteeHome/></>}/>
-<Route path="mentee/dashboard/tasks" element={<><MenteeDashboard/><Tasks/></>}/>
-<Route path="mentee/dashboard/chats" element={<><MenteeDashboard/><Chats/></>}/>
-<Route path="mentee/dashboard/settings" element={<><MenteeDashboard/><Settings/></>}/>
-<Route path="mentee/dashboard/subscription" element={<><MenteeDashboard/><Subscription/></>}/>
-          <Route path="/profile/:nameId" element={<MentorProfile />} />
-          <Route path="/allMentors" element={<AllMentorsPage />} />
+        {/* Home Route */}
+        <Route path="/" element={<Home />} />
 
-          {/* Stripe Payment response Routes */}
-          <Route path="/checkout-success" element={<Paymentsuccess />} />
-          <Route path="/Mentor/:mentorid" element={<PaymentFailed />} />
+        {/* Main Routes */}
+        <Route path="mentor/dashboard/" element={<MentorDashboard />} />
+        <Route path="mentee/dashboard/" element={<><MenteeDashboard /><MenteeHome /></>} />
+        <Route path="mentee/dashboard/tasks" element={<><MenteeDashboard /><Tasks /></>} />
+        <Route path="mentee/dashboard/chats" element={<><MenteeDashboard /><Chats /></>} />
+        <Route path="mentee/dashboard/settings" element={<><MenteeDashboard /><Settings /></>} />
+        <Route path="mentee/dashboard/subscription" element={<><MenteeDashboard /><Subscription /></>} />
+        <Route path="/profile/:nameId" element={<MentorProfile />} />
+        <Route path="/allMentors" element={<AllMentorsPage />} />
 
-
-
-          {/* Authentication Routes  */}
-          <Route path="/login_mentee" element={<Login_Mentee />} />
-          <Route path="/signup_mentee" element={<Signup_Mentee />} />
-          <Route path="/login_mentor" element={<Login_Mentor />} />
-          <Route path="/signup_mentor" element={<Signup_Mentor />} />
-
-          {/* Chat Routes */}
-          <Route path="/mentee/chat/:recipientId" element={<Chat />} />
-
-          {/* Extra Temporary routes */}
-
-          <Route path="/a" element={<MentorAllTasks />} />
-          <Route path="/m" element={<MenteeAllTasks />} />
-
-          <Route path="/editProfile" element={<EditProfile />} />
+        {/* Stripe Payment response Routes */}
+        <Route path="/checkout-success" element={<Paymentsuccess />} />
+        <Route path="/Mentor/:mentorid" element={<PaymentFailed />} />
 
 
 
-          <Route path="/m" element={<Meetings />} />
+        {/* Authentication Routes  */}
+        <Route path="/login_mentee" element={<Login_Mentee />} />
+        <Route path="/signup_mentee" element={<Signup_Mentee />} />
+        <Route path="/login_mentor" element={<Login_Mentor />} />
+        <Route path="/signup_mentor" element={<Signup_Mentor />} />
+
+        {/* Chat Routes */}
+        <Route path="/mentee/chat/:recipientId" element={<Chat />} />
+        <Route path="/room/:roomId" element={<RoomPage />} />
+
+        {/* Extra Temporary routes */}
+
+        <Route path="/a" element={<MentorAllTasks />} />
+        <Route path="/m" element={<MenteeAllTasks />} />
+
+        <Route path="/editProfile" element={<EditProfile />} />
 
 
 
-        </Routes>
-     
+        <Route path="/m" element={<Meetings />} />
+
+
+
+      </Routes>
+
 
       <Toaster />
     </>
