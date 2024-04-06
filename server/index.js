@@ -7,8 +7,6 @@ import http from 'http';
 import { Server } from 'socket.io';
 import Message from './src/models/message.model.js'
 
-
-
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
