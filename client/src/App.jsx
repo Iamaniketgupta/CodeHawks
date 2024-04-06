@@ -29,6 +29,7 @@ import MenteeAllTasks from './components/MenteeAllTasks';
 import Pricing from './components/mentorDashboard/dashboardComponents/Pricing';
 import Meetings from './components/mentorDashboard/dashboardComponents/Meetings';
 import RoomPage from "./components/Room/RoomPage";
+import MyMentees from './components/mentorDashboard/dashboardComponents/MyMentees';
 
 function App() {
   return (
@@ -67,7 +68,7 @@ function App() {
 
         {/* Extra Temporary routes */}
 
-        <Route path="/a" element={<MentorAllTasks />} />
+        <Route path="/a" element={<MyMentees />} />
         <Route path="/m" element={<MenteeAllTasks />} />
 
         <Route path="/editProfile" element={<EditProfile />} />
