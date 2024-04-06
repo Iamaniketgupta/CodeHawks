@@ -68,6 +68,10 @@ const submitTask = asyncHandler(async (req, res, next) => {
         if(!sTask){
             throw new ApiError(400 , "Submitted task not found");
         }
+
+        if(sTask.status !== "pending"){
+            throw new ApiError(400 , "Task already submitted")
+        }
     
         const task = await Task.findById(sTask.task);
         if(!task){
@@ -75,7 +79,7 @@ const submitTask = asyncHandler(async (req, res, next) => {
         }
     
         let found = false;
-        task.mentees.map((mentee)=>{
+        task.mentee.map((mentee)=>{
             if(String(mentee) == String(menteeId)){
                 found = true;
             }

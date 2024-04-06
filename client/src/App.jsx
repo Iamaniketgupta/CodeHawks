@@ -59,7 +59,7 @@ function App() {
           {/* Extra Temporary routes */}
 
           <Route path="/a" element={<MentorAllTasks />} />
-          <Route path="/m" element={<AssignTask />} />
+          <Route path="/m" element={<MenteeAllTasks />} />
 
           <Route path="/editProfile" element={<EditProfile />} />
 
