@@ -59,7 +59,7 @@ const TaskSubmissionModal = ({
             <div className="absolute top-2 right-2 z-20">
               <button
                 onClick={closeModal}
-                className="text-gray-200 hover:text-gray-800 focus:outline-none text-3xl"
+                className="text-gray-200 hover:text-red-500 focus:outline-none text-3xl"
               >
                 ×
               </button>
