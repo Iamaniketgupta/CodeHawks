@@ -67,6 +67,10 @@ const submitTask = asyncHandler(async (req, res, next) => {
         if(!sTask){
             throw new ApiError(400 , "Submitted task not found");
         }
+
+        if(sTask.status !== "pending"){
+            throw new ApiError(400 , "Task already submitted")
+        }
     
         const task = await Task.findById(sTask.task);
         if(!task){
