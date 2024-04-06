@@ -3,17 +3,28 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import io from "socket.io-client";
 import axios from 'axios'
+import { MdMessage } from "react-icons/md";
 
 const ChatMessage = ({
-  
+  togglechat
 }) => {
   const user = useSelector((state) => state.auth.user);
   console.log(user);
+
+  const close =()=>{
+    togglechat()
+  }
+
+  
+
+
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [myId, setmyId] = useState("");
   const { recipientId } = useParams();
   const [Socket, setSocket] = useState(null);
+  const [recipient, setrecipient] = useState('');
+
 
   const getAllMsg = async()=>{
     try {
@@ -25,15 +36,34 @@ const ChatMessage = ({
     }
   }
 
+
+  const recipientDetails = async()=>{
+    try {
+      const response = await axios.post("/api/v1/message/getPersonById",{
+        id:recipientId
+      })
+      console.log(response.data)
+      setrecipient(response.data.data)
+      
+    } catch (error) {
+      console.log(error)
+      
+    }
+
+  }
+
   useEffect(() => {
     getAllMsg()
     const newSocket = io("http://localhost:8000"); // Replace with your server URL
     setSocket(newSocket);
+    recipientDetails()
+
+    
 
     return () => {
       newSocket.disconnect(); // Clean up socket connection when component unmounts
     };
-  }, []);
+  }, [recipientId]);
 
   useEffect(() => {
     if (Socket) {
@@ -44,14 +74,19 @@ const ChatMessage = ({
         setMessages((prev) => [...prev, newMessage]);
       });
     }
-  }, [Socket, user._id]);
+  }, [Socket, user._id , recipientId]);
 
   const sendMessage = (e) => {
     e.preventDefault();
 
     if (message.trim() !== "") {
       // Emit message to server
-      console.log("first");
+      const msg = {
+        senderId:user._id,
+        message:message
+      }
+      setMessages((prev) => [...prev, msg]);
+
       Socket.emit("message", {
         senderId: user._id,
         recipientId: recipientId,
@@ -61,9 +96,14 @@ const ChatMessage = ({
     }
   };
 
+
   return (
     <div className="w-full p-1 min-h-screen ">
-      <div className="w-full bg-white my-2 flex  items-center gap-2">
+      <div className="w-full bg-white my-2 flex  items-center gap-2 relative">
+        <div onClick={close} className=" md:hidden absolute top-1 right-2 px-2 py-1 border-[1px] border-black rounded-xl">
+          <button>Close</button>
+        </div>
+
         <div className="overflow-hidden rounded-full w-[30px] h-[30px] ">
           <img
             className="w-full object-cover h-full rounded-full "
@@ -93,7 +133,7 @@ const ChatMessage = ({
                           <div className="flex items-center overflow-hidden justify-center h-8 w-8 rounded-full bg-indigo-500 flex-shrink-0">
                             <img
                               className="w-full h-full object-cover"
-                              src="https://res.cloudinary.com/surajgsn/image/upload/v1709554953/fkzh0a9sgc4rik8mqju6.png"
+                              src={recipient.avatar}
                               alt=""
                             />
                           </div>
@@ -113,8 +153,7 @@ const ChatMessage = ({
                         <div className="flex items-center justify-start flex-row-reverse">
                           <div className="flex items-center overflow-hidden justify-center h-8 w-8 rounded-full bg-indigo-500 flex-shrink-0">
                             <img
-                              className="w-full h-full object-cover"
-                              src="https://res.cloudinary.com/surajgsn/image/upload/v1709554953/fkzh0a9sgc4rik8mqju6.png"
+                              className={user.avatar}
                               alt=""
                             />
                           </div>
@@ -156,7 +195,7 @@ const ChatMessage = ({
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      stroke-linecap="round"
+                      strokeLinecap="round"
                       stroke-linejoin="round"
                       stroke-width="2"
                       d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"

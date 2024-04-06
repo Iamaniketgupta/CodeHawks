@@ -31,9 +31,7 @@ export default function Login_Mentee() {
 
 
             // temporary
-            navigate("/m");
-
-
+            navigate("/mentee/dashboard");
 
             
         } catch (error) {

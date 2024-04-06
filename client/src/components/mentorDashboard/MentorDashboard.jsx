@@ -10,6 +10,7 @@ const MentorDashboard = () => {
         <Link to={"/pricing"} >Pricing</Link>
         <Link to={"/slots"} >My Slots</Link>
         <Link to={"/mentordashboard/home"} >Home</Link>
+        <Link to={`/mentor/chat/id`} >chat</Link>
        </div>
         </div>
     );
