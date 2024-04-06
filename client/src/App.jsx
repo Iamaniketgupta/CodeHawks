@@ -41,12 +41,14 @@ function App() {
         <Route path="/" element={<Home />} />
 
         {/* Main Routes */}
-        <Route path="mentor/dashboard/" element={<MentorDashboard />} />
         <Route path="mentee/dashboard/" element={<><MenteeDashboard /><MenteeHome /></>} />
-        <Route path="mentee/dashboard/tasks" element={<><MenteeDashboard /><Tasks /></>} />
+        <Route path="mentee/dashboard/tasks" element={<><MenteeDashboard /><MenteeAllTasks /></>} />
         <Route path="mentee/dashboard/chats" element={<><MenteeDashboard /><Chats /></>} />
-        <Route path="mentee/dashboard/settings" element={<><MenteeDashboard /><Settings /></>} />
+        <Route path="mentee/dashboard/settings" element={<><MenteeDashboard /><EditMenteeProfile /></>} />
         <Route path="mentee/dashboard/subscription" element={<><MenteeDashboard /><Subscription /></>} />
+
+
+        <Route path="mentor/dashboard/" element={<MentorDashboard />} />
         <Route path="/profile/:nameId" element={<MentorProfile />} />
         <Route path="/allMentors" element={<AllMentorsPage />} />
 
@@ -70,13 +72,13 @@ function App() {
 
         <Route path="/a" element={<AssignTask />} />
 
-        <Route path="/m" element={<MenteeAllTasks />} />
+        {/* <Route path="/m" element={<MentorAllTasks />} /> */}
 
         <Route path="/editProfile" element={<EditProfile />} />
 
 
 
-        <Route path="/m" element={<Meetings />} />
+        <Route path="/meet" element={<Meetings />} />
 
 
 

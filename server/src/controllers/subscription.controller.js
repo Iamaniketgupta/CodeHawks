@@ -114,7 +114,11 @@ const getUserSubscribers = asyncHandler(async(req,res)=>{
 
 
 const getMenteeSubscriptions = asyncHandler(async(req,res)=>{
+    
     const menteeId = req.user._id;
+   
+    if(!menteeId)
+    throw new ApiError(401 , "Please Login");
 
     const mentee = await Mentee.findById(menteeId);
     if(!mentee){

@@ -4,6 +4,8 @@ import { MdDelete } from "react-icons/md";
 import { IoMdSwitch } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import {toast} from "react-hot-toast";
+import {useNavigate} from 'react-router-dom';
 import {login} from '../../../store/authSlice'
 
 const EditMenteeProfile = () => {
@@ -12,7 +14,7 @@ const EditMenteeProfile = () => {
     const user = useSelector((state)=>state.auth.user);
     const dispatch = useDispatch();
 
-
+const navigate =  useNavigate()
     
     const [loader, setLoader] = useState(false);
     const [fullName, setfullName] = useState(user.fullName || "");
@@ -42,9 +44,11 @@ const EditMenteeProfile = () => {
                 user:response.data.data
               }
               dispatch(login(obj))
+              toast.success("Profile updated");
+              navigate("/mentee/dashboard");
             
         } catch (error) {
-            console.log(error)
+            toast.success("Update Failed");
         }finally{
             setLoader(false);
         }

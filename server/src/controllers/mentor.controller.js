@@ -133,7 +133,7 @@ const refreshMentorAccessToken = asyncHandler(async (req, res) => {
 });
 
 const updateMentorProfile = asyncHandler(async (req, res) => {
-    const { fullName, country, state, interests, experience, linkedin, pricing, workExp , status } = req.body;
+    const { fullName, country, state, interests, experience, profession,description, linkedin, pricing, workExp , status } = req.body;
 
     // console.log(req.body)
     const userId = req.mentor._id;
@@ -144,6 +144,8 @@ const updateMentorProfile = asyncHandler(async (req, res) => {
 
     const updatedFields = {
         fullName: fullName || user.fullName,
+        profession: profession || user.profession,
+        description: description || user.description,
         country: country || user.country,
         state: state || user.state,
         interests: interests || user.interests,
