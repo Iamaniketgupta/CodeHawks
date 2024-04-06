@@ -2,12 +2,14 @@ import { useState } from "react";
 import { FaEdit, FaToggleOff, FaToggleOn } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { IoMdSwitch } from "react-icons/io";
+import {useNavigate} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import {toast} from "react-hot-toast";
 import {login} from '../../../store/authSlice'
 
 const EditProfile = () => {
-
+const navigate = useNavigate();
     
     const user = useSelector((state)=>state.auth.user);
     const dispatch = useDispatch();
@@ -43,9 +45,13 @@ const EditProfile = () => {
               const obj = {
                 user:response.data.data
               }
-              dispatch(login(obj))
+              dispatch(login(obj));
+              toast.success("Profile updated");
+              navigate("/mentor/dashboard");
             
         } catch (error) {
+            toast.success("Update Failed");
+
             console.log(error)
         }finally{
             setLoader(false);
@@ -58,11 +64,11 @@ const EditProfile = () => {
         setLoader(true);
         const input = document.querySelector("#avatar");
         const file = input.files[0];
-        // console.log(file)
+
         try {
           const formData = new FormData();
           formData.append('avatar', file);
-        //   console.log(formData)
+     
       
           const response = await axios.post("/api/v1/mentor/updateMentorAvatar", {avatar : file}, {
             headers: {
@@ -70,7 +76,6 @@ const EditProfile = () => {
             }
           });
 
-        //   console.log(response.data.data);
           const obj = {
             user:response.data.data
           }
@@ -78,14 +83,13 @@ const EditProfile = () => {
           
 
         } catch (error) {
+            toast.success("Update Failed");
           console.log(error);
         }finally{
             setLoader(false);
         }
       }
 
-
-    
 
       const handleWorkExpChange = (idx, value) => {
         const updatedWorkExp = [...workExp];

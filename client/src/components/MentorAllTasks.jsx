@@ -49,12 +49,17 @@ const MentorAllTasks = () => {
     fetchTasks();
   }, [showModal]);
 
+console.log(tasks); 
   return (
-    <div className='flex flex-col text-black justify-center items-center w-full min-h-screen bg-gray-300'>
-      <h2 className="text-2xl  font-bold mb-4 mt-3 bg-gray-400 rounded-xl px-4 py-2 ">Mentor Tasks</h2>
-      {tasks.map(task => (
-        <div key={task._id} className="mb-4 w-[70%] p-4 border rounded-xl bg-gray-800 text-white relative">
-          <div className='absolute top-3 right-3 text-white text-xl' onClick={()=>{
+    <div>
+
+      <h2 className="text-3xl text-center font-bold mb-4 mt-3 ">
+        Assigned Tasks
+      </h2>
+    <div className='flex flex-col border-2 py-3 max-w-[700px] px-3 mx-auto justify-center items-center w-full '>
+      {tasks?.map(task => (
+        <div key={task._id} className="mb-4 w-full p-4 border rounded-xl bg-gray-800 text-white relative">
+          <div className='absolute cursor-pointer top-3 right-3 text-white text-xl' onClick={()=>{
             settaskId(task._id)
             setshowModal(true)
           }} ><MdDelete /></div>
@@ -103,6 +108,7 @@ const MentorAllTasks = () => {
           </div>
         </div>
       )}
+    </div>
     </div>
   );
 };
