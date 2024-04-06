@@ -30,7 +30,7 @@ function getSubs(){
     <div className="row justify-content-around">
     {
      subs.length>0 && subs.map((sub)=>(
-       <SubCard key={sub._id} price={sub.Price} status={sub.status} mentor={sub.mentor.fullName} getsubs={getSubs} />
+       <SubCard key={sub._id} price={sub.price} status={sub.status} mentor={sub.mentor.fullName} getsubs={getSubs} />
       ))
     }  
     </div>

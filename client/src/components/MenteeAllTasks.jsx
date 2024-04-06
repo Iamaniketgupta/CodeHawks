@@ -26,15 +26,17 @@ const MenteeAllTasks = () => {
   }, []);
 
   return (
-    <div className="flex flex-col text-black justify-center items-center w-full min-h-screen bg-gray-300" >
-      <h2 className="text-2xl  font-bold mb-4 mt-3 bg-gray-400 rounded-xl px-4 py-2 ">
+    <div>
+
+      <h2 className="text-3xl text-center font-bold mb-4 mt-3 ">
         My Tasks
       </h2>
-      <div className="w-full flex flex-col items-center gap-4 p-4">
-        {tasks.map((task) => (
+    <div className="flex flex-col gap-4 text-black justify-center items-center" >
+      <div className="w-full flex max-w-[700px] flex-col border-2 items-center gap-4 p-4">
+        {tasks?.map((task) => (
           <div
             key={task._id}
-            className=" w-full bg-gray-800 text-white rounded-lg p-4 mb-4 relative md:w-[700px]" 
+            className=" w-full cursor-pointer shadow-xl border-blue-400 border-2 rounded-xl p-4 mb-4 relative md:w-[600px]" 
             onClick={()=>{
               setTaskId(task._id)
               setTitle(task.task.title)
@@ -42,14 +44,14 @@ const MenteeAllTasks = () => {
               setShow(true)}}
           >
             <h3 className="text-lg font-bold h-7 mb-2">{task.task.title}</h3>
-            <p className="text-gray-200 h-7 mb-2">{task.task.description}</p>
+            <p className="text-gray-500 h-7 mb-2">{task.task.description}</p>
             <h3
               href={task.mentor.fullName}
               target="_blank"
               rel="noopener noreferrer"
-              className=" font-bold hover:underline bg-gray-300 p-1 rounded-md   text-black absolute bottom-3 right-3 text-sm "
+              className=" font-bold text-decoration-none hover:underline text-xs bg-blue-500 text-white p-1 rounded-md absolute bottom-3 right-3 "
             >
-              <span className="">Given by : </span>
+              <span className="">Assigned by : </span>
               {task.mentor.fullName}
             </h3>
           </div>
@@ -60,6 +62,7 @@ const MenteeAllTasks = () => {
       {show && (
         <TaskSubmissionModal showModal={show} setShowModal={setShow} taskId={taskId} title={title} description={description} />
       )}
+    </div>
     </div>
   );
 };

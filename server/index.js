@@ -56,7 +56,6 @@ io.on('connection', (socket) => {
         // Emit message to recipient if online
         if (recipientSocketId) {
             io.to(recipientSocketId).emit('message', { senderId, message });
-            io.to(userid).emit('message', { senderId, message });
             try {
                 await Message.updateMany({ recipientId, read: false }, { read: true });
         io.to(userid).emit('message', { senderId, message });

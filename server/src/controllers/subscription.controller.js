@@ -69,6 +69,7 @@ const getCheckoutSession = asyncHandler(async (req, res) => {
 
 const getUserSubscribers = asyncHandler(async(req,res)=>{
     const {mentorId} = req.body;
+    // console.log(mentorId);
     if(!mentorId){
         throw new ApiError(400 , "Mentor id is required");
     }
@@ -91,6 +92,9 @@ const getUserSubscribers = asyncHandler(async(req,res)=>{
             _id: sub.mentee._id,
             fullName: sub.mentee.fullName,
             avatar: sub.mentee.avatar,
+            state:sub.mentee.state,
+            country:sub.mentee.country,
+            interests:sub.mentee.interests
         };
     }); 
 
@@ -110,7 +114,11 @@ const getUserSubscribers = asyncHandler(async(req,res)=>{
 
 
 const getMenteeSubscriptions = asyncHandler(async(req,res)=>{
+    
     const menteeId = req.user._id;
+   
+    if(!menteeId)
+    throw new ApiError(401 , "Please Login");
 
     const mentee = await Mentee.findById(menteeId);
     if(!mentee){

@@ -6,7 +6,7 @@ export default function Subscription(props) {
   const [subs,setSubs]=useState([]);
   useEffect(()=>{
     (async ()=>{
-      const response = await axios.post('/api/v1/subscription/getMenteeSubscriptions');
+      const response = await axios.get('/api/v1/subscription/getMenteeSubscriptions');
       setSubs(response.data.data);
        console.log(response.data.data);
     })();
