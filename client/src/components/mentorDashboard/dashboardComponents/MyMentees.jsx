@@ -6,6 +6,7 @@ const MyMentees = () => {
     
     const [loading, setLoading] = useState(false);
     const [mentees, setMentees] = useState([]);
+
     
     const user = useSelector((state) => state.auth.user);
     
@@ -17,7 +18,7 @@ const MyMentees = () => {
             const response = await axios.post("/api/v1/subscription/getUserSubscribers", {
                 mentorId: user._id
             });
-            // console.log(response.data.data)
+            console.log(response.data.data)
             // console.log(response.data.data);
             setMentees(response.data.data)
         } catch (error) {
