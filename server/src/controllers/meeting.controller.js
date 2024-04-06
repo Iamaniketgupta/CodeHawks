@@ -2,7 +2,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import cron from "node-cron";
 
 
-import { Meeting } from "../models/Meeting.js";
+import { Meeting } from "../models/meeting.model.js";
 
 // to create a new meeting
 const createMeeting = asyncHandler(async (req, res) => {
@@ -43,7 +43,7 @@ const deleteMeeting = asyncHandler(async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
-
+ 
 
 const getAllMeetings = asyncHandler(async (req, res) => {
     const mentorId = req.mentor._id;
