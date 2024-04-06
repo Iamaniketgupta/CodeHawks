@@ -22,7 +22,7 @@ import Paymentsuccess from './common/Paymentsuccess';
 import PaymentFailed from './common/PaymentFailed';
 import MySlots from './components/mentorDashboard/dashboardComponents/MySlots';
 
-import AssignTask from './components/AssignTask';
+import AssignTask from './components/mentorDashboard/dashboardComponents/AssignTask';
 import MentorAllTasks from './components/MentorAllTasks';
 import MenteeAllTasks from './components/MenteeAllTasks';
 
@@ -67,7 +67,7 @@ function App() {
 
         {/* Extra Temporary routes */}
 
-        <Route path="/a" element={<MentorAllTasks />} />
+        <Route path="/a" element={<AssignTask />} />
         <Route path="/m" element={<MenteeAllTasks />} />
 
         <Route path="/editProfile" element={<EditProfile />} />

@@ -69,6 +69,7 @@ const getCheckoutSession = asyncHandler(async (req, res) => {
 
 const getUserSubscribers = asyncHandler(async(req,res)=>{
     const {mentorId} = req.body;
+    // console.log(mentorId);
     if(!mentorId){
         throw new ApiError(400 , "Mentor id is required");
     }
