@@ -80,8 +80,8 @@ const loginMentor = asyncHandler(async (req, res) => {
 
         const loggedInUser = await Mentor.findById(ValidUser._id).select("-password -refreshToken");
 
-    return res.status(200).cookie("menauthId", accessToken, options)
-        .cookie("referId", rtoken.refreshToken, options).json({
+    return res.status(200).cookie("accessToken", accessToken)
+        .cookie("refreshToken", rtoken.refreshToken).json({
             user: loggedInUser,
             message: "Logged in Success"
         });

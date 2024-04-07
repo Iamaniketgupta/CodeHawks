@@ -32,8 +32,80 @@ import RoomPage from "./components/Room/RoomPage";
 import MyMentees from './components/mentorDashboard/dashboardComponents/MyMentees';
 import MentorCard from './common/MentorCard';
 import MentorChat from './components/MentorChat';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import {useSelector , useDispatch} from 'react-redux'
+import { login } from './store/authSlice';
+import {useNavigate} from 'react-router-dom'
 
 function App() {
+
+  const user = useSelector((state)=>state.auth.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
+  const [loading, setLoading] = useState(true); // State for loading indicator
+
+  
+
+  const refresh = async()=>{
+    try {
+      console.log("first")
+      const response = await axios.post("/api/v1/refresh");
+      console.log("second")
+      console.log(response.data)
+      const obj = {
+        user:response.data.data
+      }
+      dispatch(login(obj))
+    } catch (error) {
+      console.log(error)
+    }finally{
+      setLoading(false);
+    }
+  }
+
+  
+  const refreshMentor = async()=>{
+    try {
+      const response = await axios.post("/api/v1/refreshMentor");
+      console.log(response.data)
+      const obj = {
+        user:response.data.data
+      }
+      dispatch(login(obj))
+    } catch (error) {
+      console.log(error)
+    }finally{
+      setLoading(false);
+    }
+  }
+
+  console.log(user)
+
+  useEffect(() => {
+    console.log("first")
+    const menteeCookie = document.cookie.includes("accessToken");
+    const mentorCoookie = document.cookie.includes("menauthId");
+    console.log(menteeCookie)
+    console.log(mentorCoookie)
+    if(!user){
+      if(menteeCookie){
+        refresh()
+      }else if(mentorCoookie){
+        refresh()
+      }else{
+        setLoading(false)
+  
+      }
+    }else{
+      setLoading(false);
+    }
+  }, [user])
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  
   return (
     <>
 
