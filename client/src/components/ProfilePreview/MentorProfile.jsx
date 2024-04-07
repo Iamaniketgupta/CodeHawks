@@ -161,7 +161,7 @@ const MentorProfile = () => {
                     {/* Description */}
                     <div className='p-3'>
                         <h3>About</h3>
-                        {state.about || "-no description found"}
+                        {state.description || "-no description found"}
                     </div>
 
                     <div className='mx-3 my-2 bg-yellow-200 border-2 border-yellow-400 rounded-lg px-2 py-1 inline-block'>
