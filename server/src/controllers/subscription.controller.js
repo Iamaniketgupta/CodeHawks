@@ -50,8 +50,8 @@ const getCheckoutSessionAndHandleWebhook = asyncHandler(async (req, res) => {
 
         
             const subscription = new Subscription({
-                mentor: session.mentorId,
-                mentee: session.customer,
+                mentor: session.mentor._id,
+                mentee: session.mentee._id,
                 price: session.amount_total / 100, // Amount is in cents, convert to base unit
                 session: session.id,
                 status: "paid"
