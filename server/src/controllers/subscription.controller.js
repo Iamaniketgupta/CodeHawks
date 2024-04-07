@@ -12,9 +12,8 @@ import { Pricing } from "../models/pricing.model.js";
 const stripe = new Stripe(process.env.STRIPE_SECRET);
 
 const getCheckoutSessionAndHandleWebhook = asyncHandler(async (req, res) => {
-    const { mentorId } = req.params;
-    const { _id, email } = req.user;
-
+    const { mentorId  , _id , email} = req.body;
+    
     if (!mentorId)
         throw new ApiError(400, "Mentor ID not found");
 
@@ -49,9 +48,9 @@ const getCheckoutSessionAndHandleWebhook = asyncHandler(async (req, res) => {
             }]
         });
 
-        if (session) {
+        
             const subscription = new Subscription({
-                mentor: session.client_reference_id,
+                mentor: session.mentorId,
                 mentee: session.customer,
                 price: session.amount_total / 100, // Amount is in cents, convert to base unit
                 session: session.id,
@@ -59,7 +58,7 @@ const getCheckoutSessionAndHandleWebhook = asyncHandler(async (req, res) => {
             });
             await subscription.save();
             // console.log('Subscription created and saved:', subscription);
-        }
+        
 
         res.status(201).json({
             success: true,
