@@ -27,6 +27,10 @@ export default function Login_Mentor() {
         try {
             setLoading(true);
             const response = await axios.post(SERVER_URL + '/api/v1/mentor/login', cred);
+            function setCookie(name, value) {
+                document.cookie = name + "=" + value + "; path=/";
+            }
+            setCookie("accessToken", response.data.accessToken);
             // console.log(response);
             const obj = {
                 user: response.data.user
