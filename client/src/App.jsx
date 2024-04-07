@@ -46,7 +46,6 @@ function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const [loading, setLoading] = useState(true); // State for loading indicator
-
   
 
   const refresh = async()=>{
@@ -97,7 +96,6 @@ function App() {
         refresh()
       }else{
         setLoading(false)
-  
       }
     }else{
       setLoading(false);

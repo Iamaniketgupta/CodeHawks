@@ -15,6 +15,7 @@ export default function Topbar() {
     const mentorName = fullname.replace(" ", "-").toLowerCase();
     }
     const [User,setUser]=useState(user);
+    console.log(user);  
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -50,7 +51,7 @@ export default function Topbar() {
             <span className="block text-sm">{User.fullName?.toUpperCase()}</span>
             <span className="block truncate text-sm font-medium">{User.email}</span>
           </Dropdown.Header>
-          <Link to="/User/dashboard">
+          <Link to={!(User.__v=='0')?`/Mentee/dashboard`:`/mentor/dashboard/${User.fullName}`}>
           <Dropdown.Item>Dashboard</Dropdown.Item>
           </Link>
           <Dropdown.Item onClick={signoutuser}>Sign out</Dropdown.Item>
