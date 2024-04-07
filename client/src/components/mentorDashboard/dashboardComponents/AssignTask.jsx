@@ -53,7 +53,8 @@ const AssignTask = () => {
         description,
         githubLink,
         mentor: user._id,
-        menteeIds: selectedUsers
+        menteeIds: selectedUsers,
+        headers: { Authorization: `Bearer ${token}`}
       },{ headers: { Authorization: `Bearer ${token}`}});
 
       // console.log(response.data);
