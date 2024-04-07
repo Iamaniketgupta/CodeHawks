@@ -29,6 +29,10 @@ const meetingSchema  = new Schema({
         type: String,
         required: true,
     },
+    monthName:{
+        type: String,
+        required: true,
+    },
     month:{
         type: String,
         required: true,

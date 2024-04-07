@@ -247,7 +247,7 @@ const Meetings = () => {
                                             <span>At : </span>
                                             <p className='inline-block text-indigo-500 font-semibold'>{item?.time}</p>
                                             <span className='ml-2'>On : </span>
-                                            <p className='inline-block text-indigo-500 font-semibold'>{item?.date + ","} {item?.month}</p>
+                                            <p className='inline-block text-indigo-500 font-semibold'>{item?.date + ","} {item?.monthName}</p>
                                         </div>
                                         <button
                                             onClick={() => handleJoinMeeting(item.roomId)}

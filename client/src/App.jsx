@@ -38,6 +38,7 @@ import axios from 'axios';
 import {useSelector , useDispatch} from 'react-redux'
 import { login } from './store/authSlice';
 import {useNavigate} from 'react-router-dom'
+import MenteeMeetings from './components/menteeDashboard/DashboardComponents/MenteeMeetings';
 
 
 function App() {
@@ -107,6 +108,7 @@ function App() {
         <Route path="/mentor/chat/:recipientId" element={<MentorChat />} />
         <Route path="mentee/dashboard/settings" element={<><MenteeDashboard /><EditMenteeProfile /></>} />
         <Route path="mentee/dashboard/subscription" element={<><MenteeDashboard /><Subscription /></>} />
+        <Route path="mentee/dashboard/meetings" element={<><MenteeDashboard /><MenteeMeetings /></>} />
 
 
         {/* Mentor Routes */}

@@ -6,11 +6,12 @@ import { Meeting } from "../models/meeting.model.js";
 
 // to create a new meeting
 const createMeeting = asyncHandler(async (req, res) => {
-    const { roomId, menteeId, isExpired, date, time, month } = req.body;
+    const { roomId, menteeId,monthName, isExpired, date, time, month } = req.body;
     const mentorId = req.mentor._id;
     try {
         const newMeeting = new Meeting({
             roomId,
+            monthName,
             mentee: menteeId,
             mentor: mentorId,
             isExpired: isExpired || false,
