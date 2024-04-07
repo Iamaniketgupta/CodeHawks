@@ -8,7 +8,7 @@ export default function TaskCard(props) {
   const {title,description,status,mentor,github,id,getTasks}=props;
   const [showModal, setshowModal] = useState(false);
   return (
-    <div className="card col-lg-4 mb-2  taskcard">
+    <div className="card col-lg-4 mb-2 text-xs taskcard">
     <div className="card-body">
       <h3 className="card-title text-title">{title}</h3>
       <p className="card-text">
@@ -21,7 +21,7 @@ export default function TaskCard(props) {
       Status: <span className="badge bg-primary">{status.toString().toUpperCase()}</span>
       </p>
       <a href={github} target="_blank" className="text-weight-bold">
-      Github
+      GitHub: {github}
       <i className="fa fa-link" aria-hidden="true"></i>
       </a>
       <br/>
