@@ -55,7 +55,7 @@ Contributions to mentorHub are welcome! Please follow the contribution guideline
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 ## Contact
-For any inquiries or support, please contact us at contact@mentorhub.com.
+For any inquiries or support, please contact us at codehawks@example.com.
 
 ---
 
