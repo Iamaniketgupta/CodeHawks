@@ -70,6 +70,10 @@ const menteeSchema = new mongoose.Schema({
     type: String,
     default: null, // or any default value you prefer
   },
+  isMentor:{
+    type:Number,
+    default:0
+  }
 });
 
 menteeSchema.pre("save", async function (next) {

@@ -51,7 +51,7 @@ export default function Signup_Mentor() {
         try {
             setLoading(true);
             const response = await axios.post(SERVER_URL+'/api/v1/mentor/signup', formData);
-            console.log(response.data);
+            // console.log(response.data);
             toast.success('Sign up successful!');
             setLoading(false);
             navigate("/login_mentor")
@@ -89,7 +89,7 @@ export default function Signup_Mentor() {
   const languageChange = (selectedOptions) => {
     // Do something with selectedOptions
   const selectedValues = selectedOptions.map(option => option.value);
-    console.log(formData.languages)
+    // console.log(formData.languages)
     setFormData({ ...formData, ["languages"]: selectedValues });
     // console.log(selectedOptions);
   };

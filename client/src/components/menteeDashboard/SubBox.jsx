@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import SubCard from './SubCard';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { SERVER_URL } from '../../../constant';
 
 export default function SubBox(props) {
   const [subs, setSubs] = useState([]);
 
   async function getSubs() {
     try {
-      const endpoint = '/api/v1/subscription/getMenteeSubscriptions';
+      const endpoint = SERVER_URL + '/api/v1/subscription/getMenteeSubscriptions';
       const response = await axios.get(endpoint);
       if (props?.type === "top") {
         setSubs(response.data.data.slice(0, 3));

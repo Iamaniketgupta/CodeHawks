@@ -4,6 +4,8 @@ import { MdDelete } from "react-icons/md";
 import {useSelector} from 'react-redux'
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { SERVER_URL } from '../../constant';
+
 
 
 const ChatListElement = (
@@ -26,7 +28,7 @@ const ChatListElement = (
   
 
   const chat = ()=>{
-    console.log(window.location.href)
+    // console.log(window.location.href)
     const url = window.location.href;
     const l = url.substring(21 , 34);
     navigate(l + id);
@@ -35,16 +37,16 @@ const ChatListElement = (
 
   const deleteChat = async()=>{
     try {
-      const response = await axios.post("/api/v1/message/deleteMessagesByUserId" , {
+      const response = await axios.post( SERVER_URL + "/api/v1/message/deleteMessagesByUserId" , {
         userId:user._id,
         personId:id
       });
-      console.log(response.data)
-      console.log(recipientId)
-      console.log(id)
+      // console.log(response.data)
+      // console.log(recipientId)
+      // console.log(id)
 
       if(String(recipientId) == String(id)){
-        console.log(window.location.href)
+        // console.log(window.location.href)
         const url = window.location.href;
         const l = url.substring(21 , 34);
         navigate(l + "id" );

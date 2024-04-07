@@ -8,6 +8,8 @@ import { useDispatch } from 'react-redux';
 import { login } from '../store/authSlice';
 import toast from 'react-hot-toast';
 
+import { SERVER_URL } from '../../constant';
+
 
 export default function Login_Mentor() {
 
@@ -24,13 +26,13 @@ export default function Login_Mentor() {
         e.preventDefault();
         try {
             setLoading(true);
-            const response = await axios.post('/api/v1/mentor/login', cred);
+            const response = await axios.post(SERVER_URL + '/api/v1/mentor/login', cred);
             // console.log(response);
             const obj = {
                 user: response.data.user
             }
             dispatch(login(obj));
-            console.log(obj);
+            // console.log(obj);
             toast.success('Login successful!');
             setLoading(false)
 

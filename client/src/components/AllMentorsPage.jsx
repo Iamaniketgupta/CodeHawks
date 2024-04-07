@@ -3,6 +3,8 @@ import { Spinner } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import MentorCard from "../common/MentorCard";
+import { SERVER_URL } from '../../constant';
+
 
 const AllMentorsPage = () => {
 
@@ -15,7 +17,7 @@ const AllMentorsPage = () => {
 
         try {
             setLoading(true);
-            const response = await axios.get('/api/v1/allMentors');
+            const response = await axios.get( SERVER_URL+ '/api/v1/allMentors');
             // console.log(response.data);
             setAllMentors(response.data?.data);
             setLoading(false);
