@@ -78,13 +78,22 @@ const loginMentor = asyncHandler(async (req, res) => {
     if (!rtoken)
         throw new ApiError(500, "something went wrong");
 
+        
+
         const loggedInUser = await Mentor.findById(ValidUser._id).select("-password -refreshToken");
 
     return res.status(200).cookie("accessToken", accessToken)
-        .cookie("refreshToken", rtoken.refreshToken).json({
-            user: loggedInUser,
-            message: "Logged in Success"
-        });
+        .cookie("refreshToken", rtoken.refreshToken).json(
+            new ApiResponse(
+                200 ,
+                {
+                    user:loggedInUser,
+                    accessToken,
+                    refreshToken
+                },
+                "user logged in successfully"
+            )
+        );
 
 });
 
