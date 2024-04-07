@@ -97,6 +97,8 @@ const ChatMessage = ({
   };
 
 
+
+
   return (
     <div className="w-full p-1 min-h-screen ">
       <div className="w-full bg-white my-2 flex  items-center gap-2 relative">
@@ -107,11 +109,11 @@ const ChatMessage = ({
         <div className="overflow-hidden rounded-full w-[30px] h-[30px] ">
           <img
             className="w-full object-cover h-full rounded-full "
-            src="https://res.cloudinary.com/surajgsn/image/upload/v1709554953/fkzh0a9sgc4rik8mqju6.png"
+            src={recipient.avatar}
             alt=""
           />
         </div>
-        <div className="font-bold text-lg ">Suraj singh</div>
+        <div className="font-bold text-lg ">{recipient.fullName}</div>
       </div>
       <div className="flex flex-col flex-auto min-h-sceen ">
         <div className="flex flex-col flex-auto flex-shrink-0  bg-gray-100 h-full p-2 relative min-h-screen ">
@@ -196,8 +198,8 @@ const ChatMessage = ({
                   >
                     <path
                       strokeLinecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
                     ></path>
                   </svg>

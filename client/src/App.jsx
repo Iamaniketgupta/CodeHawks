@@ -53,10 +53,10 @@ function App() {
 
   const refresh = async()=>{
     try {
-      console.log("first")
+      // console.log("first")
       const response = await axios.post("/api/v1/refresh");
-      console.log("second")
-      console.log(response.data)
+      // console.log("second")
+      // console.log(response.data)
       const obj = {
         user:response.data.data
       }
@@ -69,29 +69,14 @@ function App() {
   }
 
   
-  const refreshMentor = async()=>{
-    try {
-      const response = await axios.post("/api/v1/refreshMentor");
-      console.log(response.data)
-      const obj = {
-        user:response.data.data
-      }
-      dispatch(login(obj))
-    } catch (error) {
-      console.log(error)
-    }finally{
-      setLoading(false);
-    }
-  }
 
-  console.log(user)
 
   useEffect(() => {
     console.log("first")
     const menteeCookie = document.cookie.includes("accessToken");
     const mentorCoookie = document.cookie.includes("menauthId");
-    console.log(menteeCookie)
-    console.log(mentorCoookie)
+    // console.log(menteeCookie)
+    // console.log(mentorCoookie)
     if(!user){
       if(menteeCookie){
         refresh()

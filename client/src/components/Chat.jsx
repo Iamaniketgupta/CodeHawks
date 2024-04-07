@@ -13,9 +13,13 @@ const Chat = () => {
 
   const user = useSelector((state) => state.auth.user);
 
+  
+
   const showchat = ()=>{
     setchatShow((prev)=>!prev)
   }
+
+  
 
   return (
     <div className="w-full md:flex">
@@ -30,7 +34,7 @@ const Chat = () => {
         )}
       </div>
       <div className={`w-full md:w-1/2 ${!chatShow ? "block" : "hidden"} md:block`}>
-        <ChatList showchat={showchat} />
+        <ChatList showchat={showchat}  />
       </div>
     </div>
   );

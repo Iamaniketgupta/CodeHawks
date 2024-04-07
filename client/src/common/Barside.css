@@ -11,7 +11,7 @@
   left: 0;
   height: 100vh;
   width: 260px;
-  background: #11101d;
+  background: #fff;
   z-index: 100;
   transition: all 0.5s ease;
 }
@@ -26,7 +26,7 @@
 }
 .sidebar .logo-details i{
   font-size: 30px;
-  color: #fff;
+  color: #000;
   height: 50px;
   min-width: 78px;
   text-align: center;
@@ -34,7 +34,7 @@
 }
 .sidebar .logo-details .logo_name{
   font-size: 22px;
-  color: #fff;
+  color: #000;
   font-weight: 600;
   transition: 0.3s ease;
   transition-delay: 0.1s;
@@ -61,7 +61,8 @@
   transition: all 0.4s ease;
 }
 .sidebar .nav-links li:hover{
-  background: #1d1b31;
+  background: #fff;
+  color:#000;
 }
 .sidebar .nav-links li .iocn-link{
   display: flex;
@@ -76,7 +77,7 @@
   min-width: 78px;
   text-align: center;
   line-height: 50px;
-  color: #fff;
+  color: #000;
   font-size: 20px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -95,7 +96,7 @@
 .sidebar .nav-links li a .link_name{
   font-size: 18px;
   font-weight: 400;
-  color: #fff;
+  color: #000;
   transition: all 0.4s ease;
 }
 .sidebar.close .nav-links li a .link_name{
@@ -174,9 +175,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #1d1b31;
+  background: #fff;
   padding: 12px 0;
   transition: all 0.5s ease;
+  color: #000;
 }
 .sidebar.close .profile-details{
   background: none;

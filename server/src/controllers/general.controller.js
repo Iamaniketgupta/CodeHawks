@@ -81,7 +81,7 @@ const verifyMentorId = asyncHandler(async (req, res, next) => {
 
 const verifyPersonById = asyncHandler(async (req, res, next) => {
     const token =
-      req.cookies.accessToken || req.header("Authorization")?.replace("Bearer", "");
+      req.cookies.accessToken || req.header("Authorization")?.replace("Bearer", "") || req.body.id;
   
     if (!token) {
       res.status(402).json({
