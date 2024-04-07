@@ -12,15 +12,15 @@ const MentorAllTasks = () => {
   const [onConfirm, setonConfirm] = useState(false)
 
   const handleConfirm = async() => {
-    // Call the onConfirm function passed as prop
   
       try {
-        const response = await axios.post("api/v1/task/deleteTask" , {taskId})
+        const response = await axios.post("/api/v1/task/deleteTask" , {taskId})
         console.log(response.data);
         toast.success("Task deleted successfully");
         
       } catch (error) {
         toast.error("Error while deleting task");
+        console.log(error);
       }
       
     
@@ -51,10 +51,13 @@ const MentorAllTasks = () => {
 
 console.log(tasks); 
   return (
+
+    <div className="p-4 sm:ml-64 text-black">
+    <div className="p-4  border-gray-200 border-2 rounded-lg dark:border-gray-700 mt-14">
     <div>
 
       <h2 className="text-3xl text-center font-bold mb-4 mt-3 ">
-        Assigned Tasks
+       All Assigned Tasks
       </h2>
     <div className='flex flex-col border-2 py-3 max-w-[700px] px-3 mx-auto justify-center items-center w-full '>
       {tasks?.map(task => (
@@ -108,6 +111,8 @@ console.log(tasks);
           </div>
         </div>
       )}
+    </div>
+    </div>
     </div>
     </div>
   );
