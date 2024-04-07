@@ -95,7 +95,7 @@ const Pricing = () => {
 
     const handleCreate = async () => {
         try {
-            const response = await axios.post(SERVER_URL+'/api/v1/mentor/pricing/new', pricingData,{ headers: { Authorization: `Bearer ${token}`}});
+            const response = await axios.post(SERVER_URL+'/api/v1/mentor/pricing/new', {...pricingData ,headers: { Authorization: `Bearer ${token}`}},{ headers: { Authorization: `Bearer ${token}`}});
             console.log('Pricing created:', response.data.pricing);
             setPricingData({
                 mentorshipPrice: 0,

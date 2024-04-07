@@ -33,7 +33,7 @@ const ChatList = (
       // console.log("first")
       // console.log(selectedUser)
       const response = await axios.post(SERVER_URL + "/api/v1/mentor/getMentorById" , {
-        mentorId:selectedUser
+        mentorId:selectedUser,headers: { Authorization: `Bearer ${token}`}
       },{ headers: { Authorization: `Bearer ${token}`}});
       // console.log(response.data.data);
       
@@ -81,7 +81,7 @@ const ChatList = (
       const response = await axios.post(
         SERVER_URL + "/api/v1/message/getUsersWithChatHistory",
         {
-          id: user._id,
+          id: user._id,headers: { Authorization: `Bearer ${token}`}
         },{ headers: { Authorization: `Bearer ${token}`}}
       );
       // console.log(response.data);

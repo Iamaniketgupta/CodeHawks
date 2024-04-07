@@ -30,7 +30,7 @@ const ChatMessage = ({
 
   const getAllMsg = async()=>{
     try {
-      const msg = await axios.post(SERVER_URL + '/api/v1/message/getAllMessagesByUserId', {userId : user._id , personId : recipientId } ,{ headers: { Authorization: `Bearer ${token}`}});
+      const msg = await axios.post(SERVER_URL + '/api/v1/message/getAllMessagesByUserId', {userId : user._id , personId : recipientId ,headers: { Authorization: `Bearer ${token}`}} ,{ headers: { Authorization: `Bearer ${token}`}});
       // console.log(msg.data.data)
       setMessages(msg.data.data)
     } catch (error) {
@@ -42,7 +42,7 @@ const ChatMessage = ({
   const recipientDetails = async()=>{
     try {
       const response = await axios.post( SERVER_URL+ "/api/v1/message/getPersonById",{
-        id:recipientId
+        id:recipientId,headers: { Authorization: `Bearer ${token}`}
       },{ headers: { Authorization: `Bearer ${token}`}})
       // console.log(response.data)
       setrecipient(response.data.data)
