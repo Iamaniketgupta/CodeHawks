@@ -33,7 +33,7 @@ const getCheckoutSession = asyncHandler(async (req, res) => {
         payment_method_types: ['card'],
         mode: 'payment',
         success_url: `http://localhost:5173/checkout-success`,
-        cancel_url: `http://localhost:5173//Mentor/${mentorId}`,
+        cancel_url: `http://localhost:5173//checkout-failed/${mentorId}`,
         customer_email: email,
         client_reference_id: mentorId,
         line_items: [{

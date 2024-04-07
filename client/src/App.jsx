@@ -127,7 +127,7 @@ function App() {
 
 
         {/* Mentor Routes */}
-        <Route path="/dashboard/:menteeName" element={<MentorDashboard />} />
+        <Route path="/mentor/dashboard/:mentorName" element={<MentorDashboard />} />
         <Route path="/profile/:nameId" element={<MentorProfile />} />
         <Route path="/allMentors" element={<AllMentorsPage />} />
 
@@ -139,10 +139,11 @@ function App() {
         <Route path="/mentor/dashboard/trailslots" element={<> <MentorDashboard /><MySlots /></>} />
         <Route path="/mentor/dashboard/tasks" element={<> <MentorDashboard /><AssignTask/></>} />
         <Route path="/mentor/dashboard/alltasks" element={<> <MentorDashboard /><MentorAllTasks/></>} />
+        <Route path="/mentor/dashboard/edit/profile" element={<> <MentorDashboard /><EditProfile/></>} />
 
         {/* Stripe Payment response Routes */}
         <Route path="/checkout-success" element={<Paymentsuccess />} />
-        <Route path="/Mentor/:mentorid" element={<PaymentFailed />} />
+        <Route path="/checkout-failed/:mentorid" element={<PaymentFailed />} />
 
 
 
