@@ -121,7 +121,7 @@ function App() {
         {/* Mentee Routes */}
         <Route path="mentee/dashboard/" element={<><MenteeDashboard /><MenteeHome /></>} />
         <Route path="mentee/dashboard/tasks" element={<><MenteeDashboard /><MenteeAllTasks /></>} />
-        <Route path="mentee/dashboard/chats" element={<><MenteeDashboard /><Chats /></>} />
+        <Route path="/mentor/chat/:recipientId" element={<MentorChat />} />
         <Route path="mentee/dashboard/settings" element={<><MenteeDashboard /><EditMenteeProfile /></>} />
         <Route path="mentee/dashboard/subscription" element={<><MenteeDashboard /><Subscription /></>} />
 
@@ -154,7 +154,7 @@ function App() {
 
         {/* Chat Routes */}
         <Route path="/mentee/chat/:recipientId" element={<Chat />} />
-        <Route path="/mentor/chat/:recipientId" element={<MentorChat />} />
+        {/* <Route path="/mentor/chat/:recipientId" element={<MentorChat />} /> */}
         <Route path="/room/:roomId" element={<RoomPage />} />
 
 
