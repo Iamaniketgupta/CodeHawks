@@ -50,6 +50,29 @@ export default function Barside() {
           </li>
 
           <li>
+            <Link to="/mentee/dashboard/allMentors"
+              className=' text-center my-2 flex mx-auto items-center '>
+              <svg
+                className="flex-shrink-0 ml-7 w-5 h-5 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 20 18"
+              >
+                <path d="M14 2a3.963 3.963 0 0 1.4.267 6.39 6.439 0 0 1-1.331 6.638A4 4 0 1 0 1 2Zm1 9h-.2646.957 6.957 0 0 1 15 1a7 2.7 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
+              </svg>
+              <p className='ml-7  link_name'>Buy Mentorship</p>
+            </Link>
+
+            <ul className="sub-menu blank">
+              <li>
+                <Link className="link_name" to="/mentee/dashboard/allMentors">
+                 Buy Mentorship
+                </Link>
+              </li>
+            </ul>
+          </li>
+          <li>
             <Link to="/mentee/dashboard/meetings"
               className=' text-center my-2 flex mx-auto items-center '>
               <svg
