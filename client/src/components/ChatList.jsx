@@ -28,10 +28,12 @@ const ChatList = (
   const refresh = async()=>{
     try {
       // console.log("first")
-      const response = await axios.post("/api/v1/refresh" , {
-        id:selectedUser
+      console.log(selectedUser)
+      const response = await axios.post("/api/v1/mentor/getMentorById" , {
+        mentorId:selectedUser
       });
       console.log(response.data.data);
+      
       setchatHistoryList([...chatHistoryList , response.data.data])
       
     } catch (error) {
@@ -41,6 +43,7 @@ const ChatList = (
     }
   }
 
+  
 
   
   const handleAddUser = () => {
@@ -54,7 +57,6 @@ const ChatList = (
     setIsModalOpen(false);
     showchat()
     refresh()
-
 
   };
 

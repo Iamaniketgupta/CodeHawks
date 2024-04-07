@@ -1,3 +1,4 @@
+import { isValidObjectId } from 'mongoose';
 import {Mentee} from '../models/mentee.model.js'
 import Mentor from '../models/mentor.model.js';
 import { ApiError } from "../utils/apiError.js";
@@ -320,6 +321,7 @@ const getMenteeById = asyncHandler(async(req,res)=>{
         throw new ApiError(400 , "menteeId id is required");
     }
 
+    
     const isMentorIdValid = isValidObjectId(menteeId);
     if(!isMentorIdValid){
         throw new ApiError(400 , "menteeId id is not valid");
