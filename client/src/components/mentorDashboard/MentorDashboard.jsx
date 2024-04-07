@@ -1,46 +1,47 @@
 import { Link, NavLink } from "react-router-dom";
-import MySlots from "./dashboardComponents/MySlots"
-import SideBar from "./common/SideBar";
-import { useEffect, useState } from "react";
-import { Routes, Route } from 'react-router-dom';
-import Home from "./dashboardComponents/Home";
-import Meetings from "./dashboardComponents/Meetings";
-import MyMentees from "./dashboardComponents/MyMentees";
-import Pricing from "./dashboardComponents/Pricing";
-import { useNavigate, useParams } from 'react-router-dom';
+import { useState } from "react";
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { toast } from "react-hot-toast";
+import axios from "axios";
 
 const MentorDashboard = () => {
-    const [tab, selTab] = useState('')
+    const [topMenuToggle, setTopMenuToggle] = useState(false);
+    const [sideBarToggele, setSideBarToggele] = useState(false);
     const user = useSelector((state) => state.auth.user);
-    // useEffect(()=>{
-    //     autoClick(e){
-    //         e.target.click();
-    //     }
-    // },[]);
+    console.error(user);
+    const state = user;
+    const fullname = user.fullName;
+    const mentorName = fullname.replace(" ", "-").toLowerCase();
+
+    const navigate = useNavigate();
+
+    const location = useLocation();
+    console.log(location);
+    async function signoutuser() {
+        try {
+            if (!confirm("Are you Sure ?"))
+                return;
+            await axios.get("/mentor/logout");
+            navigate('/');
+            toast.success("SignOut Success");
+
+        } catch (error) {
+            toast.error("Failed to Signout");
+        }
+    }
 
     return (
 
-
-        //         {/* <div>
-        //     <Link to={"/editProfile"} >Edit profile</Link>
-        //     <Link to={"/pricing"} >Pricing</Link>
-        //     <Link to={"/slots"} >My Slots</Link>
-        //     <Link to={"/mentordashboard/home"} >Home</Link>
-        //     <Link to={`/mentor/chat/id`} >chat</Link>
-        //    </div> */}
-        //     </div>
-
-
         <>
             <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+
                 <div className="px-3 py-3 lg:px-5 lg:pl-3">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center justify-start rtl:justify-end">
                             <button
-                                data-drawer-target="logo-sidebar"
-                                data-drawer-toggle="logo-sidebar"
-                                aria-controls="logo-sidebar"
+                                onClick={() => setSideBarToggele((prev) => !prev)}
+
                                 type="button"
                                 className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                             >
@@ -59,7 +60,7 @@ const MentorDashboard = () => {
                                     />
                                 </svg>
                             </button>
-                            <a href="https://flowbite.com" className="flex ms-2 md:me-24">
+                            <a href="/" className="flex ms-2 md:me-24">
                                 <img
                                     src="https://flowbite.com/docs/images/logo.svg"
                                     className="h-8 me-3"
@@ -74,21 +75,23 @@ const MentorDashboard = () => {
                             <div className="flex items-center ms-3">
                                 <div>
                                     <button
+                                        onClick={() => setTopMenuToggle((prev) => !prev)}
                                         type="button"
                                         className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                                         aria-expanded="false"
-                                        data-dropdown-toggle="dropdown-user"
+
                                     >
                                         <span className="sr-only">Open user menu</span>
                                         <img
                                             className="w-8 h-8 rounded-full"
-                                            src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                                            alt="user photo"
+                                            src={user.avatar}
+                                            alt={user.fullName}
                                         />
                                     </button>
                                 </div>
                                 <div
-                                    className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
+                                    className={`z-50 fixed top-10 right-5 ${!topMenuToggle ? 'hidden' : ''}
+                                    my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600`}
                                     id="dropdown-user"
                                 >
                                     <div className="px-4 py-3" role="none">
@@ -96,35 +99,35 @@ const MentorDashboard = () => {
                                             className="text-sm text-gray-900 dark:text-white"
                                             role="none"
                                         >
-                                            Neil Sims
+                                            {user.fullName}
                                         </p>
                                         <p
                                             className="text-sm font-medium text-gray-900 truncate dark:text-gray-300"
                                             role="none"
                                         >
-                                            neil.sims@flowbite.com
+                                            {user.email}
                                         </p>
                                     </div>
                                     <ul className="py-1" role="none">
 
                                         <li>
-                                            <a
-                                                href="#"
+                                            <NavLink
+                                                to="/mentor/dashboard/edit/profile"
                                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                                                 role="menuitem"
                                             >
                                                 Settings
-                                            </a>
+                                            </NavLink>
                                         </li>
 
                                         <li>
-                                            <a
-                                                href="#"
-                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                                            <div
+                                                onClick={signoutuser}
+                                                className="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                                                 role="menuitem"
                                             >
                                                 Sign out
-                                            </a>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>
@@ -135,12 +138,12 @@ const MentorDashboard = () => {
             </nav>
             <aside
                 id="logo-sidebar"
-                className="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+                className={`fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform ${!sideBarToggele ? '-translate-x-full' : ''} bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700`}
                 aria-label="Sidebar"
             >
                 <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
                     <ul className="space-y-2 font-medium">
-                        {/* <NavLink to={`/mentor/dashboard/`}
+                        <Link to={`/mentor/dashboard/${mentorName}`}
                             className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
                         >
                             <svg
@@ -153,10 +156,10 @@ const MentorDashboard = () => {
                                 <path d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z" />
                             </svg>
                             <span className="ms-3">
-                                Home
+                                Dashboard
                             </span>
 
-                        </NavLink> */}
+                        </Link>
                         <li>
                             <NavLink
                                 to="/mentor/dashboard/meetings"
@@ -288,7 +291,7 @@ const MentorDashboard = () => {
                         </li>
                         <li>
                             <div
-                                // href="#"
+                                onClick={signoutuser}
                                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
                             >
                                 <svg
@@ -314,8 +317,106 @@ const MentorDashboard = () => {
                 </div>
             </aside>
 
+            {location.pathname === `/mentor/dashboard/${mentorName}` &&
+                <div className="p-4 sm:ml-64 text-black">
+                    <div className="p-4  border-gray-200 border-2 rounded-lg dark:border-gray-700 mt-14">
 
 
+
+                        <div className=' '>
+
+
+                            <div className=' p-3 '>
+
+                                <div className='flex items-center justify-between'>
+
+                                    <div className='p-2 rounded-xl w-32 h-32 bg-black my-3'>
+
+                                        <img src={state?.avatar || "/"} alt={state.fullName} className='w-full h-full' />
+                                    </div>
+
+                                </div>
+
+                                <div className='flex justify-between p-3 flex-wrap gap-3 '>
+                                    <div>
+
+                                        <div className=' text-2xl font-bold'>
+                                            {state.fullName}
+                                        </div>
+                                        <div className='font-semit text-xl'>
+                                            {state.profession || "-no profession found"}
+                                        </div>
+
+                                        {/*                                         
+                <div className='flex gap-3 text-xs my-2'>
+                    {
+                        state.intrests?.map((item,idx)=>
+                        <p key={idx} className='p-2 border-2 rounded-lg'>{item}</p>
+                    )
+                    }
+                
+                </div> */}
+
+                                    </div>
+
+
+                                    <div>
+                                        <div className='p-3 max-w-[250px] border-2'>
+                                            <p>{state.experience || "1"} + years of experience</p>
+
+
+                                            <p className='text-xs mt-3 text-blue-500 font-semibold'>Companies Experience </p>
+                                            {
+                                                state.workExp?.map((item, idx) =>
+                                                    <p key={idx} className='font-semibold text-lg'>{item} </p>
+                                                )
+                                            }
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                {/* Description */}
+                                <div className='p-3'>
+                                    <h3>About</h3>
+                                    {state.description || "-no description found"}
+                                </div>
+
+                                <div className='mx-3 my-2 bg-yellow-200 border-2 border-yellow-400 rounded-lg px-2 py-1 inline-block'>
+                                    <span>{state.rating + " Stars"}</span>
+                                </div>
+
+                                <div className='pl-3'>
+                                    <div className='p-2 border-2 inline-block px-3'>
+                                        <p>{state.state}, {state.country}</p>
+                                    </div>
+                                    <a href={state.linkedin || "#"} className='mx-2 w-10 h-10 rounded-full border-2 inline-flex bg-blue-500 items-center justify-center text-white font-bold'>In</a>
+
+                                    <div >
+                                        <p className='my-3 '>
+                                            Languages That i speak
+                                        </p>
+
+                                        {
+
+                                            state.languages?.map((item) =>
+                                                <p key={item} className='p-2  border-2 inline-block'>
+                                                    {item}
+                                                </p>
+                                            )
+
+                                        }
+                                        {state.languages.length === 0 && <p><i>-No Languages found</i></p>}
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>}
         </>
 
     );

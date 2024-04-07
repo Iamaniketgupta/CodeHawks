@@ -185,7 +185,7 @@ const Meetings = () => {
                         <h1 className='text-3xl font-bold text-center p-2 m-2'>Meetings</h1>
 
                         {/* Create Meetings */}
-                        <div className='border-2 m-2 my-3 p-3'>
+                        <div className=' m-2 my-3 p-3'>
                             <div className='flex flex-wrap p-2 gap-3 items-center justify-center'>
                                 <form className="w-full pl-4 text-center" onSubmit={handleSubmit}>
                                     <h3 className="text-2xl font-semibold"> Create Your Meetings</h3>
@@ -205,7 +205,7 @@ const Meetings = () => {
                                         </div>
                                         <div>
 
-                                            <h3 className="my-2">Select Time </h3>
+                                            <h3 className="my-2">Make Room ID </h3>
                                             <input onChange={handleDataChange} value={data.roomId}
                                                 type="text" name="roomId" id="" placeholder='e.g. myRoom121' />
                                         </div>
@@ -224,7 +224,7 @@ const Meetings = () => {
                         </div>
 
                         {/* My meetings */}
-                        <div className='border-2 m-2 relative my-3 p-3'>
+                        <div className='border-2\ m-2 relative my-3 p-3'>
                             <div className="text-blue-500 absolute right-7 top-10 cursor-pointer hover:text-blue-800">
                                 <IoRefreshCircle onClick={fetchMeetings} size={30} title={"Refresh slots"} />
                             </div>

@@ -37,7 +37,7 @@ export default function Login_Mentor() {
             const fullname= response.data.user.fullName;
             const mentorName = fullname.replace(" ","-").toLowerCase();
 
-            navigate(`/dashboard/${mentorName}`);
+            navigate(`/mentor/dashboard/${mentorName}`);
 
         } catch (error) {
             console.error('Error:', error);
