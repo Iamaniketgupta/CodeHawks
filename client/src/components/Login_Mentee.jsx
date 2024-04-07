@@ -19,7 +19,7 @@ export default function Login_Mentee() {
         e.preventDefault();
         try {
             setLoading(true);
-            const response = await axios.post('https://mentorhub-s8mg.onrender.com/api/v1/mentee/signup/api/v1/mentee/login', cred);
+            const response = await axios.post('https://mentorhub-s8mg.onrender.com/api/v1/api/v1/mentee/login', cred);
             console.log(response.data.data);
             const obj = {
                 user:response.data.data.user
