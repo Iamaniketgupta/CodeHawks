@@ -5,9 +5,9 @@
 
 
 ## Live Site
-Visit the live site: [mentorHub](https://www.mentorhub.com)
+Visit the live site: [MentorHub]([https://thementorhub.vercel.app])
 
-## Sample Login Credentials
+## Sample Login Credentials 📌
 ### Mentor:
 - Email: codehawks@mentor.com
 - Password: codehawks
