@@ -4,7 +4,11 @@ import toast from 'react-hot-toast';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Select from "react-select";
+
+
 import { SERVER_URL } from '../../constant';
+
+
 export default function Signup_Mentor() {
     
     const handlePart1 = () => {
@@ -93,7 +97,12 @@ export default function Signup_Mentor() {
 
     return (
         <>
-            <section className="min-vh-100 form">
+            <section className="min-vh-100 form relative">
+            <div className="absolute px-3 py-2 bg-blue-700 m-2 rounded-xl text-white font-semibold">
+          <button onClick={()=>{
+            navigate("/signup_mentee")
+          }} >SignUp as Mentee</button>
+        </div>
                 <form className="container h-100"  onSubmit={handleSubmit}>
                     <div className="row d-flex justify-content-center align-items-center h-100">
                         <div className="col-xl-9 mt-md-5">

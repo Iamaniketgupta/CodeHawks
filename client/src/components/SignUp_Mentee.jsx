@@ -4,8 +4,11 @@ import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
 import Select from "react-select";
+import {useNavigate} from 'react-router-dom'
 
 export default function SignUp_Mentee() {
+
+  const navigate = useNavigate();
   const handlePart1 = () => {
     const fullName = document
       .getElementById("fullName")
@@ -54,8 +57,9 @@ export default function SignUp_Mentee() {
     e.preventDefault();
     try {
       setLoading(true);
+
       const response = await axios.post("https://mentorhub-s8mg.onrender.com/api/v1/mentee/signup", formData);
-    //   console.log(response.data);
+
       toast.success("Sign up successful!");
       setLoading(false);
     } catch (error) {
@@ -111,7 +115,7 @@ export default function SignUp_Mentee() {
 
   const interestsChange = (selectedOptions) => {
     // Do something with selectedOptions
-  const selectedValues = selectedOptions.map(option => option.value);
+    const selectedValues = selectedOptions.map((option) => option.value);
     setFormData({ ...formData, ["interests"]: selectedValues });
     // ha
     // console.log(selectedOptions);
@@ -119,8 +123,8 @@ export default function SignUp_Mentee() {
 
   const languageChange = (selectedOptions) => {
     // Do something with selectedOptions
-  const selectedValues = selectedOptions.map(option => option.value);
-    console.log(formData.languages)
+    const selectedValues = selectedOptions.map((option) => option.value);
+    console.log(formData.languages);
     setFormData({ ...formData, ["languages"]: selectedValues });
     // console.log(selectedOptions);
   };
@@ -128,8 +132,13 @@ export default function SignUp_Mentee() {
   const selectRef = useRef(null);
 
   return (
-    <>
-      <section className="min-vh-100 form">
+    <div>
+      <section className="min-vh-100 form relative">
+        <div className="absolute px-3 py-2 bg-blue-700 m-2 rounded-xl text-white font-semibold">
+          <button onClick={()=>{
+            navigate("/signup_mentor")
+          }} >SignUp as Mentor</button>
+        </div>
         <form className="container h-100" onSubmit={handleSubmit}>
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-xl-9 mt-md-5">
@@ -346,6 +355,6 @@ export default function SignUp_Mentee() {
           </div>
         </form>
       </section>
-    </>
+    </div>
   );
 }
