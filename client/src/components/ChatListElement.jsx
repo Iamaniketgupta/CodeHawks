@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { MdDelete } from "react-icons/md";
 import {useSelector} from 'react-redux'
 import axios from "axios";
+import { useParams } from "react-router-dom";
+
 
 const ChatListElement = (
   {
@@ -11,24 +13,16 @@ const ChatListElement = (
     state,
     country,
     id,
-    showchat
+    showchat,
+    toggleReload
   }
 ) => {
   const user = useSelector((state)=>state.auth.user);
 
+  const { recipientId } = useParams();
   const navigate = useNavigate()
 
-  const deleteChat = async()=>{
-    try {
-      const response = await axios.post("/api/v1/message/deleteMessagesByUserId" , {
-        userId:user._id,
-        personId:id
-      });
-      console.log(response.data)
-    } catch (error) {
-      console.log(error)
-    }
-  }
+
   
 
   const chat = ()=>{
@@ -38,6 +32,30 @@ const ChatListElement = (
     navigate(l + id);
     showchat();
   }
+
+  const deleteChat = async()=>{
+    try {
+      const response = await axios.post("/api/v1/message/deleteMessagesByUserId" , {
+        userId:user._id,
+        personId:id
+      });
+      console.log(response.data)
+      console.log(recipientId)
+      console.log(id)
+
+      if(String(recipientId) == String(id)){
+        console.log(window.location.href)
+        const url = window.location.href;
+        const l = url.substring(21 , 34);
+        navigate(l + "id" );
+      }
+
+      toggleReload()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  
 
   return (
     <div className="w-full bg-gray-100 rounded-xl px-2 py-2 flex gap-3 items-center relative" onClick={chat}>

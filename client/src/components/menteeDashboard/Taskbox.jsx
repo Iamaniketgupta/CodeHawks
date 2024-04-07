@@ -27,6 +27,14 @@ export default function Taskbox(props) {
     <>
     <br></br> 
     <div className="row justify-content-around">
+      {
+        tasks.length === 0 && (
+          <div className='w-full h-full flex justify-center items-center font-bold text-2xl text-gray-300'>
+            No subscription found
+
+          </div>
+        )
+      }
     {
      tasks.length>0 && tasks.map((task)=>(
        <TaskCard key={task._id} getTasks={getTasks} id={task._id} title={task.task.title} github={task.task.githubLink} description={task.task.description} status={task.status} mentor={task.mentor.fullName}/>

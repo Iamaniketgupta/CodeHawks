@@ -3,21 +3,44 @@ import ChatListElement from './ChatListElement'
 import { IoPersonAdd } from "react-icons/io5";
 import axios from 'axios'
 import {useSelector} from 'react-redux'
+import {useNavigate} from 'react-router-dom'
 
 const ChatList = (
   {
-    showchat
+    showchat,
+    
   }
 ) => {
+
+  const  navigate = useNavigate()
 
 
   const [mentors, setmentors] = useState([]);
   const [chatHistoryList, setchatHistoryList] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [relaoad, setrelaoad] = useState(0);
   
   const [selectedUser, setSelectedUser] = useState('');
 
   const user = useSelector((state)=>state.auth.user)
+  // console.log(mentors)
+
+  const refresh = async()=>{
+    try {
+      // console.log("first")
+      const response = await axios.post("/api/v1/refresh" , {
+        id:selectedUser
+      });
+      console.log(response.data.data);
+      setchatHistoryList([...chatHistoryList , response.data.data])
+      
+    } catch (error) {
+      console.log(error)
+    }finally{
+      
+    }
+  }
+
 
   
   const handleAddUser = () => {
@@ -30,13 +53,15 @@ const ChatList = (
     // Close the modal after adding the user
     setIsModalOpen(false);
     showchat()
+    refresh()
+
 
   };
 
 
   async function fetchMentorList(){
     try {
-      const response = await axios.post("/api/v1/subscription/getMenteeSubscriptions");
+      const response = await axios.get("/api/v1/subscription/getMenteeSubscriptions");
       console.log(response.data);
       setmentors(response.data.data)
     } catch (error) {
@@ -65,13 +90,16 @@ const ChatList = (
     }
   }
 
+  const toggleReload = ()=>{
+    setrelaoad((relaoad === 0) ? 1 : 0);
+  }
 
 
   useEffect(() => {
     fetchMentorList()
     getUsersWithHistory()
     
-  }, [])
+  }, [relaoad])
   
   
   
@@ -95,6 +123,7 @@ const ChatList = (
             country={user.country}
             id={user._id}
             showchat={showchat}
+            toggleReload={toggleReload}
           />
           ))}
           
@@ -115,8 +144,8 @@ const ChatList = (
                 className="border border-gray-300 rounded mb-2 px-3 py-2 w-full"
               >
                 <option value="">Select a user</option>
-                {mentors.map(user => (
-                  <option key={user._id} value={user._id}>{user.fullName}</option>
+                {mentors.map((user) => (
+                  <option key={user.mentor._id} value={user.mentor._id}>{user.mentor.fullName}</option>
                 ))}
               </select>
 

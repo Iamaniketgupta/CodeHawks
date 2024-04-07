@@ -14,7 +14,8 @@ export default function Subscription(props) {
   return (
     <>
     <section className="home-section">
-        <div><h1>My Subscription</h1></div>
+        <div className='font-bold text-center text-3xl mt-4 mb-2'>My Subscriptions</div>
+        <div className='text-black px-4 font-bold'><hr /></div>
         <SubBox type="all"/>
     </section>
     </>
