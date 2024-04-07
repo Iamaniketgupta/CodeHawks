@@ -3,6 +3,24 @@
 
 ---
 
+
+## Live Site
+Visit the live site: [mentorHub](https://www.mentorhub.com)
+
+## Sample Login Credentials
+### Mentor:
+- Email: codehawks@mentor.com
+- Password: codehawks
+
+### Mentee:
+- Email: codehawks@mentee.com
+- Password: codehawks
+
+## Card Details
+- Card Number: 4000003560000008
+- Expiry: 12/34
+- CVV: 112
+
 # mentorHub README
 
 ## Project Description
