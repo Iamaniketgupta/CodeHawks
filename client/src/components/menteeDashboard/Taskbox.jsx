@@ -3,19 +3,21 @@ import TaskCard from './TaskCard';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 import { SERVER_URL } from '../../../constant';
+import { token } from '../constants';
+
 export default function Taskbox(props) {
   const [tasks,setTasks]=useState([]);
   function getTasks(){
     if(props.type=="top"){
       (async ()=>{
-      const response = await axios.post(SERVER_URL + '/api/v1/task/getAllMenteeTasks');
+      const response = await axios.post(SERVER_URL + '/api/v1/task/getAllMenteeTasks',{ headers: { Authorization: `Bearer ${token}`}});
       setTasks(response.data.data.slice(0,3));
       console.log(response.data.data);
       })();
     }
     else{
       (async ()=>{
-        const response = await axios.post(SERVER_URL + '/api/v1/task/getAllMenteeTasks');
+        const response = await axios.post(SERVER_URL + '/api/v1/task/getAllMenteeTasks',{ headers: { Authorization: `Bearer ${token}`}});
         setTasks(response.data.data);
         })();
     }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { SERVER_URL } from "../../../../constant";
+import { token } from "../../constants";
 
 const MyMentees = () => {
     
@@ -18,7 +19,7 @@ const MyMentees = () => {
         try {
             const response = await axios.post(SERVER_URL+"/api/v1/subscription/getUserSubscribers", {
                 mentorId: user._id
-            });
+            },{ headers: { Authorization: `Bearer ${token}`}});
             console.log(response.data.data)
             // console.log(response.data.data);
             setMentees(response.data.data)

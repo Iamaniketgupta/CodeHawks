@@ -3,11 +3,12 @@ import SubBox from './SubBox';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 import { SERVER_URL } from '../../../constant';
+import { token } from '../constants';
 export default function Subscription(props) {
   const [subs,setSubs]=useState([]);
   useEffect(()=>{
     (async ()=>{
-      const response = await axios.get(SERVER_URL + '/api/v1/subscription/getMenteeSubscriptions');
+      const response = await axios.get(SERVER_URL + '/api/v1/subscription/getMenteeSubscriptions',{ headers: { Authorization: `Bearer ${token}`}});
       setSubs(response.data.data);
        console.log(response.data.data);
     })();

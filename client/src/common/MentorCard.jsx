@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { SERVER_URL } from "../../constant";
+import { token } from "../components/constants";
 
 function MentorCard(props) {
   const [liked, setLiked] = useState(false);
@@ -20,7 +21,7 @@ function MentorCard(props) {
 
   const handleBookMark = async () => {
     try {
-       await axios.put(SERVER_URL + "/api/v1/mentee/addMentorToBookmark", { mentorId });
+       await axios.put(SERVER_URL + "/api/v1/mentee/addMentorToBookmark", { mentorId },{ headers: { Authorization: `Bearer ${token}`}});
        
       toast.success(`Like Added Success`);
       setLiked(true);
@@ -35,7 +36,7 @@ function MentorCard(props) {
       if (!mentorId)
         throw new Error("Something went wrong!");
 
-      const response = await axios.delete(SERVER_URL + "/api/v1/mentee/removeMentorFromBookmark", { data: { mentorId } });
+      const response = await axios.delete(SERVER_URL + "/api/v1/mentee/removeMentorFromBookmark", { data: { mentorId } },{ headers: { Authorization: `Bearer ${token}`}});
 
       if (!response)
         throw new Error("Failed to Remove !");

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import TaskSubmissionModal from "./TaskSubmissionModal";
 import { SERVER_URL } from '../../constant';
+import { token } from "./constants";
 
 
 const MenteeAllTasks = () => {
@@ -16,7 +17,7 @@ const MenteeAllTasks = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await axios.post(SERVER_URL + "/api/v1/task/getAllMenteeTasks");
+        const response = await axios.post(SERVER_URL + "/api/v1/task/getAllMenteeTasks" ,{ headers: { Authorization: `Bearer ${token}`}});
         // console.log(response.data.data);
         setTasks(response.data.data);
       } catch (error) {
