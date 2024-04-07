@@ -39,7 +39,7 @@ import {useSelector , useDispatch} from 'react-redux'
 import { login } from './store/authSlice';
 import {useNavigate} from 'react-router-dom'
 import MenteeMeetings from './components/menteeDashboard/DashboardComponents/MenteeMeetings';
-
+import { SERVER_URL } from '../constant';
 
 function App() {
 
@@ -52,7 +52,7 @@ function App() {
   const refresh = async()=>{
     try {
       // console.log("first")
-      const response = await axios.post("/api/v1/refresh");
+      const response = await axios.post(SERVER_URL + "/api/v1/refresh");
       // console.log("second")
       // console.log(response.data)
       const obj = {
@@ -67,8 +67,6 @@ function App() {
   }
 
   
-
-
   useEffect(() => {
     console.log("first")
     const menteeCookie = document.cookie.includes("accessToken");
