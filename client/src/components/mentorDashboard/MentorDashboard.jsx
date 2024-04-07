@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
-import { useNavigate,  useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { toast } from "react-hot-toast";
 import axios from "axios";
@@ -10,16 +10,18 @@ const MentorDashboard = () => {
     const [sideBarToggele, setSideBarToggele] = useState(false);
     const user = useSelector((state) => state.auth.user);
     const state = user;
-    
-    const fullname= user.fullName;
-    const mentorName = fullname.replace(" ","-").toLowerCase();
+
+    const fullname = user.fullName;
+    const mentorName = fullname.replace(" ", "-").toLowerCase();
 
     const navigate = useNavigate();
 
-  const location = useLocation();
-  console.log(location);
+    const location = useLocation();
+    console.log(location);
     async function signoutuser() {
         try {
+            if (!confirm("Are you Sure ?"))
+                return;
             await axios.get("/mentor/logout");
             navigate('/');
             toast.success("SignOut Success");
@@ -141,7 +143,7 @@ const MentorDashboard = () => {
             >
                 <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
                     <ul className="space-y-2 font-medium">
-                        <Link to={`/mentor/dashboard/${user.fullName}`}
+                        <Link to={`/mentor/dashboard/${mentorName}`}
                             className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
                         >
                             <svg
@@ -315,13 +317,13 @@ const MentorDashboard = () => {
                 </div>
             </aside>
 
-            { location.pathname===`/mentor/dashboard/${mentorName}` &&
+            {location.pathname === `/mentor/dashboard/${mentorName}` &&
                 <div className="p-4 sm:ml-64 text-black">
                     <div className="p-4  border-gray-200 border-2 rounded-lg dark:border-gray-700 mt-14">
 
 
 
-                        <div className='grid gap-10 lg:grid-cols-3'>
+                        <div className='grid '>
 
 
                             <div className='m-4 p-3 lg:col-span-2'>
@@ -345,10 +347,14 @@ const MentorDashboard = () => {
                                             {state.profession || "-no profession found"}
                                         </div>
 
-                                        {/* 
+                                        {/*                                         
                 <div className='flex gap-3 text-xs my-2'>
-                    <p className='p-2 border-2 rounded-lg'>Frontend</p>
-                    <p className='p-2 border-2 rounded-lg'>Frontend</p>
+                    {
+                        state.intrests?.map((item,idx)=>
+                        <p key={idx} className='p-2 border-2 rounded-lg'>{item}</p>
+                    )
+                    }
+                
                 </div> */}
 
                                     </div>
