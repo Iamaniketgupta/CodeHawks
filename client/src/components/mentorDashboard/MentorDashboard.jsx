@@ -42,7 +42,7 @@ const MentorDashboard = () => {
                                 onClick={() => setSideBarToggele((prev) => !prev)}
 
                                 type="button"
-                                className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                                className="inline-flex cursor-pointer items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                             >
                                 <span className="sr-only">Open sidebar</span>
                                 <svg
@@ -382,11 +382,7 @@ const MentorDashboard = () => {
                                     <h3>About</h3>
                                     {state.description || "-no description found"}
                                 </div>
-
-                                <div className='mx-3 my-2 bg-yellow-200 border-2 border-yellow-400 rounded-lg px-2 py-1 inline-block'>
-                                    <span>{state.rating + " Stars"}</span>
-                                </div>
-
+                                
                                 <div className='pl-3'>
                                     <div className='p-2 border-2 inline-block px-3'>
                                         <p>{state.state}, {state.country}</p>

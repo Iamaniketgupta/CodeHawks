@@ -27,7 +27,7 @@ export default function Barside() {
   return (
     <>
 
-      <div className="sidebar close" onClick={giveAction}>
+      <div className="sidebar close cursor-pointer" onClick={giveAction}>
         <div className="logo-details">
           <i className="bx bx-menu" />
         </div>
