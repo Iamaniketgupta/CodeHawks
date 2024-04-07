@@ -14,16 +14,17 @@ const EditMenteeProfile = () => {
     
     const user = useSelector((state)=>state.auth.user);
     const dispatch = useDispatch();
+    console.log(user);
 
 const navigate =  useNavigate()
     
     const [loader, setLoader] = useState(false);
-    const [fullName, setfullName] = useState(user.fullName || "");
-    const [country, setcountry] = useState(user.country || "")
-    const [state, setstate] = useState(user.state || "")
-    const [experience, setexperience] = useState(user.experience || "");
-    const [linkedin, setlinkedin] = useState(user.linkedin || "")
-    const [interests, setinterests] = useState(user.interests || []);
+    const [fullName, setfullName] = useState(user?.fullName || "");
+    const [country, setcountry] = useState(user?.country || "")
+    const [state, setstate] = useState(user?.state || "")
+    const [experience, setexperience] = useState(user?.experience || "");
+    const [linkedin, setlinkedin] = useState(user?.linkedin || "")
+    const [interests, setinterests] = useState(user?.interests || []);
 
 
     const updateDetails = async()=>{

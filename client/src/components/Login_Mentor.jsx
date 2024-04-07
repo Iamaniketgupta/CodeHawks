@@ -31,16 +31,16 @@ export default function Login_Mentor() {
                 document.cookie = name + "=" + value + "; path=/";
             }
             setCookie("accessToken", response.data.data.accessToken);
-            // console.log(response);
+            console.log(response);
             const obj = {
-                user: response.data.user
+                user: response.data.data.user
             }
             dispatch(login(obj));
             // console.log(obj);
             toast.success('Login successful!');
             setLoading(false)
 
-            const fullname= response.data.user.fullName;
+            const fullname= response.data.data.user.fullName;
             const mentorName = fullname.replace(" ","-").toLowerCase();
 
             navigate(`/mentor/dashboard/${mentorName}`);
