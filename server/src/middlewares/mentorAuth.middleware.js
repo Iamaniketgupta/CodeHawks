@@ -5,6 +5,7 @@ import Mentor  from "../models/mentor.model.js";
 export const verifyMentorJwt = asyncHandler(async( req , res, next)=>{
     try {
         // console.log(req.cookies.accessToken);
+        // console.log(req.cookies.accessToken);
         const token = req.cookies.accessToken || req.header("Authorization")?.replace("Bearer" , "");
     
         if(!token){
