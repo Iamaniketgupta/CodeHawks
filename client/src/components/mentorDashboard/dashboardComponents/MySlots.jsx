@@ -116,7 +116,7 @@ const MySlots = () => {
                 setLoading(false);
                 return;
             }
-            const response = await axios.post(SERVER_URL+'/api/v1/timeslot/addTimeslot', { date, month, monthName, time },{ headers: { Authorization: `Bearer ${token}`}});
+            const response = await axios.post(SERVER_URL+'/api/v1/timeslot/addTimeslot', { date, month, monthName, time,headers: { Authorization: `Bearer ${token}`} },{ headers: { Authorization: `Bearer ${token}`}});
             // console.log(response.data);
             toast.success("Slot Added");
             getAllSlots();
