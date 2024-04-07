@@ -43,6 +43,7 @@ function addAnimation() {
 <div className="box text-center mt-5">
 <Link to="/signup_mentee" className="btn btn-primary btn-lg mybtn">Get Your Mentor Now →</Link>
 </div>
+<a name="about"></a>
 <div className="mentors mt-5">
 <h2 className='text-center mt-5' style={{ textAlign: "center" }}>Our Mentors</h2>
 <div className="scroller" data-direction="right" data-speed="slow">
@@ -61,6 +62,7 @@ function addAnimation() {
   <div className="bg-white dark:bg-gray-900">
   <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
       <div className="max-w-screen-md mb-8 lg:mb-16">
+      <a name="categories"></a>
           <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Designed For Mentees like you</h2>
           <p className="text-gray-500 sm:text-xl dark:text-gray-400">Welcome to Mentor Hub, where we're dedicated to nurturing growth and development in aspiring individuals and emerging professionals.</p>
       </div>
@@ -110,8 +112,7 @@ function addAnimation() {
       </div>
   </div>
 </div>
-
-
+<a name="reviews"></a>
 <div className="domains mt-5 pb-5">
 <h2 className='text-center mt-5' style={{ textAlign: "center" }}>Domains In Which We Mentor</h2>
 <div className="div d-flex justify-content-center">
@@ -128,7 +129,6 @@ function addAnimation() {
   </div>
   </div>
 </div>
-
 <Reviews/> 
 
 <div className="container mt-5 mb-5">

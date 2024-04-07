@@ -80,10 +80,10 @@ export default function Topbar() {
         <Navbar.Link href="#" active>
           Home
         </Navbar.Link>
-        <Navbar.Link href="#" className="lg:text-xl">About</Navbar.Link>
-        <Navbar.Link href="#" className="lg:text-xl">Services</Navbar.Link>
-        <Navbar.Link href="#" className="lg:text-xl">Pricing</Navbar.Link>
-        <Navbar.Link href="#" className="lg:text-xl">Contact</Navbar.Link>
+        <Navbar.Link href="#about" className="lg:text-xl">About</Navbar.Link>
+        <Navbar.Link href="#reviews" className="lg:text-xl">Reviews</Navbar.Link>
+        <Navbar.Link href="#faqs" className="lg:text-xl">FAQ's</Navbar.Link>
+        <Navbar.Link href="#categories" className="lg:text-xl">Categories</Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
 </>
