@@ -39,8 +39,6 @@ import {useSelector , useDispatch} from 'react-redux'
 import { login } from './store/authSlice';
 import {useNavigate} from 'react-router-dom'
 
-import Home from './components/mentorDashboard/dashboardComponents/Home';
-
 
 function App() {
 

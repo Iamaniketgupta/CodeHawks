@@ -10,6 +10,10 @@ const MentorDashboard = () => {
     const [sideBarToggele, setSideBarToggele] = useState(false);
     const user = useSelector((state) => state.auth.user);
     const state = user;
+    
+    const fullname= user.fullName;
+    const mentorName = fullname.replace(" ","-").toLowerCase();
+
     const navigate = useNavigate();
 
   const location = useLocation();
@@ -311,7 +315,7 @@ const MentorDashboard = () => {
                 </div>
             </aside>
 
-            { location.pathname===`/mentor/dashboard/${user.fullName}` &&
+            { location.pathname===`/mentor/dashboard/${mentorName}` &&
                 <div className="p-4 sm:ml-64 text-black">
                     <div className="p-4  border-gray-200 border-2 rounded-lg dark:border-gray-700 mt-14">
 
