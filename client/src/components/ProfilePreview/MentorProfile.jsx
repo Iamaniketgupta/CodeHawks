@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 import { loadStripe } from '@stripe/stripe-js';
 
 import { useLocation, useNavigate } from 'react-router-dom';
+import { SERVER_URL } from '../../../constant';
 const MentorProfile = () => {
     const { state } = useLocation();
     const navigate = useNavigate();
@@ -22,7 +23,7 @@ const MentorProfile = () => {
             setSlotLoader(true);
             const mentorId = state._id;
             // console.log(mentorId)
-            const response = await axios.get('/api/v1/timeslot/getAllSlots', {
+            const response = await axios.get(SERVER_URL+'/api/v1/timeslot/getAllSlots', {
                 params: {
                     mentorId: mentorId
                 }
@@ -42,7 +43,7 @@ const MentorProfile = () => {
 
     async function fetchPricing() {
         try {
-            const response = await axios.get(`/api/v1/mentor/pricing/${state._id}`);
+            const response = await axios.get(SERVER_URL+`/api/v1/mentor/pricing/${state._id}`);
             // console.log("hello ");
             setMyPrice(response.data.pricing);
             // console.log(pricingData);
@@ -63,7 +64,7 @@ const MentorProfile = () => {
             
             if(!selectedSlot)
             toast.error("Please Select a slot");
-        const res = await axios.post("/api/v1/timeslot/bookSlot",{selectedSlot});
+        const res = await axios.post(SERVER_URL+"/api/v1/timeslot/bookSlot",{selectedSlot});
         if(res.status === 200) {
             toast.success("Booked Success");
         }
@@ -85,7 +86,7 @@ const MentorProfile = () => {
         console.log(state._id);
         const stripe = await stripePromise;
         // Make a request to your backend to create a checkout session
-        const res = await axios.post(`/api/v1/payment/checkout-session/${state._id}`, {
+        const res = await axios.post(SERVER_URL+`/api/v1/payment/checkout-session/${state._id}`, {
             headers: {
                 Authorization: `Bearer ${your_stripe_public_key}`
             }

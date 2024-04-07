@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
 import { useSelector } from "react-redux";
+import { SERVER_URL } from "../../../constant";
 
 const RoomPage = () => {
     const user = useSelector((state) => state.auth.user);
@@ -20,7 +21,7 @@ const RoomPage = () => {
                 container: elementRef.current,
                 sharedLinks: [{
                     name: "Copy Link",
-                    url: `http://localhost:5173/room/${roomId}`,
+                    url: SERVER_URL+`/room/${roomId}`,
                 }],
                 scenario: {
                     mode: ZegoUIKitPrebuilt.OneONoneCall

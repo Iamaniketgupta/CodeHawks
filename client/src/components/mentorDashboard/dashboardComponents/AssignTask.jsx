@@ -3,6 +3,7 @@ import Select from 'react-select';
 import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import axios from 'axios';
+import { SERVER_URL } from "../../../../constant";
 const AssignTask = () => {
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [title, setTitle] = useState("");
@@ -17,7 +18,7 @@ const AssignTask = () => {
   const getMentees = async () => {
     try {
       setLoading(true)
-      const response = await axios.post("/api/v1/subscription/getUserSubscribers", {
+      const response = await axios.post(SERVER_URL+"/api/v1/subscription/getUserSubscribers", {
         mentorId: user._id
       });
       if (response.data.data) {
@@ -46,7 +47,7 @@ const AssignTask = () => {
         return;
       }
 
-      await axios.post("/api/v1/task/assign-task", {
+      await axios.post(SERVER_URL+"/api/v1/task/assign-task", {
         title,
         description,
         githubLink,

@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useSelector } from "react-redux";
 import { IoRefreshCircle } from 'react-icons/io5';
+import { SERVER_URL } from '../../../../constant';
 
 const Meetings = () => {
     const navigate = useNavigate();
@@ -96,7 +97,7 @@ const Meetings = () => {
                 setLoading(false);
                 return;
             }
-            const response = await axios.post('/api/v1/meeting/create/new', { date, month, monthName, time, roomId, menteeId });
+            const response = await axios.post(SERVER_URL+'/api/v1/meeting/create/new', { date, month, monthName, time, roomId, menteeId });
             // console.log(response.data);
             toast.success("Meeting Added");
             setData({ date: '', time: '', roomId: '' });
@@ -121,7 +122,7 @@ const Meetings = () => {
             return;
         try {
 
-            const res = await Axios.delete(`/api/v1/meeting/${menteeId}`);
+            const res = await Axios.delete(SERVER_URL+`/api/v1/meeting/${menteeId}`);
             if (res) {
                 toast.success("Delete Success");
             }
@@ -133,7 +134,7 @@ const Meetings = () => {
 
     async function fetchMeetings() {
         try {
-            const res = await axios.get("/api/v1/meeting/allMentorMeetings");
+            const res = await axios.get(SERVER_URL+"/api/v1/meeting/allMentorMeetings");
             console.log(res.data);
             setMeetings(res.data.meetings);
 
@@ -147,7 +148,7 @@ const Meetings = () => {
     async function fetchMentees() {
         setLoading(true)
         try {
-            const response = await axios.post("/api/v1/subscription/getUserSubscribers", {
+            const response = await axios.post(SERVER_URL+"/api/v1/subscription/getUserSubscribers", {
                 mentorId: user._id
             });
             // console.log(response.data.data)

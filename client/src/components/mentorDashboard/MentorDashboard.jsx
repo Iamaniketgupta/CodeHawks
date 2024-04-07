@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { toast } from "react-hot-toast";
 import axios from "axios";
+import { SERVER_URL } from "../../../constant";
 
 const MentorDashboard = () => {
     const [topMenuToggle, setTopMenuToggle] = useState(false);
@@ -22,7 +23,7 @@ const MentorDashboard = () => {
         try {
             if (!confirm("Are you Sure ?"))
                 return;
-            await axios.get("/mentor/logout");
+            await axios.get(SERVER_URL+"/mentor/logout");
             navigate('/');
             toast.success("SignOut Success");
 

@@ -3,6 +3,7 @@ import axios from 'axios';
 import Select from 'react-select';
 import toast from 'react-hot-toast';
 import { useSelector } from "react-redux";
+import { SERVER_URL } from '../../../../constant';
 
 
 const Pricing = () => {
@@ -13,7 +14,7 @@ const Pricing = () => {
 
     async function fetchPricing() {
         try {
-            const response = await axios.get(`/api/v1/mentor/pricing/${mentorId}`);
+            const response = await axios.get(SERVER_URL+`/api/v1/mentor/pricing/${mentorId}`);
             const pricingData = response.data.pricing;
 
             setMyPrice(response.data.pricing);
@@ -31,7 +32,7 @@ const Pricing = () => {
 
     async function handleDeletePrice() {
         try {
-             await axios.delete('/api/v1/mentor/pricing/' + myprice._id);
+             await axios.delete(SERVER_URL+'/api/v1/mentor/pricing/' + myprice._id);
             // console.log('Pricing deleted successfully');
             fetchPricing();
             toast.success("Price Deleted Successfully");

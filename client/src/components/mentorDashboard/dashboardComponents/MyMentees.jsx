@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { SERVER_URL } from "../../../../constant";
 
 const MyMentees = () => {
     
@@ -15,7 +16,7 @@ const MyMentees = () => {
     async function fetchMentees() {
         setLoading(true)
         try {
-            const response = await axios.post("/api/v1/subscription/getUserSubscribers", {
+            const response = await axios.post(SERVER_URL+"/api/v1/subscription/getUserSubscribers", {
                 mentorId: user._id
             });
             console.log(response.data.data)
