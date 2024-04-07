@@ -89,7 +89,7 @@ const MentorProfile = () => {
         // Make a request to your backend to create a checkout session
         const res = await axios.post(SERVER_URL+`/api/v1/payment/checkout-session/${state._id}`, {
             headers: {
-                Authorization: `Bearer ${your_stripe_public_key}`
+                Authorization: `Bearer ${token}`
             }
         },{ headers: { Authorization: `Bearer ${token}`}});
 
