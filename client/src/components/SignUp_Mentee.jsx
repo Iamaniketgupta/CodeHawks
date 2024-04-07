@@ -54,7 +54,7 @@ export default function SignUp_Mentee() {
     e.preventDefault();
     try {
       setLoading(true);
-      const response = await axios.post("/api/v1/mentee/signup", formData);
+      const response = await axios.post("https://mentorhub-s8mg.onrender.com/api/v1/mentee/signup", formData);
     //   console.log(response.data);
       toast.success("Sign up successful!");
       setLoading(false);
