@@ -20,7 +20,7 @@ const AssignTask = () => {
     try {
       setLoading(true)
       const response = await axios.post(SERVER_URL+"/api/v1/subscription/getUserSubscribers", {
-        mentorId: user._id
+        mentorId: user._id,headers: { Authorization: `Bearer ${token}`}
       },{ headers: { Authorization: `Bearer ${token}`}});
       if (response.data.data) {
         const newMentees = response.data.data;

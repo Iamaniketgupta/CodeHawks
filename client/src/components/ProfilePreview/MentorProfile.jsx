@@ -65,7 +65,7 @@ const MentorProfile = () => {
             
             if(!selectedSlot)
             toast.error("Please Select a slot");
-        const res = await axios.post(SERVER_URL+"/api/v1/timeslot/bookSlot",{selectedSlot},{ headers: { Authorization: `Bearer ${token}`}});
+        const res = await axios.post(SERVER_URL+"/api/v1/timeslot/bookSlot",{selectedSlot,headers: { Authorization: `Bearer ${token}`}},{ headers: { Authorization: `Bearer ${token}`}});
         if(res.status === 200) {
             toast.success("Booked Success");
         }

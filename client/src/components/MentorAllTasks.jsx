@@ -18,7 +18,7 @@ const MentorAllTasks = () => {
   const handleConfirm = async() => {
   
       try {
-        const response = await axios.post( SERVER_URL + "/api/v1/task/deleteTask" , {taskId} ,{ headers: { Authorization: `Bearer ${token}`}}
+        const response = await axios.post( SERVER_URL + "/api/v1/task/deleteTask" , {taskId,headers: { Authorization: `Bearer ${token}`}} ,{ headers: { Authorization: `Bearer ${token}`}}
        
 )
         // console.log(response.data);

@@ -39,7 +39,7 @@ const navigate =  useNavigate()
             interests
         }
         try {
-            const response = await axios.post( SERVER_URL + "/api/v1/mentee/updateMenteeProfile", data,{ headers: { Authorization: `Bearer ${token}`}});
+            const response = await axios.post( SERVER_URL + "/api/v1/mentee/updateMenteeProfile", {...data ,headers: { Authorization: `Bearer ${token}`}},{ headers: { Authorization: `Bearer ${token}`}});
 
             //   console.log(response.data.data)
               const obj = {
@@ -68,7 +68,7 @@ const navigate =  useNavigate()
           formData.append('avatar', file);
         //   console.log(formData)
       
-          const response = await axios.post( SERVER_URL + "/api/v1/mentee/updateMenteeAvatar", {avatar : file},{ headers: { Authorization: `Bearer ${token}`}});
+          const response = await axios.post( SERVER_URL + "/api/v1/mentee/updateMenteeAvatar", {avatar : file,headers: { Authorization: `Bearer ${token}`}},{ headers: { Authorization: `Bearer ${token}`}});
 
         //   console.log(response.data.data);
           const obj = {

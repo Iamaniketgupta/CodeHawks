@@ -40,7 +40,7 @@ const ChatListElement = (
     try {
       const response = await axios.post( SERVER_URL + "/api/v1/message/deleteMessagesByUserId" , {
         userId:user._id,
-        personId:id
+        personId:id,headers: { Authorization: `Bearer ${token}`}
       },{ headers: { Authorization: `Bearer ${token}`}});
       // console.log(response.data)
       // console.log(recipientId)

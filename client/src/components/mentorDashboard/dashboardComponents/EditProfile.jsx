@@ -41,7 +41,7 @@ const EditProfile = () => {
             description
         }
         try {
-            const response = await axios.post(SERVER_URL+"/api/v1/mentor/editProfile", data,{ headers: { Authorization: `Bearer ${token}`}});
+            const response = await axios.post(SERVER_URL+"/api/v1/mentor/editProfile", {...data,headers: { Authorization: `Bearer ${token}`}},{ headers: { Authorization: `Bearer ${token}`}});
             // console.log(response.data)
             const obj = {
                 user: response.data.data
@@ -76,7 +76,7 @@ const EditProfile = () => {
             formData.append('avatar', file);
 
 
-            const response = await axios.post(SERVER_URL+"/api/v1/mentor/updateMentorAvatar", { avatar: file },{ headers: { Authorization: `Bearer ${token}`}});
+            const response = await axios.post(SERVER_URL+"/api/v1/mentor/updateMentorAvatar", { avatar: file ,headers: { Authorization: `Bearer ${token}`}},{ headers: { Authorization: `Bearer ${token}`}});
 
             const obj = {
                 user: response.data.data

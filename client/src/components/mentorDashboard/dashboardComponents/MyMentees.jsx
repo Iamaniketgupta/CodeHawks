@@ -18,7 +18,7 @@ const MyMentees = () => {
         setLoading(true)
         try {
             const response = await axios.post(SERVER_URL+"/api/v1/subscription/getUserSubscribers", {
-                mentorId: user._id
+                mentorId: user._id,headers: { Authorization: `Bearer ${token}`}
             },{ headers: { Authorization: `Bearer ${token}`}});
             console.log(response.data.data)
             // console.log(response.data.data);

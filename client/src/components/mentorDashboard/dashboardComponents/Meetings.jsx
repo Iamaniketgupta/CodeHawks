@@ -98,7 +98,7 @@ const Meetings = () => {
                 setLoading(false);
                 return;
             }
-            const response = await axios.post(SERVER_URL+'/api/v1/meeting/create/new', { date, month, monthName, time, roomId, menteeId },{ headers: { Authorization: `Bearer ${token}`}});
+            const response = await axios.post(SERVER_URL+'/api/v1/meeting/create/new', { date, month, monthName, time, roomId, menteeId,headers: { Authorization: `Bearer ${token}`} },{ headers: { Authorization: `Bearer ${token}`}});
             // console.log(response.data);
             toast.success("Meeting Added");
             setData({ date: '', time: '', roomId: '' });
@@ -151,6 +151,7 @@ const Meetings = () => {
         try {
             const response = await axios.post(SERVER_URL+"/api/v1/subscription/getUserSubscribers", {
                 mentorId: user._id
+                ,headers: { Authorization: `Bearer ${token}`}
             },{ headers: { Authorization: `Bearer ${token}`}});
             // console.log(response.data.data)
             // console.log(response.data.data);
