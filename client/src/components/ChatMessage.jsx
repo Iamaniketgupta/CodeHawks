@@ -5,6 +5,7 @@ import io from "socket.io-client";
 import axios from 'axios'
 import { MdMessage } from "react-icons/md";
 import { SERVER_URL } from "../../constant";
+import { token } from "./constants";
 
 const ChatMessage = ({
   togglechat
@@ -29,7 +30,7 @@ const ChatMessage = ({
 
   const getAllMsg = async()=>{
     try {
-      const msg = await axios.post(SERVER_URL + '/api/v1/message/getAllMessagesByUserId', {userId : user._id , personId : recipientId });
+      const msg = await axios.post(SERVER_URL + '/api/v1/message/getAllMessagesByUserId', {userId : user._id , personId : recipientId } ,{ headers: { Authorization: `Bearer ${token}`}});
       // console.log(msg.data.data)
       setMessages(msg.data.data)
     } catch (error) {
@@ -42,7 +43,7 @@ const ChatMessage = ({
     try {
       const response = await axios.post( SERVER_URL+ "/api/v1/message/getPersonById",{
         id:recipientId
-      })
+      },{ headers: { Authorization: `Bearer ${token}`}})
       // console.log(response.data)
       setrecipient(response.data.data)
       

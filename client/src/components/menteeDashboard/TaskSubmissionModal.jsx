@@ -3,6 +3,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
 import { SERVER_URL } from "../../../constant";
+import { token } from "../constants";
 
 const TaskSubmissionModal = ({
   showModal,
@@ -29,7 +30,7 @@ const TaskSubmissionModal = ({
       const response = await axios.post(SERVER_URL + "/api/v1/task/submit-task", {
         githubLink: githubLink,
         submitTaskId: taskId,
-      });
+      },{ headers: { Authorization: `Bearer ${token}`}});
       console.log(response.data)
       if(response){
         toast.success("Submitted successfully");

@@ -5,6 +5,7 @@ import {useSelector} from 'react-redux'
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { SERVER_URL } from '../../constant';
+import { token } from "./constants";
 
 
 
@@ -40,7 +41,7 @@ const ChatListElement = (
       const response = await axios.post( SERVER_URL + "/api/v1/message/deleteMessagesByUserId" , {
         userId:user._id,
         personId:id
-      });
+      },{ headers: { Authorization: `Bearer ${token}`}});
       // console.log(response.data)
       // console.log(recipientId)
       // console.log(id)

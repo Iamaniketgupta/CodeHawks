@@ -28,6 +28,8 @@ export default function Login_Mentee() {
                 document.cookie = name + "=" + value + "; path=/";
             }
             setCookie("accessToken", response.data.data.accessToken);
+            localStorage.setItem("accessToken" , response.data.data.accessToken)
+
             // console.log(response.data.data);
 
 

@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { toast } from "react-hot-toast";
 import { SERVER_URL } from "../../constant";
+import { token } from "../components/constants";
 
 export default function Topbar() {
 
@@ -25,7 +26,7 @@ export default function Topbar() {
         try {
             if (!confirm("Are you Sure ?"))
                 return;
-            await axios.get(SERVER_URL + "/mentor/logout");
+            await axios.get(SERVER_URL + "/mentor/logout",{ headers: { Authorization: `Bearer ${token}`}});
             navigate('/');
             toast.success("SignOut Success");
            setUser(null);
