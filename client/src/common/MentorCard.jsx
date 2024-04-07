@@ -36,7 +36,7 @@ function MentorCard(props) {
       if (!mentorId)
         throw new Error("Something went wrong!");
 
-      const response = await axios.delete(SERVER_URL + "/api/v1/mentee/removeMentorFromBookmark", { data: { mentorId } },{ headers: { Authorization: `Bearer ${token}`}});
+      const response = await axios.delete(SERVER_URL + "/api/v1/mentee/removeMentorFromBookmark", { data: { mentorId },headers: { Authorization: `Bearer ${token}`} },{ headers: { Authorization: `Bearer ${token}`}});
 
       if (!response)
         throw new Error("Failed to Remove !");
