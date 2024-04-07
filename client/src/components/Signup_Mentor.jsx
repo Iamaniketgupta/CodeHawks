@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Select from "react-select";
+import { SERVER_URL } from '../../constant';
 export default function Signup_Mentor() {
     
     const handlePart1 = () => {
@@ -45,7 +46,7 @@ export default function Signup_Mentor() {
         e.preventDefault();
         try {
             setLoading(true);
-            const response = await axios.post('/api/v1/mentor/signup', formData);
+            const response = await axios.post(SERVER_URL+'/api/v1/mentor/signup', formData);
             console.log(response.data);
             toast.success('Sign up successful!');
             setLoading(false);
