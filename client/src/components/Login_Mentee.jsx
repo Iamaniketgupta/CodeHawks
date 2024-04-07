@@ -20,11 +20,17 @@ export default function Login_Mentee() {
         try {
             setLoading(true);
             const response = await axios.post('https://mentorhub-s8mg.onrender.com/api/v1/mentee/login', cred);
+            
+            console.log("Login Mentee: ",response);
+
+
             function setCookie(name, value) {
                 document.cookie = name + "=" + value + "; path=/";
             }
             setCookie("accessToken", response.data.data.accessToken);
             // console.log(response.data.data);
+
+
             const obj = {
                 user:response.data.data.user
             }

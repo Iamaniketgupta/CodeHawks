@@ -26,12 +26,14 @@ export default function Login_Mentor() {
         e.preventDefault();
         try {
             setLoading(true);
-            const response = await axios.post(SERVER_URL + '/api/v1/mentor/login', cred);
+            const response = await axios.post('https://mentorhub-s8mg.onrender.com/api/v1/mentor/login', cred);
+            console.log("Login Mentor: ",response);
             function setCookie(name, value) {
                 document.cookie = name + "=" + value + "; path=/";
             }
-            setCookie("accessToken", response.data.data.accessToken);
-            console.log(response);
+            setCookie("accessToken", response.data.data.user.accessToken);
+
+
             const obj = {
                 user: response.data.data.user
             }
