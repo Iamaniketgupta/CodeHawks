@@ -49,10 +49,9 @@ mentorHub is a platform designed to facilitate interaction between mentees and m
 - **Nodemon:** Automatic server restarts during backend development.
 
 ## Contributing
-Contributions to mentorHub are welcome! Please follow the contribution guidelines outlined in CONTRIBUTING.md.
+Contributions to mentorHub are welcome!
 
-## License
-This project is licensed under the MIT License. See the LICENSE file for details.
+
 
 ## Contact
 For any inquiries or support, please contact us at codehawks@example.com.
