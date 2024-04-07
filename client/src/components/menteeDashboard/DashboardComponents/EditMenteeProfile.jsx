@@ -8,6 +8,7 @@ import {toast} from "react-hot-toast";
 import {useNavigate} from 'react-router-dom';
 import {login} from '../../../store/authSlice'
 import { SERVER_URL } from "../../../../constant";
+import { token } from "../../constants";
 
 const EditMenteeProfile = () => {
 
@@ -38,8 +39,7 @@ const navigate =  useNavigate()
             interests
         }
         try {
-            const response = await axios.post( SERVER_URL + "/api/v1/mentee/updateMenteeProfile", data, {
-              });
+            const response = await axios.post( SERVER_URL + "/api/v1/mentee/updateMenteeProfile", {...data ,headers: { Authorization: `Bearer ${token}`}},{ headers: { Authorization: `Bearer ${token}`}});
 
             //   console.log(response.data.data)
               const obj = {
@@ -68,11 +68,7 @@ const navigate =  useNavigate()
           formData.append('avatar', file);
         //   console.log(formData)
       
-          const response = await axios.post( SERVER_URL + "/api/v1/mentee/updateMenteeAvatar", {avatar : file}, {
-            headers: {
-              'Content-Type': 'multipart/form-data'
-            }
-          });
+          const response = await axios.post( SERVER_URL + "/api/v1/mentee/updateMenteeAvatar", {avatar : file,headers: { Authorization: `Bearer ${token}`}},{ headers: { Authorization: `Bearer ${token}`}});
 
         //   console.log(response.data.data);
           const obj = {

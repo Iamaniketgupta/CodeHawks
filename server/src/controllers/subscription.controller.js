@@ -12,6 +12,7 @@ import { Pricing } from "../models/pricing.model.js";
 const stripe = new Stripe(process.env.STRIPE_SECRET);
 
 const getCheckoutSessionAndHandleWebhook = asyncHandler(async (req, res) => {
+
     const { mentorId } = req.params;
     const { _id, email } = req.body;
 
@@ -20,11 +21,9 @@ const getCheckoutSessionAndHandleWebhook = asyncHandler(async (req, res) => {
                 mentor: mentorId,
                 mentee: _id,
                 price: pricing.mentorshipPrice, // Amount is in cents, convert to base unit
-            
-                status: "paid"
-            });
+            })
             await subscription.save();
-            // console.log('Subscription created and saved:', subscription);
+
             res.status(200).send({});
         }
 

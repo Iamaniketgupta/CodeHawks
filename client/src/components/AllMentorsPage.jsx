@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import MentorCard from "../common/MentorCard";
 import { SERVER_URL } from '../../constant';
+import { token } from './constants';
 
 
 const AllMentorsPage = () => {
@@ -17,7 +18,7 @@ const AllMentorsPage = () => {
 
         try {
             setLoading(true);
-            const response = await axios.get( SERVER_URL+ '/api/v1/allMentors');
+            const response = await axios.get( SERVER_URL+ '/api/v1/allMentors',{ headers: { Authorization: `Bearer ${token}`}});
             // console.log(response.data);
             setAllMentors(response.data?.data);
             setLoading(false);

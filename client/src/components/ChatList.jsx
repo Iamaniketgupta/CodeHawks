@@ -5,6 +5,7 @@ import axios from 'axios'
 import {useSelector} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 import { SERVER_URL } from '../../constant';
+import { token } from './constants';
 
 
 const ChatList = (
@@ -32,8 +33,8 @@ const ChatList = (
       // console.log("first")
       // console.log(selectedUser)
       const response = await axios.post(SERVER_URL + "/api/v1/mentor/getMentorById" , {
-        mentorId:selectedUser
-      });
+        mentorId:selectedUser,headers: { Authorization: `Bearer ${token}`}
+      },{ headers: { Authorization: `Bearer ${token}`}});
       // console.log(response.data.data);
       
       setchatHistoryList([...chatHistoryList , response.data.data])
@@ -65,7 +66,7 @@ const ChatList = (
 
   async function fetchMentorList(){
     try {
-      const response = await axios.get(SERVER_URL + "/api/v1/subscription/getMenteeSubscriptions");
+      const response = await axios.get(SERVER_URL + "/api/v1/subscription/getMenteeSubscriptions",{ headers: { Authorization: `Bearer ${token}`}});
       // console.log(response.data);
       setmentors(response.data.data)
     } catch (error) {
@@ -80,8 +81,8 @@ const ChatList = (
       const response = await axios.post(
         SERVER_URL + "/api/v1/message/getUsersWithChatHistory",
         {
-          id: user._id,
-        }
+          id: user._id,headers: { Authorization: `Bearer ${token}`}
+        },{ headers: { Authorization: `Bearer ${token}`}}
       );
       // console.log(response.data);
       setchatHistoryList(response.data.usersWithChatHistory);

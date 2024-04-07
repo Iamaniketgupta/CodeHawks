@@ -5,8 +5,10 @@ import { SERVER_URL } from '../../constant';
 
 import toast from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";import { MdDelete } from "react-icons/md";
+import { token } from './constants';
 
 const MentorAllTasks = () => {
+  
 
   const [tasks, setTasks] = useState([]);
   const [showModal, setshowModal] = useState(false);
@@ -16,7 +18,9 @@ const MentorAllTasks = () => {
   const handleConfirm = async() => {
   
       try {
-        const response = await axios.post( SERVER_URL + "/api/v1/task/deleteTask" , {taskId})
+        const response = await axios.post( SERVER_URL + "/api/v1/task/deleteTask" , {taskId,headers: { Authorization: `Bearer ${token}`}} ,{ headers: { Authorization: `Bearer ${token}`}}
+       
+)
         // console.log(response.data);
         toast.success("Task deleted successfully");
         
@@ -40,7 +44,7 @@ const MentorAllTasks = () => {
     // Fetch tasks assigned by the mentor to mentees
     const fetchTasks = async () => {
       try {
-        const response = await axios.post( SERVER_URL +'/api/v1/task/getAllTasks');
+        const response = await axios.post( SERVER_URL +'/api/v1/task/getAllTasks' ,{ headers: { Authorization: `Bearer ${token}`}});
         // console.log(response.data)
         setTasks(response.data.data);
       } catch (error) {

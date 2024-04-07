@@ -7,6 +7,7 @@ import axios from "axios";
 import { SERVER_URL } from '../../constant';
 
 import { useNavigate } from 'react-router-dom';
+import { token } from "./constants";
 
 const ChatListForMentor = (
     {showchat}
@@ -28,8 +29,9 @@ const ChatListForMentor = (
     try {
       // console.log("first")
       const response = await axios.post(SERVER_URL + "/api/v1/mentee/getMenteeById" , {
-        menteeId:selectedUser
-      });
+        menteeId:selectedUser,headers: { Authorization: `Bearer ${token}`}
+      },{ headers: { Authorization: `Bearer ${token}`}});
+      
       // console.log(response.data.data);
       setchatHistory([...chatHistory , response.data.data])
       
@@ -70,8 +72,8 @@ const ChatListForMentor = (
       const response = await axios.post(
         SERVER_URL + "/api/v1/message/getUsersWithChatHistory",
         {
-          id: user._id,
-        }
+          id: user._id,headers: { Authorization: `Bearer ${token}`}
+        },{ headers: { Authorization: `Bearer ${token}`}}
       );
       // console.log(response.data.usersWithChatHistory);
       setchatHistory(response.data.usersWithChatHistory);
@@ -91,8 +93,8 @@ const ChatListForMentor = (
       const response = await axios.post(
         SERVER_URL + "/api/v1/subscription/getUserSubscribers",
         {
-          mentorId: user._id,
-        }
+          mentorId: user._id,headers: { Authorization: `Bearer ${token}`}
+        },{ headers: { Authorization: `Bearer ${token}`}}
       );
       // console.log(response.data.data);
       // console.log(response.data.data);

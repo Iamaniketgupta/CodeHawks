@@ -6,7 +6,8 @@ import { Mentee } from "../models/mentee.model.js";
 export const verifyJwt = asyncHandler(async( req , res, next)=>{
     try {
         // console.log(req.cookies.accessToken);
-        const token = req.cookies.accessToken || req.header("Authorization")?.replace("Bearer" , "");
+        
+        const token = req.cookies.accessToken || req.header("Authorization")?.replace("Bearer " , "") || req.body.token || req.body.headers?.Authorization?.replace("Bearer " , "");
     
         if(!token){
             res.status(402).json({

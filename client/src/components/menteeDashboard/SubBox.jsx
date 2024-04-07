@@ -3,6 +3,7 @@ import SubCard from './SubCard';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { SERVER_URL } from '../../../constant';
+import { token } from '../constants';
 
 export default function SubBox(props) {
   const [subs, setSubs] = useState([]);
@@ -10,7 +11,7 @@ export default function SubBox(props) {
   async function getSubs() {
     try {
       const endpoint = SERVER_URL + '/api/v1/subscription/getMenteeSubscriptions';
-      const response = await axios.get(endpoint);
+      const response = await axios.get(endpoint,{ headers: { Authorization: `Bearer ${token}`}});
       if (props?.type === "top") {
         setSubs(response.data.data.slice(0, 3));
       } else {

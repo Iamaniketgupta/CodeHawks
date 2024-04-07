@@ -6,7 +6,8 @@ export const verifyMentorJwt = asyncHandler(async( req , res, next)=>{
     try {
         // console.log(req.cookies.accessToken);
         // console.log(req.cookies.accessToken);
-        const token = req.cookies.accessToken || req.header("Authorization")?.replace("Bearer" , "");
+        
+        const token = req.cookies.accessToken || req.header("Authorization")?.replace("Bearer " , "") || req.body.token || req.body.headers?.Authorization?.replace("Bearer " , "");
     
         if(!token){
              res.staus(401).json( {message:`Unauthorized request  ${token}`} );

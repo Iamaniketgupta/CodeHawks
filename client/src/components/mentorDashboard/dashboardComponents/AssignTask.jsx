@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import axios from 'axios';
 import { SERVER_URL } from "../../../../constant";
+import { token } from "../../constants";
 const AssignTask = () => {
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [title, setTitle] = useState("");
@@ -19,8 +20,8 @@ const AssignTask = () => {
     try {
       setLoading(true)
       const response = await axios.post(SERVER_URL+"/api/v1/subscription/getUserSubscribers", {
-        mentorId: user._id
-      });
+        mentorId: user._id,headers: { Authorization: `Bearer ${token}`}
+      },{ headers: { Authorization: `Bearer ${token}`}});
       if (response.data.data) {
         const newMentees = response.data.data;
         setMentees([...newMentees]);
@@ -52,8 +53,9 @@ const AssignTask = () => {
         description,
         githubLink,
         mentor: user._id,
-        menteeIds: selectedUsers
-      });
+        menteeIds: selectedUsers,
+        headers: { Authorization: `Bearer ${token}`}
+      },{ headers: { Authorization: `Bearer ${token}`}});
 
       // console.log(response.data);
       toast.success("Assigned SuccessFully");

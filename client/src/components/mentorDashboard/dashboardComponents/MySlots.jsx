@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { IoRefreshCircle } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
 import { SERVER_URL } from "../../../../constant";
+import { token } from "../../constants";
 
 const MySlots = () => {
 
@@ -17,7 +18,7 @@ const MySlots = () => {
     async function getAllSlots() {
         try {
             setSlotLoader(true);
-            const response = await axios.get(SERVER_URL+'/api/v1/mentor/getAllSlots');
+            const response = await axios.get(SERVER_URL+'/api/v1/mentor/getAllSlots',{ headers: { Authorization: `Bearer ${token}`}});
             setSlotsData(response.data?.data);
             setSlotLoader(false);
 
@@ -37,7 +38,7 @@ const MySlots = () => {
             if (!confirm("Are you sure ?"))
                 return;
 
-            const response = await axios.delete(SERVER_URL+`/api/v1/timeslot/deleteSlots/${slotId}`);
+            const response = await axios.delete(SERVER_URL+`/api/v1/timeslot/deleteSlots/${slotId}`,{ headers: { Authorization: `Bearer ${token}`}});
             if (response)
                 toast.success("Slot Deleted")
             getAllSlots();
@@ -115,7 +116,7 @@ const MySlots = () => {
                 setLoading(false);
                 return;
             }
-            const response = await axios.post(SERVER_URL+'/api/v1/timeslot/addTimeslot', { date, month, monthName, time });
+            const response = await axios.post(SERVER_URL+'/api/v1/timeslot/addTimeslot', { date, month, monthName, time,headers: { Authorization: `Bearer ${token}`} },{ headers: { Authorization: `Bearer ${token}`}});
             // console.log(response.data);
             toast.success("Slot Added");
             getAllSlots();
