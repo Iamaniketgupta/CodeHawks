@@ -57,5 +57,3 @@ Contributions to mentorHub are welcome!
 For any inquiries or support, please contact us at codehawks@example.com.
 
 ---
-
-Feel free to customize the content further to align with your project's specifics. If you have any more questions or need further assistance, feel free to ask!
