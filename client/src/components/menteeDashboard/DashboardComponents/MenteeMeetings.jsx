@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { IoRefreshCircle } from 'react-icons/io5';
 import { useEffect, useState } from "react";
+import { SERVER_URL } from "../../../../constant";
 const MenteeMeetings = () => {
     const navigate = useNavigate();
 
@@ -24,7 +25,7 @@ const MenteeMeetings = () => {
         try {
             setLoading(true);
 
-            const res = await axios.get("/api/v1/meeting/allMenteeMeetings");
+            const res = await axios.get( SERVER_URL + "/api/v1/meeting/allMenteeMeetings");
             // console.log(res.data);
             setMeetings(res.data);
             setLoading(false);

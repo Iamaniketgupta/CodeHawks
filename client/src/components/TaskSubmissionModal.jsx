@@ -3,6 +3,9 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
 
+import { SERVER_URL } from '../../constant';
+
+
 const TaskSubmissionModal = ({
   showModal,
   setShowModal,
@@ -28,11 +31,11 @@ const TaskSubmissionModal = ({
       return;
     }
     try {
-      const response = await axios.post("/api/v1/task//submit-task", {
+      const response = await axios.post( SERVER_URL +"/api/v1/task//submit-task", {
         githubLink: githubLink,
         submitTaskId: taskId,
       });
-      console.log(response.data)
+      // console.log(response.data)
       if(response){
         toast.success("Submitted successfully")
       }
@@ -47,7 +50,7 @@ const TaskSubmissionModal = ({
   };
 
   const closeModal = () => {
-    console.log(showModal);
+    // console.log(showModal);
     setShowModal(false);
   };
 

@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import io from "socket.io-client";
 import { useParams } from "react-router-dom";
 import { MdMessage } from "react-icons/md";
+import { SERVER_URL } from '../../constant';
+
 
 const Chat = () => {
   const [socket, setSocket] = useState(null);

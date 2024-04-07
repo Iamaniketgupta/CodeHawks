@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import TaskSubmissionModal from "./TaskSubmissionModal";
+import { SERVER_URL } from '../../constant';
+
 
 const MenteeAllTasks = () => {
   const [tasks, setTasks] = useState([]);
@@ -14,8 +16,8 @@ const MenteeAllTasks = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await axios.post("/api/v1/task/getAllMenteeTasks");
-        console.log(response.data.data);
+        const response = await axios.post(SERVER_URL + "/api/v1/task/getAllMenteeTasks");
+        // console.log(response.data.data);
         setTasks(response.data.data);
       } catch (error) {
         console.error("Error fetching tasks:", error);

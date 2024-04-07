@@ -6,6 +6,8 @@ import "react-toastify/dist/ReactToastify.css";
 import Select from "react-select";
 import {useNavigate} from 'react-router-dom'
 
+import { SERVER_URL } from '../../constant';
+
 export default function SignUp_Mentee() {
 
   const navigate = useNavigate();
@@ -62,6 +64,7 @@ export default function SignUp_Mentee() {
 
       toast.success("Sign up successful!");
       setLoading(false);
+      navigate("/login_mentee")
     } catch (error) {
       console.error("Error:", error);
       toast.error("Error signing up. Please try again.");
@@ -124,7 +127,7 @@ export default function SignUp_Mentee() {
   const languageChange = (selectedOptions) => {
     // Do something with selectedOptions
     const selectedValues = selectedOptions.map((option) => option.value);
-    console.log(formData.languages);
+    // console.log(formData.languages);
     setFormData({ ...formData, ["languages"]: selectedValues });
     // console.log(selectedOptions);
   };

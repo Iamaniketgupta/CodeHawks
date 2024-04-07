@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
+import { SERVER_URL } from "../../../constant";
 
 const TaskSubmissionModal = ({
   showModal,
@@ -25,7 +26,7 @@ const TaskSubmissionModal = ({
       return;
     }
     try {
-      const response = await axios.post("/api/v1/task/submit-task", {
+      const response = await axios.post(SERVER_URL + "/api/v1/task/submit-task", {
         githubLink: githubLink,
         submitTaskId: taskId,
       });

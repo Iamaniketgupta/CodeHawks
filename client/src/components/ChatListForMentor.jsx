@@ -4,6 +4,8 @@ import { IoPersonAdd } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
+import { SERVER_URL } from '../../constant';
+
 import { useNavigate } from 'react-router-dom';
 
 const ChatListForMentor = (
@@ -24,11 +26,11 @@ const ChatListForMentor = (
 
   const refresh = async()=>{
     try {
-      console.log("first")
-      const response = await axios.post("/api/v1/mentee/getMenteeById" , {
+      // console.log("first")
+      const response = await axios.post(SERVER_URL + "/api/v1/mentee/getMenteeById" , {
         menteeId:selectedUser
       });
-      console.log(response.data.data);
+      // console.log(response.data.data);
       setchatHistory([...chatHistory , response.data.data])
       
     } catch (error) {
@@ -48,16 +50,16 @@ const ChatListForMentor = (
   const handleAddUser = () => {
     // af
     
-    console.log(window.location.href)
+    // console.log(window.location.href)
     const url = window.location.href;
     const l = url.substring(21 , 34);
     navigate(l + selectedUser);
     // Close the modal after adding the user
     setIsModalOpen(false);
 
-    console.log("refre")
+    // console.log("refre")
     refresh()
-    console.log(showchat)
+    // console.log(showchat)
 
   };
 
@@ -66,12 +68,12 @@ const ChatListForMentor = (
     setLoading(true);
     try {
       const response = await axios.post(
-        "/api/v1/message/getUsersWithChatHistory",
+        SERVER_URL + "/api/v1/message/getUsersWithChatHistory",
         {
           id: user._id,
         }
       );
-      console.log(response.data.usersWithChatHistory);
+      // console.log(response.data.usersWithChatHistory);
       setchatHistory(response.data.usersWithChatHistory);
 
       // console.log(response.data.data);
@@ -87,12 +89,12 @@ const ChatListForMentor = (
     setLoading(true);
     try {
       const response = await axios.post(
-        "/api/v1/subscription/getUserSubscribers",
+        SERVER_URL + "/api/v1/subscription/getUserSubscribers",
         {
           mentorId: user._id,
         }
       );
-      console.log(response.data.data);
+      // console.log(response.data.data);
       // console.log(response.data.data);
       setMentees(response.data.data);
     } catch (error) {

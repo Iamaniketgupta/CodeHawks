@@ -4,12 +4,13 @@ import { useParams } from "react-router-dom";
 import io from "socket.io-client";
 import axios from 'axios'
 import { MdMessage } from "react-icons/md";
+import { SERVER_URL } from "../../constant";
 
 const ChatMessage = ({
   togglechat
 }) => {
   const user = useSelector((state) => state.auth.user);
-  console.log(user);
+  // console.log(user);
 
   const close =()=>{
     togglechat()
@@ -28,8 +29,8 @@ const ChatMessage = ({
 
   const getAllMsg = async()=>{
     try {
-      const msg = await axios.post('http://localhost:8000/api/v1/message/getAllMessagesByUserId', {userId : user._id , personId : recipientId });
-      console.log(msg.data.data)
+      const msg = await axios.post(SERVER_URL + '/api/v1/message/getAllMessagesByUserId', {userId : user._id , personId : recipientId });
+      // console.log(msg.data.data)
       setMessages(msg.data.data)
     } catch (error) {
       console.log(error)
@@ -39,10 +40,10 @@ const ChatMessage = ({
 
   const recipientDetails = async()=>{
     try {
-      const response = await axios.post("/api/v1/message/getPersonById",{
+      const response = await axios.post( SERVER_URL+ "/api/v1/message/getPersonById",{
         id:recipientId
       })
-      console.log(response.data)
+      // console.log(response.data)
       setrecipient(response.data.data)
       
     } catch (error) {
@@ -70,7 +71,7 @@ const ChatMessage = ({
       Socket.emit("login", user._id);
       // Listen for incoming messages
       Socket.on("message", (newMessage) => {
-        console.log(newMessage);
+        // console.log(newMessage);
         setMessages((prev) => [...prev, newMessage]);
       });
     }

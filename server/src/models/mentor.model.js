@@ -92,6 +92,10 @@ const mentorSchema = new Schema({
     },
     profession:{
         type:String
+    },
+    isMentor:{
+      type:Number,
+      default:1
     }
     
 }, { timestamps: true });

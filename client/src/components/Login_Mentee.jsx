@@ -20,7 +20,7 @@ export default function Login_Mentee() {
         try {
             setLoading(true);
             const response = await axios.post('https://mentorhub-s8mg.onrender.com/api/v1/mentee/login', cred);
-            console.log(response.data.data);
+            // console.log(response.data.data);
             const obj = {
                 user:response.data.data.user
             }
@@ -37,6 +37,7 @@ export default function Login_Mentee() {
         } catch (error) {
             
             toast.error(error.response?.data?.message || "Failed to Login!");
+            console.log(error)
             setLoading(false);
         }
     }

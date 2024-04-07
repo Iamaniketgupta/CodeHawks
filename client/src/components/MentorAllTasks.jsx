@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { SERVER_URL } from '../../constant';
+
 
 import toast from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";import { MdDelete } from "react-icons/md";
@@ -14,8 +16,8 @@ const MentorAllTasks = () => {
   const handleConfirm = async() => {
   
       try {
-        const response = await axios.post("/api/v1/task/deleteTask" , {taskId})
-        console.log(response.data);
+        const response = await axios.post( SERVER_URL + "/api/v1/task/deleteTask" , {taskId})
+        // console.log(response.data);
         toast.success("Task deleted successfully");
         
       } catch (error) {
@@ -38,8 +40,8 @@ const MentorAllTasks = () => {
     // Fetch tasks assigned by the mentor to mentees
     const fetchTasks = async () => {
       try {
-        const response = await axios.post('/api/v1/task/getAllTasks');
-        console.log(response.data)
+        const response = await axios.post( SERVER_URL +'/api/v1/task/getAllTasks');
+        // console.log(response.data)
         setTasks(response.data.data);
       } catch (error) {
         console.error('Error fetching tasks:', error);
@@ -49,7 +51,7 @@ const MentorAllTasks = () => {
     fetchTasks();
   }, [showModal]);
 
-console.log(tasks); 
+// console.log(tasks); 
   return (
 
     <div className="p-4 sm:ml-64 text-black">
