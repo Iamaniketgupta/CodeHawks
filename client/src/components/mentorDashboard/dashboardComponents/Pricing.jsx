@@ -93,7 +93,7 @@ const Pricing = () => {
 
     const handleCreate = async () => {
         try {
-            const response = await axios.post('/api/v1/mentor/pricing/new', pricingData);
+            const response = await axios.post(SERVER_URL+'/api/v1/mentor/pricing/new', pricingData);
             console.log('Pricing created:', response.data.pricing);
             setPricingData({
                 mentorshipPrice: 0,
