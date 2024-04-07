@@ -107,6 +107,7 @@ function App() {
         <Route path="mentee/dashboard/settings" element={<><MenteeDashboard /><EditMenteeProfile /></>} />
         <Route path="mentee/dashboard/subscription" element={<><MenteeDashboard /><Subscription /></>} />
         <Route path="mentee/dashboard/meetings" element={<><MenteeDashboard /><MenteeMeetings /></>} />
+        <Route path="mentee/dashboard/allMentors" element={<><MenteeDashboard /><AllMentorsPage /></>} />
 
 
         {/* Mentor Routes */}
