@@ -6,6 +6,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { SERVER_URL } from '../../../constant';
 import { token } from '../constants';
+import {useSelector} from 'react-redux'
 const MentorProfile = () => {
     const { state } = useLocation();
     const navigate = useNavigate();
@@ -14,6 +15,7 @@ const MentorProfile = () => {
     const [selectedSlot, setSelectedSlot] = useState(null);
 
     const [slotloader, setSlotLoader] = useState(false);
+    const user = useSelector((state)=>state.auth.user);
 
 
     // const [userDetails,setUserDetails]= useState({});
@@ -90,7 +92,10 @@ const MentorProfile = () => {
         const res = await axios.post(SERVER_URL+`/api/v1/payment/checkout-session/${state._id}`, {
             headers: {
                 Authorization: `Bearer ${your_stripe_public_key}`
-            }
+            },
+            _id:user._id,
+            mentorId:state._id,
+            email:user.email
         },{ headers: { Authorization: `Bearer ${token}`}});
 
         // Check if the response contains the session URL
