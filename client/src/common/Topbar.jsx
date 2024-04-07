@@ -1,7 +1,7 @@
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
-import { useState ,useEffect} from "react";
+import { useState } from "react";
 import { useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { toast } from "react-hot-toast";
@@ -10,17 +10,17 @@ import { SERVER_URL } from "../../constant";
 export default function Topbar() {
 
     const user = useSelector((state) => state.auth.user);
-    if(user){
+   
     const state = user;
-    const fullname = user.fullName;
-    const mentorName = fullname.replace(" ", "-").toLowerCase();
-    }
+    const fullname = user?.fullName;
+    const mentorName = fullname?.replace(" ", "-").toLowerCase();
+    
     const [User,setUser]=useState(user);
-    console.log(user);  
+    // console.log(user);  
 
     const navigate = useNavigate();
     const location = useLocation();
-    console.log(location);
+    // console.log(location);
     async function signoutuser() {
         try {
             if (!confirm("Are you Sure ?"))
@@ -52,7 +52,7 @@ export default function Topbar() {
             <span className="block text-sm">{User.fullName?.toUpperCase()}</span>
             <span className="block truncate text-sm font-medium">{User.email}</span>
           </Dropdown.Header>
-          <Link to={!(User.__v=='0')?`/Mentee/dashboard`:`/mentor/dashboard/${User.fullName}`}>
+          <Link to={(User?.isMentor==='0')?`/mentee/dashboard`:`/mentor/dashboard/${mentorName}`}>
           <Dropdown.Item>Dashboard</Dropdown.Item>
           </Link>
           <Dropdown.Item onClick={signoutuser}>Sign out</Dropdown.Item>

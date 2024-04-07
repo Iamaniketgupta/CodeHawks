@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { login } from '../../../store/authSlice'
+import { SERVER_URL } from "../../../../constant";
 
 const EditProfile = () => {
     const navigate = useNavigate();
@@ -39,7 +40,7 @@ const EditProfile = () => {
             description
         }
         try {
-            const response = await axios.post("/api/v1/mentor/editProfile", data);
+            const response = await axios.post(SERVER_URL+"/api/v1/mentor/editProfile", data);
             // console.log(response.data)
             const obj = {
                 user: response.data.data
@@ -74,7 +75,7 @@ const EditProfile = () => {
             formData.append('avatar', file);
 
 
-            const response = await axios.post("/api/v1/mentor/updateMentorAvatar", { avatar: file }, {
+            const response = await axios.post(SERVER_URL+"/api/v1/mentor/updateMentorAvatar", { avatar: file }, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
