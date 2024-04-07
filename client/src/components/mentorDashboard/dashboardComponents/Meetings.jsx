@@ -205,7 +205,7 @@ const Meetings = () => {
                                         </div>
                                         <div>
 
-                                            <h3 className="my-2">Select Time </h3>
+                                            <h3 className="my-2">Make Room ID </h3>
                                             <input onChange={handleDataChange} value={data.roomId}
                                                 type="text" name="roomId" id="" placeholder='e.g. myRoom121' />
                                         </div>
