@@ -18,20 +18,8 @@ const subscriptionSchema = new mongoose.Schema(
             type: String,
             required: true
         },
-        session:{
-            type:String,
-            required:true
-        },
+      
 
-        status: {
-            type: String,
-            enum: ["pending", "paid", "cancelled"],
-            default: "pending",
-        },
-        isPaid: {
-            type: Boolean,
-            default: true,
-        },
     },
     { timestamps: true }
 );
