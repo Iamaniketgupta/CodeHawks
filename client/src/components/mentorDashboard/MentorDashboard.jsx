@@ -9,8 +9,8 @@ const MentorDashboard = () => {
     const [topMenuToggle, setTopMenuToggle] = useState(false);
     const [sideBarToggele, setSideBarToggele] = useState(false);
     const user = useSelector((state) => state.auth.user);
+    console.error(user);
     const state = user;
-
     const fullname = user.fullName;
     const mentorName = fullname.replace(" ", "-").toLowerCase();
 
