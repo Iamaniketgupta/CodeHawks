@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { verifyJwt } from "../middlewares/auth.middleware2.js";
 import { uploadImage } from "../middlewares/multer.middleware.js";
-import { signup , login , logoutUser , addMentorToBookmark , removeMentorFromBookmark , updateMenteeAvatar , updateMenteeProfile, getMenteeBookmarks } from "../controllers/mentee.controller.js";
+import { signup , login , logoutUser,getMenteeById , addMentorToBookmark , removeMentorFromBookmark , updateMenteeAvatar , updateMenteeProfile, getMenteeBookmarks } from "../controllers/mentee.controller.js";
 
 const router = Router();
 
@@ -19,5 +19,5 @@ router.route('/allBookmarks').get(verifyJwt , getMenteeBookmarks);
 router.route('/updateMenteeAvatar').post(verifyJwt , updateMenteeAvatar);
 
 router.route('/updateMenteeProfile').post(verifyJwt , updateMenteeProfile);
-
+router.route('/getMenteeById').post(getMenteeById);
 export default router;

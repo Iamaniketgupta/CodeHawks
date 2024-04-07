@@ -22,7 +22,7 @@ const MentorChat = () => {
   }
 
   return (
-    <div className='flex' >
+    <div className='w-full md:flex' >
     <div className={`md:w-1/2 min-h-screen ${chatShow ? "block" : "hidden"} md:block`} >
             {
                 recipientId === "id" ? (

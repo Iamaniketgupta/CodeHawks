@@ -7,11 +7,13 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
 const ChatListForMentor = (
-    showchat
+    {showchat}
 ) => {
   const [loading, setLoading] = useState(false);
   const [mentees, setMentees] = useState([]);
   const [chatHistory, setchatHistory] = useState([]);
+  const [relaoad, setrelaoad] = useState(0);
+  
 
   const user = useSelector((state) => state.auth.user);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,8 +22,31 @@ const ChatListForMentor = (
   
   const navigate = useNavigate()
 
+  const refresh = async()=>{
+    try {
+      console.log("first")
+      const response = await axios.post("/api/v1/mentee/getMenteeById" , {
+        menteeId:selectedUser
+      });
+      console.log(response.data.data);
+      setchatHistory([...chatHistory , response.data.data])
+      
+    } catch (error) {
+      console.log(error)
+    }finally{
+      
+    }
+  }
+
+
+  
+  const toggleReload = ()=>{
+    setrelaoad((relaoad === 0) ? 1 : 0);
+  }
+
+  
   const handleAddUser = () => {
-    
+    // af
     
     console.log(window.location.href)
     const url = window.location.href;
@@ -29,9 +54,13 @@ const ChatListForMentor = (
     navigate(l + selectedUser);
     // Close the modal after adding the user
     setIsModalOpen(false);
-    showchat()
+
+    console.log("refre")
+    refresh()
+    console.log(showchat)
 
   };
+
 
   async function getUsersWithHistory() {
     setLoading(true);
@@ -76,7 +105,7 @@ const ChatListForMentor = (
   useEffect(() => {
     getUsersWithHistory();
     fetchMentees()
-  }, [loading]);
+  }, [loading , relaoad]);
 
   return (
     <div className="w-full min-h-screen relative">
@@ -100,6 +129,7 @@ const ChatListForMentor = (
             country={mentee.country}
             id={mentee._id}
             showchat={showchat}
+            toggleReload={toggleReload}
           />
         ))}
       </div>
