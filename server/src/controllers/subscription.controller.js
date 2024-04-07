@@ -9,16 +9,17 @@ import { Pricing } from "../models/pricing.model.js";
 
 
 
-const getCheckoutSession = asyncHandler(async (req, res) => {
+const stripe = new Stripe(process.env.STRIPE_SECRET);
+
+const getCheckoutSessionAndHandleWebhook = asyncHandler(async (req, res) => {
     const { mentorId } = req.params;
     const { _id, email } = req.user;
-// console.log(mentorId);
 
     if (!mentorId)
         throw new ApiError(400, "Mentor ID not found");
 
     const mentor = await Mentor.findById(mentorId).select("-password -refreshToken");
-    const pricing = await Pricing.findOne({mentor:mentorId});
+    const pricing = await Pricing.findOne({ mentor: mentorId });
 
     if (!mentor)
         throw new ApiError(404, "Mentor not found");
@@ -27,44 +28,50 @@ const getCheckoutSession = asyncHandler(async (req, res) => {
     if (!mentee)
         throw new ApiError(404, "Please Login first");
 
-        const stripe =new Stripe(process.env.STRIPE_SECRET);
+    try {
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            mode: 'payment',
+            success_url: `https://thementorhub.vercel.app/checkout-success`,
+            cancel_url: `https://thementorhub.vercel.app/checkout-failed/${mentorId}`,
+            customer_email: email,
+            client_reference_id: mentorId,
+            line_items: [{
+                price_data: {
+                    currency: 'inr',
+                    unit_amount: pricing.mentorshipPrice * 100,
+                    product_data: {
+                        name: mentor.fullName,
+                        images: [mentor.avatar],
+                    }
+                },
+                quantity: 1
+            }]
+        });
 
-    const session = await stripe.checkout.sessions.create({
-        payment_method_types: ['card'],
-        mode: 'payment',
-        success_url: `http://localhost:5173/checkout-success`,
-        cancel_url: `http://localhost:5173//checkout-failed/${mentorId}`,
-        customer_email: email,
-        client_reference_id: mentorId,
-        line_items: [{
-            price_data: {
-                currency: 'inr',
-                unit_amount: pricing.mentorshipPrice * 100, 
-                product_data: {
-                    name: mentor.fullName,
-                    images: [mentor.avatar], 
-                }
-            },
-            quantity: 1
-        }]
-    });
+        if (session) {
+            const subscription = new Subscription({
+                mentor: session.client_reference_id,
+                mentee: session.customer,
+                price: session.amount_total / 100, // Amount is in cents, convert to base unit
+                session: session.id,
+                status: "paid"
+            });
+            await subscription.save();
+            // console.log('Subscription created and saved:', subscription);
+        }
 
-    const subscription = new Subscription({
-        mentor: mentorId,
-        mentee: _id,
-        price: pricing.mentorshipPrice,
-        session: session.id,
-        status:"paid"
-    });
-
-    await subscription.save();
-
-    res.status(201).json({
-        success: true,
-        message: 'Successfully paid',
-        session: session
-    });
+        res.status(201).json({
+            success: true,
+            message: 'Successfully initiated payment',
+            session: session
+        });
+    } catch (error) {
+        console.error('Error creating checkout session:', error);
+        throw new ApiError(500, "Failed to create checkout session");
+    }
 });
+
 
 
 const getUserSubscribers = asyncHandler(async(req,res)=>{
@@ -74,7 +81,7 @@ const getUserSubscribers = asyncHandler(async(req,res)=>{
         throw new ApiError(400 , "Mentor id is required");
     }
 
-    console.log(mentorId)
+    // console.log(mentorId)
     const subscription = await Subscription.find({ mentor: mentorId })
     .populate(
         {
@@ -152,7 +159,7 @@ const getMenteeSubscriptions = asyncHandler(async(req,res)=>{
 
 export {
 
-    getCheckoutSession,
+    getCheckoutSessionAndHandleWebhook,
     getUserSubscribers,
     getMenteeSubscriptions
 

@@ -2,18 +2,17 @@ import 'dotenv/config';  // dont change this line
 import {app} from './app.js'
 import connectDB from "./src/db/index.js";
 import http from 'http';
-// import socketIo from 'socket.io';
-// const socketIo = require('socket.io');
+
 import { Server } from 'socket.io';
 import Message from './src/models/message.model.js'
 
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173", // Allow requests from this origin
-    methods: ["GET", "POST"],      // Allow only GET and POST requests
-    allowedHeaders: ["my-custom-header"], // Allow only specific headers
-    credentials: true              // Allow sending cookies along with the request
+    origin: "https://thementorhub.vercel.app",
+    methods: ["GET", "POST"],      
+    allowedHeaders: ["my-custom-header"], 
+    credentials: true              
   }
 });
 
@@ -84,7 +83,7 @@ io.on('connection', (socket) => {
 const port = 8000;
 connectDB()
 .then(()=>{
-  server.listen(port || 8000 , ()=>{
+  server.listen(process.env.PORT || port , ()=>{
         console.log(`Server started at port ${port}`)
     }) 
 })
