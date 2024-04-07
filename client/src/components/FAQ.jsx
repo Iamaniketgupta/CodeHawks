@@ -3,9 +3,12 @@ import React from 'react'
 export default function FAQ() {
   return (
  <>
+ <br />
+ <a name="faqs"></a>
  <div className="dark:bg-gray-100 dark:text-gray-800">
 	<div className="container flex flex-col justify-center px-4 py-8 mx-auto md:p-8">
 		<h2 className="text-2xl font-semibold sm:text-4xl">Frequently Asked Questions</h2>
+		<br />
 		<div className="space-y-4">
 			<details className="w-full border rounded-lg">
 				<summary className="px-4 py-6 focus:outline-none focus-visible:dark:ring-violet-600">How does Mentor Hub match mentors with mentees?</summary>

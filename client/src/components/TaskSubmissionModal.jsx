@@ -54,7 +54,7 @@ const TaskSubmissionModal = ({
   return (
     <>
       {showModal && (
-        <div className="fixed top-0 left-0 flex items-center justify-center w-full h-full bg-gray-900 bg-opacity-50">
+        <div className="fixed top-0 left-0 flex items-center justify-center w-full h-full bg-gray-900 bg-opacity-50" style={{zIndex:100}}>
           <div className="bg-gray-900 text-white w-[500px]  p-6 rounded-lg relative">
             <div className="absolute top-2 right-2 z-20">
               <button
