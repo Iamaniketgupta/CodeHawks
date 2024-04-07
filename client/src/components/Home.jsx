@@ -64,7 +64,7 @@ function addAnimation() {
       <div className="max-w-screen-md mb-8 lg:mb-16">
       <a name="categories"></a>
           <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Designed For Mentees like you</h2>
-          <p className="text-gray-500 sm:text-xl dark:text-gray-400">Welcome to Mentor Hub, where we're dedicated to nurturing growth and development in aspiring individuals and emerging professionals.</p>
+          <p className="text-gray-500 sm:text-xl dark:text-gray-400">Welcome to Mentor Hub, where we are dedicated to nurturing growth and development in aspiring individuals and emerging professionals.</p>
       </div>
       <div className="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
           <div>

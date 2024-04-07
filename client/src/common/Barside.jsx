@@ -32,8 +32,7 @@ export default function Barside() {
           <i className="bx bx-menu" />
         </div>
         <div className="logo-details">
-          <i className="bx bx bx-shield-quarter" />
-          <span className="logo_name">Mentor Hub</span>
+          <span className="ml-7 logo_name">Mentor Hub</span>
         </div>
         <ul className="nav-links">
           <li>
