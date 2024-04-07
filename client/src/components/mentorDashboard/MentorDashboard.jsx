@@ -1,23 +1,25 @@
 import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,  useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import {toast} from "react-hot-toast";
-import axios  from "axios";
+import { toast } from "react-hot-toast";
+import axios from "axios";
 
 const MentorDashboard = () => {
     const [topMenuToggle, setTopMenuToggle] = useState(false);
     const [sideBarToggele, setSideBarToggele] = useState(false);
     const user = useSelector((state) => state.auth.user);
-const navigate = useNavigate()
+    const state = user;
+    const navigate = useNavigate();
 
+  const location = useLocation();
+  console.log(location);
     async function signoutuser() {
         try {
- console.log("hello");
             await axios.get("/mentor/logout");
             navigate('/');
             toast.success("SignOut Success");
-            
+
         } catch (error) {
             toast.error("Failed to Signout");
         }
@@ -27,13 +29,13 @@ const navigate = useNavigate()
 
         <>
             <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-                
+
                 <div className="px-3 py-3 lg:px-5 lg:pl-3">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center justify-start rtl:justify-end">
                             <button
-                                onClick={()=>setSideBarToggele((prev)=>!prev)}
-                                
+                                onClick={() => setSideBarToggele((prev) => !prev)}
+
                                 type="button"
                                 className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                             >
@@ -67,11 +69,11 @@ const navigate = useNavigate()
                             <div className="flex items-center ms-3">
                                 <div>
                                     <button
-                                     onClick={()=>setTopMenuToggle((prev)=>!prev)}
+                                        onClick={() => setTopMenuToggle((prev) => !prev)}
                                         type="button"
                                         className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                                         aria-expanded="false"
-                                        
+
                                     >
                                         <span className="sr-only">Open user menu</span>
                                         <img
@@ -82,7 +84,7 @@ const navigate = useNavigate()
                                     </button>
                                 </div>
                                 <div
-                                    className={`z-50 fixed top-10 right-5 ${!topMenuToggle? 'hidden' :'' }
+                                    className={`z-50 fixed top-10 right-5 ${!topMenuToggle ? 'hidden' : ''}
                                     my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600`}
                                     id="dropdown-user"
                                 >
@@ -91,7 +93,7 @@ const navigate = useNavigate()
                                             className="text-sm text-gray-900 dark:text-white"
                                             role="none"
                                         >
-                                           {user.fullName}
+                                            {user.fullName}
                                         </p>
                                         <p
                                             className="text-sm font-medium text-gray-900 truncate dark:text-gray-300"
@@ -130,7 +132,7 @@ const navigate = useNavigate()
             </nav>
             <aside
                 id="logo-sidebar"
-                className={`fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform ${!sideBarToggele ?'-translate-x-full':''} bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700`}
+                className={`fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform ${!sideBarToggele ? '-translate-x-full' : ''} bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700`}
                 aria-label="Sidebar"
             >
                 <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
@@ -283,7 +285,7 @@ const navigate = useNavigate()
                         </li>
                         <li>
                             <div
-                               onClick={signoutuser}
+                                onClick={signoutuser}
                                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
                             >
                                 <svg
@@ -309,8 +311,102 @@ const navigate = useNavigate()
                 </div>
             </aside>
 
+            { location.pathname===`/mentor/dashboard/${user.fullName}` &&
+                <div className="p-4 sm:ml-64 text-black">
+                    <div className="p-4  border-gray-200 border-2 rounded-lg dark:border-gray-700 mt-14">
 
 
+
+                        <div className='grid gap-10 lg:grid-cols-3'>
+
+
+                            <div className='m-4 p-3 lg:col-span-2'>
+
+                                <div className='flex items-center justify-between'>
+
+                                    <div className='p-2 rounded-xl w-32 h-32 bg-black my-3'>
+
+                                        <img src={state?.avatar || "/"} alt={state.fullName} className='w-full h-full' />
+                                    </div>
+
+                                </div>
+
+                                <div className='flex   justify-between p-3 flex-wrap gap-3 '>
+                                    <div>
+
+                                        <div className=' text-2xl font-bold'>
+                                            {state.fullName}
+                                        </div>
+                                        <div className='font-semit text-xl'>
+                                            {state.profession || "-no profession found"}
+                                        </div>
+
+                                        {/* 
+                <div className='flex gap-3 text-xs my-2'>
+                    <p className='p-2 border-2 rounded-lg'>Frontend</p>
+                    <p className='p-2 border-2 rounded-lg'>Frontend</p>
+                </div> */}
+
+                                    </div>
+
+
+                                    <div>
+                                        <div className='p-3 max-w-[250px] border-2'>
+                                            <p>{state.experience || "1"} + years of experience</p>
+
+
+                                            <p className='text-xs mt-3 text-blue-500 font-semibold'>Companies Experience </p>
+                                            {
+                                                state.workExp?.map((item, idx) =>
+                                                    <p key={idx} className='font-semibold text-lg'>{item} </p>
+                                                )
+                                            }
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                {/* Description */}
+                                <div className='p-3'>
+                                    <h3>About</h3>
+                                    {state.description || "-no description found"}
+                                </div>
+
+                                <div className='mx-3 my-2 bg-yellow-200 border-2 border-yellow-400 rounded-lg px-2 py-1 inline-block'>
+                                    <span>{state.rating + " Stars"}</span>
+                                </div>
+
+                                <div className='pl-3'>
+                                    <div className='p-2 border-2 inline-block px-3'>
+                                        <p>{state.state}, {state.country}</p>
+                                    </div>
+                                    <a href={state.linkedin || "#"} className='mx-2 w-10 h-10 rounded-full border-2 inline-flex bg-blue-500 items-center justify-center text-white font-bold'>In</a>
+
+                                    <div >
+                                        <p className='my-3 '>
+                                            Languages That i speak
+                                        </p>
+
+                                        {
+
+                                            state.languages?.map((item) =>
+                                                <p key={item} className='p-2  border-2 inline-block'>
+                                                    {item}
+                                                </p>
+                                            )
+
+                                        }
+                                        {state.languages.length === 0 && <p><i>-No Languages found</i></p>}
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>}
         </>
 
     );
