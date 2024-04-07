@@ -323,10 +323,10 @@ const MentorDashboard = () => {
 
 
 
-                        <div className='grid '>
+                        <div className=' '>
 
 
-                            <div className='m-4 p-3 lg:col-span-2'>
+                            <div className=' p-3 '>
 
                                 <div className='flex items-center justify-between'>
 
@@ -337,7 +337,7 @@ const MentorDashboard = () => {
 
                                 </div>
 
-                                <div className='flex   justify-between p-3 flex-wrap gap-3 '>
+                                <div className='flex justify-between p-3 flex-wrap gap-3 '>
                                     <div>
 
                                         <div className=' text-2xl font-bold'>

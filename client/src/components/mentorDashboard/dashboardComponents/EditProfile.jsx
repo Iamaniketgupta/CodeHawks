@@ -14,7 +14,7 @@ const EditProfile = () => {
     const user = useSelector((state) => state.auth.user);
     const dispatch = useDispatch();
 
-    console.log(user);
+    // console.log(user);
 
     const [loader, setLoader] = useState(false);
     const [fullName, setfullName] = useState(user.fullName || "");
@@ -40,18 +40,21 @@ const EditProfile = () => {
         }
         try {
             const response = await axios.post("/api/v1/mentor/editProfile", data);
-
-            console.log(response.data)
+            // console.log(response.data)
             const obj = {
                 user: response.data.data
             }
             dispatch(login(obj));
-            navigate(`/mentor/dashboard/${response.data.data.fullName}`);
+            
+            console.log(obj);
+            const fullname= response.data.data?.fullName;
+            const mentorName = fullname.replace(" ","-").toLowerCase();
+            navigate(`/mentor/dashboard/${mentorName}`);
             toast.success("Profile updated");
 
         } catch (error) {
-            // console.log(error)
             toast.error("Failed");
+            // console.log(error.message)
 
            
         } finally {
@@ -126,7 +129,7 @@ const EditProfile = () => {
 
 
 
-                    <div className="m-3 border-2 p-2">
+                    <div className="border-2 p-2">
 
                         <div className="w-20 h-20 bg-contain overflow-clip relative rounded-full ring ring-blue-500 mx-auto">
                             <img src={user.avatar} alt="" className="w-full h-full " />
@@ -152,7 +155,7 @@ const EditProfile = () => {
                         </div>
 
 
-                        <div className=" grid mx-3  place-items-center">
+                        <div className=" ">
 
                             {/*  My Details */}
 
