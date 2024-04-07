@@ -17,7 +17,7 @@ const MentorDashboard = () => {
     const navigate = useNavigate();
 
     const location = useLocation();
-    console.log(location);
+    
     async function signoutuser() {
         try {
             if (!confirm("Are you Sure ?"))
