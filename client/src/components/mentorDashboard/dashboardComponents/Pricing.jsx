@@ -104,9 +104,8 @@ const Pricing = () => {
             fetchPricing();
             selectRef.current.select.clearValue();
         } catch (error) {
-            fetchPricing();
-
-            // console.error('Error creating pricing:', error);
+            // fetchPricing();
+            console.error('Error creating pricing:', error);
             toast.error(error.response.data.message || "Failed to create");
 
         }
