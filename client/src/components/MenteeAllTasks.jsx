@@ -36,7 +36,7 @@ const MenteeAllTasks = () => {
         {tasks?.map((task) => (
           <div
             key={task._id}
-            className=" w-full cursor-pointer shadow-xl border-blue-400 border-2 rounded-xl p-4 mb-4 relative md:w-[600px]" 
+            className=" w-[67%] cursor-pointer shadow-xl border-blue-400 border-2 rounded-xl p-4 mb-4 relative md:w-[600px]" 
             onClick={()=>{
               setTaskId(task._id)
               setTitle(task.task.title)
