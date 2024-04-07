@@ -45,6 +45,7 @@ const AssignTask = () => {
         toast.error("Please Select a Mentee");
         return;
       }
+
       await axios.post("/api/v1/task/assign-task", {
         title,
         description,
@@ -55,7 +56,7 @@ const AssignTask = () => {
 
       // console.log(response.data);
       toast.success("Assigned SuccessFully");
-      selectedUsers([]);
+      setSelectedUsers([]);
       setTitle("");
       setDescription("");
       setGithubLink("");
@@ -82,6 +83,9 @@ const AssignTask = () => {
 
 
   return (
+
+    <div className="p-4 sm:ml-64 text-black">
+    <div className="p-4  border-gray-200 border-2 rounded-lg dark:border-gray-700 mt-14">
     <div className="flex items-center justify-center">
 
 
@@ -173,6 +177,8 @@ const AssignTask = () => {
             </button>
           </div>
         </form>
+      </div>
+    </div>
       </div>
     </div>
   );

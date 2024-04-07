@@ -312,6 +312,37 @@ const updateMenteeProfile = asyncHandler(async(req,res)=>{
     
 })
 
+
+
+const getMenteeById = asyncHandler(async(req,res)=>{
+    const {menteeId} = req.body;
+    if(!menteeId){
+        throw new ApiError(400 , "menteeId id is required");
+    }
+
+    const isMentorIdValid = isValidObjectId(menteeId);
+    if(!isMentorIdValid){
+        throw new ApiError(400 , "menteeId id is not valid");
+    }
+
+
+    const mentee = await Mentee.findById(menteeId).select("-password -refreshToken");
+
+    if(!mentee){
+        throw new ApiError(500 , "Error while fetching mentor from the db");
+    }
+
+    return res.status(200).json(
+        new ApiResponse(
+            200,
+            mentee ,
+            "mentor fetched successfully"
+        )
+    )
+});
+
+
+
 export 
 {
     signup,
@@ -321,5 +352,6 @@ export
     removeMentorFromBookmark,
     updateMenteeAvatar,
     updateMenteeProfile,
-    getMenteeBookmarks
+    getMenteeBookmarks,
+    getMenteeById
 }

@@ -86,9 +86,9 @@ const ChatList = (
         </div>
         </div>
         <div className='flex flex-col gap-3 px-1 max-h-[500px] overflow-scroll pb-4 ' style={{scrollbarWidth:'none'}}>
-          {chatHistoryList.map((user)=>(
+          {chatHistoryList.map((user , index)=>(
             <ChatListElement
-            key={user._id}
+            key={index}
             name={user.fullName}
             avatar={user.avatar}
             state={user.state}

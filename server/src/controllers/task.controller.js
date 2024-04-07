@@ -218,6 +218,7 @@ const getTaskSubmissions = asyncHandler(async(req,res)=>{
 
 const deleteTask = asyncHandler(async(req,res)=>{
     const {taskId} = req.body;
+    console.log("task If",taskId);
     if(!taskId){
         throw new ApiError(400 , "Task id is required");
     }

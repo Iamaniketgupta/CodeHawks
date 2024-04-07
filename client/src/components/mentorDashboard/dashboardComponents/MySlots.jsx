@@ -136,6 +136,8 @@ const MySlots = () => {
     }
 
     return (
+        <div className="p-4 sm:ml-64 text-black">
+        <div className="p-4  border-gray-200 border-2 rounded-lg dark:border-gray-700 mt-14">
         <div className="pb-5">
             <div className="p-2 my-5">
                 <h2 className="text-3xl font-bold text-center">
@@ -221,6 +223,8 @@ const MySlots = () => {
                 </div>
 
 
+            </div>
+        </div>
             </div>
         </div>
     );

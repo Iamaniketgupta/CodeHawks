@@ -112,7 +112,8 @@ const Pricing = () => {
     };
 
     return (
-        <div>
+        <div className="p-4 sm:ml-64 text-black">
+        <div className="p-4  border-gray-200 border-2 rounded-lg dark:border-gray-700 mt-14">
             <div className='p-3 m-3'>
 
                 <h1 className='text-3xl font-bold text-center my-3'>Mentorship Pricing</h1>
@@ -177,6 +178,8 @@ const Pricing = () => {
                 }
             </div>
         </div>
+            </div>
+     
     );
 };
 

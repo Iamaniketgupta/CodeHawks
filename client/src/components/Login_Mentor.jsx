@@ -34,7 +34,10 @@ export default function Login_Mentor() {
             toast.success('Login successful!');
             setLoading(false)
 
-            navigate("/mentor/dashboard");
+            const fullname= response.data.user.fullName;
+            const mentorName = fullname.replace(" ","-").toLowerCase();
+
+            navigate(`/mentor/dashboard/${mentorName}`);
 
         } catch (error) {
             console.error('Error:', error);

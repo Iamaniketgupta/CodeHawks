@@ -7,14 +7,14 @@ export default function SubBox(props) {
 function getSubs(){
     if(props.type=="top"){
         (async ()=>{
-            const response = await axios.post('/api/v1/subscription/getMenteeSubscriptions');
+            const response = await axios.get('/api/v1/subscription/getMenteeSubscriptions');
             setSubs(response.data.data.slice(0,3));
             console.log(response.data.data);
         })();
       }
       else{
         (async ()=>{
-             const response = await axios.post('/api/v1/subscription/getMenteeSubscriptions');
+             const response = await axios.get('/api/v1/subscription/getMenteeSubscriptions');
              setSubs(response.data.data);
              console.log(response.data.data);
           })();
