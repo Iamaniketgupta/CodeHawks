@@ -31,7 +31,7 @@ export default function Login_Mentor() {
             function setCookie(name, value) {
                 document.cookie = name + "=" + value + "; path=/";
             }
-            setCookie("accessToken", response.data.data.user.accessToken);
+            setCookie("accessToken", response.data.data.accessToken);
 
 
             const obj = {
