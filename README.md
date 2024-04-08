@@ -7,15 +7,6 @@
 ## Live Site
 Visit the live site: [MentorHub]([https://thementorhub.vercel.app])
 
-## Sample Login Credentials 📌
-### Mentor:
-- Email: codehawks@mentor.com
-- Password: codehawks
-
-### Mentee:
-- Email: codehawks@mentee.com
-- Password: codehawks
-
 ## Card Details
 - Card Number: 4000003560000008
 - Expiry: 12/34
