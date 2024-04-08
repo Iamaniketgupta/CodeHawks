@@ -9,25 +9,64 @@ import { Pricing } from "../models/pricing.model.js";
 
 
 
-const stripe = new Stripe(process.env.STRIPE_SECRET);
-
-const getCheckoutSessionAndHandleWebhook = asyncHandler(async (req, res) => {
-
+const getCheckoutSession = asyncHandler(async (req, res) => {
     const { mentorId } = req.params;
     const { _id, email } = req.body;
+// console.log(mentorId);
 
-    
-            const subscription = new Subscription({
-                mentor: mentorId,
-                mentee: _id,
-                price: pricing.mentorshipPrice, // Amount is in cents, convert to base unit
-            })
-            await subscription.save();
+    if (!mentorId)
+        throw new ApiError(400, "Mentor ID not found");
 
-            res.status(200).send({});
-        }
+    const mentor = await Mentor.findById(mentorId).select("-password -refreshToken");
+    const pricing = await Pricing.findOne({mentor:mentorId});
 
-);
+    if (!mentor)
+        throw new ApiError(400, "Mentor not found");
+
+    const mentee = await Mentee.findById(_id).select("-password -refreshToken");
+    if (!mentee)
+        throw new ApiError(402, "Please Login first");
+
+        const stripe =new Stripe(process.env.STRIPE_SECRET);
+
+    const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        mode: 'payment',
+        success_url: `https://thementorhub.vercel.app/checkout-success`,
+        cancel_url: `https://thementorhub.vercel.app/checkout-failed/${mentorId}`,
+        customer_email: email,
+        client_reference_id: mentorId,
+        line_items: [{
+            price_data: {
+                currency: 'inr',
+                unit_amount: pricing.mentorshipPrice * 100, 
+                product_data: {
+                    name: mentor.fullName,
+                    images: [mentor.avatar], 
+                }
+            },
+            quantity: 1
+        }]
+    });
+
+
+    const subscription = new Subscription({
+        mentor: mentorId,
+        mentee: _id,
+        price: pricing.mentorshipPrice,
+        session: session.id,
+        status:"paid"
+    });
+
+    await subscription.save();
+
+    res.status(201).json({
+        success: true,
+        message: 'Successfully paid',
+        session: session
+    });
+});
+
 
 
 
@@ -116,7 +155,7 @@ const getMenteeSubscriptions = asyncHandler(async(req,res)=>{
 
 export {
 
-    getCheckoutSessionAndHandleWebhook,
+    getCheckoutSession,
     getUserSubscribers,
     getMenteeSubscriptions
 
